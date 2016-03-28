@@ -140,11 +140,11 @@ class Rest {
     }
 
     public function getCheckinCollection() {
-        foreach ($this->db->query("SELECT * FROM checkin ORDER BY id DESC LIMIT 10") as $row) {
+        foreach ($this->db->query("SELECT checkin.id as 'checkin_id', checkin.latitude, checkin.longitude, place.place_name FROM checkin INNER JOIN place ON checkin.checkin_place_id = place.id ORDER BY checkin.id DESC LIMIT 10") as $row) {
             $response[] = array(
-                'ID' => $row['id'],
-                'latitude' => $row['c_latitude'],
-                'longitude' => $row['c_longitude']
+                'ID' => $row['checkin_id'],
+                'latitude' => $row['latitude'],
+                'longitude' => $row['longitude']
             );
         }
 
