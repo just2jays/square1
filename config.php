@@ -7,9 +7,9 @@ $dev_user = "root";
 $dev_pass = "root";
 
 // Production connection vars
-$dbname = "johnf76c_square1";
-$user = "johnf76c_super";
-$pass = "brash wookie coffee burp";
+$dbname = "square1";
+$user = "root";
+$pass = "masterj1";
 
 // Dev PDO Connection to MySQL
 //$db = new PDO('mysql:host='.$host.';dbname='.$dev_dbname, $dev_user, $dev_pass);
