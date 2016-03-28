@@ -28,7 +28,7 @@ var Checkin = Backbone.Model.extend({
     // local dev api
     //urlRoot: 'http://localhost/api/Checkins'
     // production api
-    urlRoot: 'http://worldisending.com/development/dowork/api/Checkins'
+    urlRoot: 'api/Checkins'
 });
 
 var Item = Backbone.Model.extend({
@@ -49,7 +49,7 @@ var Item = Backbone.Model.extend({
     // local dev api
     //urlRoot: 'http://localhost/api/Items'
     // production api
-    urlRoot: 'http://worldisending.com/development/dowork/api/Items'
+    urlRoot: 'api/Items'
 });
 
 var Place = Backbone.Model.extend({
@@ -286,7 +286,7 @@ var CheckinsCollection = Backbone.Collection.extend({
     // local dev api
     //url: 'http://localhost/api/Checkins'
     // production api
-    url: 'http://worldisending.com/development/dowork/api/Checkins'
+    url: 'api/Checkins'
 });
 
 var checkinView = new CheckinView({ el: $("#checkinContainer") });

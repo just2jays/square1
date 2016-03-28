@@ -16,5 +16,5 @@ var Item = Backbone.Model.extend({
     // local dev api
     //urlRoot: 'http://localhost/api/Items'
     // production api
-    urlRoot: 'http://worldisending.com/development/dowork/api/Items'
+    urlRoot: 'api/Items'
 });

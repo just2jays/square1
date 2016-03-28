@@ -13,5 +13,5 @@ var Checkin = Backbone.Model.extend({
     // local dev api
     //urlRoot: 'http://localhost/api/Checkins'
     // production api
-    urlRoot: 'http://worldisending.com/development/dowork/api/Checkins'
+    urlRoot: 'api/Checkins'
 });
