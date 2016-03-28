@@ -191,6 +191,7 @@ var CheckinView = Backbone.View.extend({
         var checkin = new Checkin({
             user_id: 1,
             foursquare_venue_id: this.selectedVenue.id,
+            name: this.selectedVenue.name,
             latitude: this.selectedVenue.location.lat,
             longitude: this.selectedVenue.location.lng,
             review: !_.isEmpty($(e.currentTarget).find('.checkinMessageInput').val()) ? $(e.currentTarget).find('.checkinMessageInput').val() : null

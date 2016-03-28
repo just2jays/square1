@@ -117,9 +117,18 @@ class Rest {
  * CHECKIN
  *-------------------------*/
     public function createCheckin($data) {
-        $query = $this->db->prepare("INSERT INTO checkin (c_uid, c_pid, c_latitude, c_longitude, c_review) VALUES (:user, :place, :latitude, :longitude, :review)");
+        // Check if existing place
+        $place = $this->placeExists($data)
+        if( !empty($place) ) {
+            // EXISTING Place
+            $place_id = $place->id;
+        }else{
+            $place_id = addPlace($data);
+        }
+
+        $query = $this->db->prepare("INSERT INTO checkin (checkin_user_id, checkin_place_id, checkin_latitude, checkin_longitude, checkin_review) VALUES (:user, :place, :latitude, :longitude, :review)");
         $query->bindParam(':user', $data->user_id);
-        $query->bindParam(':place', $data->foursquare_venue_id);
+        $query->bindParam(':place', $place_id);
         $query->bindParam(':latitude', $data->latitude);
         $query->bindParam(':longitude', $data->longitude);
         $query->bindParam(':review', $data->review);
@@ -143,6 +152,31 @@ class Rest {
         $this->send();
     }
 
+/*--------------------------
+ * PLACE
+ *-------------------------*/
+    public function placeExists($data) {
+        // TODO: Add functionality to check for existing CUSTOM places somehow
+
+        $response = [];
+        foreach ($this->db->query("SELECT * FROM place WHERE place_foursquare_id = $data->foursquare_venue_id LIMIT 1") as $row) {
+            $response = array(
+                'ID' => $row['id'],
+                'name' => $row['place_name']
+            );
+        }
+
+        return $response;
+    }
+
+    public function addPlace($data) {
+        $query = $this->db->prepare("INSERT INTO place (place_foursquare_id, place_name) VALUES (:foursquare, :name)");
+        $query->bindParam(':foursquare', $data->foursquare_venue_id);
+        $query->bindParam(':name', $data->name);
+        $query->execute();
+
+        return $this->db->lastInsertId();
+    }
 /*--------------------------
  * UTILITY FUNCTIONS
  *-------------------------*/
