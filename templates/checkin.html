@@ -1,0 +1,50 @@
+<div class="container">
+    <h2 class="widget-title text-center">Check In Here</h2>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="fetchFromFoursquare">
+                <p class="text-center">In this location, on this day, you did some awesome stuff...</p>
+                <p><button type="button" id="BeginCheckin" class="btn btn-block btn-lg"><%= data.search_label %></button></p>
+                <div class="text-center">
+                    <i class="loading-indicator fa fa-spinner fa-pulse fa-spin"></i>
+                </div>
+                <div class="list-group location-list"></div>
+            </div>
+        </div><!-- col-lg-8 -->
+    </div><!-- row -->
+</div><!-- container -->
+
+<div id="foursquareModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="foursqareModal" aria-hidden="true">
+	<form id="existingLocationForm" role="form">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="existingLocationName modal-title" id="myModalLabel"></h4>
+				</div>
+				<div class="modal-body default-body">
+					<div class="well">
+						<h3></h3>
+					</div>
+					<div class="well">
+						<i class="fa fa-bullhorn"></i> Got something to say?
+						<textarea id="CheckinMessageInput" class="checkinMessageInput form-control" rows="4"></textarea>
+					</div>
+				</div>
+				<div class="modal-body response-body">
+					<div class="well">
+						<h3></h3>
+					</div>
+					<div class="well prize-well">
+						<i class="fa fa-gift fa-3"></i> Prizes
+
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="existing_save btn btn-primary">Here</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

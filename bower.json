@@ -1,0 +1,13 @@
+{
+  "name": "fresh-project",
+  "version": "0.0.1",
+  "dependencies": {
+    "bootstrap": "latest",
+    "modernizr": "~2.6.2",
+    "jquery": "~1.10.2",
+    "backbone": "latest",
+    "components-underscore": "latest",
+    "font-awesome": "^4.5.0"
+  },
+  "private": true
+}

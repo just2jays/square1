@@ -1,0 +1,191 @@
+<?php
+date_default_timezone_set('America/New_York');
+require_once("../config.php");
+
+$method = $_SERVER['REQUEST_METHOD'];
+$request = explode( '/', trim($_GET['request'], '/') );
+
+$rest = new Rest($db, $request, $method);
+$rest->process();
+
+class Rest {
+    public $db;
+    public $request;
+    public $method;
+	public $response = array();
+	public $requestTime;
+
+	function __construct($db, $request, $method) {
+        $this->db = $db;
+        $this->request = $request;
+        $this->method = $method;
+		$this->time = substr(date('Y-m-d H:i:s'),0,15).'0:00';
+		$this->requestTime = date('Y-m-d H:i:s');
+	}
+
+	public function send() {
+		header('Content-type: application/json');
+		echo $this->response;
+		exit();
+	}
+
+    public function error($message) {
+        $this->response['error'] = $message;
+        $this->send();
+    }
+
+	public function process() {
+		if (!isset($this->request[0])) {
+			$this->error('Required query not provided');
+		}
+
+		$this->starttime = microtime(true);
+        $type = $this->request[0];
+
+		switch ($type) {
+			case 'Items':
+				switch ($this->method) {
+					case 'GET':
+						$this->getItem($this->request[1]);
+						break;
+
+					default:
+						$this->error('Unsupported request method');
+						break;
+				}
+
+				break;
+
+            case 'Checkins':
+                switch ($this->method) {
+                    case 'GET':
+                        if( array_key_exists(1, $this->request) ) {
+                            // Single Model Fetch
+                        }else{
+                            // Collection Fetch
+                            $this->getCheckinCollection();
+                            break;
+                        }
+                    case 'POST':
+                        $data = json_decode(file_get_contents('php://input'));
+                        $this->createCheckin($data);
+                        break;
+
+                    default:
+                        $this->error('Unsupported request method');
+                        break;
+                }
+
+                break;
+
+            case 'Utilities':
+                switch ($this->request[1]) {
+                    case 'checkPrize':
+                        $this->checkPrize($data);
+                        break;
+
+                    default:
+                        $this->error('Unsupported request method');
+                        break;
+                }
+
+                break;
+
+			default:
+				$this->error('Unknown content type');
+				break;
+		}
+	}
+
+/*--------------------------
+ * ITEM
+ *-------------------------*/
+    public function getItem($item_id) {
+        foreach ($this->db->query("SELECT * FROM item WHERE id = $item_id LIMIT 1") as $row) {
+            $response = array(
+                'ID' => $row['id'],
+                'name' => $row['i_name'],
+                'image' => $row['i_image']
+            );
+        }
+
+        $this->response = json_encode($response);
+        $this->send();
+    }
+
+/*--------------------------
+ * CHECKIN
+ *-------------------------*/
+    public function createCheckin($data) {
+        $query = $this->db->prepare("INSERT INTO checkin (c_uid, c_pid, c_latitude, c_longitude, c_review) VALUES (:user, :place, :latitude, :longitude, :review)");
+        $query->bindParam(':user', $data->user_id);
+        $query->bindParam(':place', $data->foursquare_venue_id);
+        $query->bindParam(':latitude', $data->latitude);
+        $query->bindParam(':longitude', $data->longitude);
+        $query->bindParam(':review', $data->review);
+        $query->execute();
+
+        $response = $this->checkPrize();
+        $this->response = json_encode($response);
+        $this->send();
+    }
+
+    public function getCheckinCollection() {
+        foreach ($this->db->query("SELECT * FROM checkin ORDER BY id DESC LIMIT 10") as $row) {
+            $response[] = array(
+                'ID' => $row['id'],
+                'latitude' => $row['c_latitude'],
+                'longitude' => $row['c_longitude']
+            );
+        }
+
+        $this->response = json_encode($response);
+        $this->send();
+    }
+
+/*--------------------------
+ * UTILITY FUNCTIONS
+ *-------------------------*/
+    public function checkPrize() {
+        $user = 1;
+        $limit = 10;
+        $simple_roll = rand( 1,$limit );
+
+        if( $simple_roll < ( $limit/2 ) ){
+            // WIN
+            $itemQuery = $this->db->prepare("SELECT * FROM item ORDER BY RAND() LIMIT 1;");
+            $itemQuery->execute();
+            $item = $itemQuery->fetch(PDO::FETCH_ASSOC);
+            $itemID = $item['id'];
+
+            $countQuery = $this->db->prepare("SELECT COUNT(*) AS 'count' FROM user_item WHERE i_id = $itemID;");
+            $countQuery->execute();
+            $uniqeItemCount = $countQuery->fetch(PDO::FETCH_ASSOC);
+            $uniqueItemID = (int)$uniqeItemCount['count'];
+            $uniqueItemID++;
+
+            $query = $this->db->prepare("INSERT INTO user_item (unique_id, u_id, i_id) VALUES (:unique, :user, :item)");
+            $query->bindParam(':unique', $uniqueItemID);
+            $query->bindParam(':user', $user);
+            $query->bindParam(':item', $itemID);
+            $query->execute();
+
+            $response['prize']['success'] = true;
+            $response['prize']['item'] = array(
+                'unique' => $uniqueItemID,
+                'name' => $item['i_name'],
+                'image' => $item['i_image']
+            );
+            $response['prize']['message'] = "Congratulations, you won!";
+
+        }else{
+            // LOSE
+            $response['prize']['success'] = false;
+            $response['prize']['item'] = array();
+            $response['prize']['message'] = "Sorry, you didn't win. Better luck next time!";
+        }
+
+        return $response;
+    }
+}
+?>
