@@ -123,7 +123,7 @@ class Rest {
             // EXISTING Place
             $place_id = $place->id;
         }else{
-            $place_id = addPlace($data);
+            $place_id = $this->addPlace($data);
         }
 
         $query = $this->db->prepare("INSERT INTO checkin (checkin_user_id, checkin_place_id, checkin_latitude, checkin_longitude, checkin_review) VALUES (:user, :place, :latitude, :longitude, :review)");
