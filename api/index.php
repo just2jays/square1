@@ -118,7 +118,7 @@ class Rest {
  *-------------------------*/
     public function createCheckin($data) {
         // Check if existing place
-        $place = $this->placeExists($data)
+        $place = $this->placeExists($data);
         if( !empty($place) ) {
             // EXISTING Place
             $place_id = $place->id;
