@@ -3,7 +3,6 @@
   "version": "0.0.2",
   "dependencies": {
     "bootstrap": "latest",
-    "modernizr": "latest",
     "jquery": "latest",
     "backbone": "latest",
     "components-underscore": "latest",

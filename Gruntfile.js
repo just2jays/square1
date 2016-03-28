@@ -25,7 +25,9 @@ module.exports = function(grunt) {
                 },
                 files: {
                     'jquery.min.js': 'jquery/dist/jquery.min.js',
-                    'bootstrap.min.js': 'bootstrap/dist/js/bootstrap.min.js'
+                    'bootstrap.min.js': 'bootstrap/dist/js/bootstrap.min.js',
+                    'backbone-min.js': 'backbone/backbone-min.js',
+                    'underscore-min.js': 'underscore/underscore-min.js'
                 }
             },
 
