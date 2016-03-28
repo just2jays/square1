@@ -144,8 +144,8 @@ class Rest {
             $response[] = array(
                 'ID' => $row['checkin_id'],
                 'name' => $row['place_name'],
-                'latitude' => $row['latitude'],
-                'longitude' => $row['longitude']
+                'latitude' => $row['checkin_latitude'],
+                'longitude' => $row['checkin_longitude']
             );
         }
 
