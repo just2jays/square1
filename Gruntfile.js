@@ -101,13 +101,14 @@ module.exports = function(grunt) {
     });
 
     // 3. Where we tell Grunt we plan to use this plug-in.
+    grunt.loadNpmTasks('grunt-bowercopy');
     grunt.loadNpmTasks('grunt-contrib-jst');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-sass');
-    grunt.loadNpmTasks('grunt-contrib-watch');
+    //grunt.loadNpmTasks('grunt-contrib-sass');
+    //grunt.loadNpmTasks('grunt-contrib-watch');
 
     // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
-    grunt.registerTask('default', ['jst', 'concat', 'uglify', 'watch']);
+    grunt.registerTask('default', ['bowercopy', 'jst', 'concat', 'uglify']);
 
 };
