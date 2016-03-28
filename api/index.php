@@ -143,6 +143,7 @@ class Rest {
         foreach ($this->db->query("SELECT checkin.id as 'checkin_id', checkin.checkin_latitude, checkin.checkin_longitude, place.place_name FROM checkin INNER JOIN place ON checkin.checkin_place_id = place.id ORDER BY checkin.id DESC LIMIT 10") as $row) {
             $response[] = array(
                 'ID' => $row['checkin_id'],
+                'name' => $row['place_name'],
                 'latitude' => $row['latitude'],
                 'longitude' => $row['longitude']
             );
