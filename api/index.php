@@ -159,7 +159,7 @@ class Rest {
  *-------------------------*/
     public function placeExists($data) {
         // TODO: Add functionality to check for existing CUSTOM places somehow
-
+        error_log(print_r($data,true));
         $response = [];
         foreach ($this->db->query("SELECT * FROM place WHERE place_foursquare_id = $data->foursquare_venue_id LIMIT 1") as $row) {
             $response = array(
