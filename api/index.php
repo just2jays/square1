@@ -105,7 +105,7 @@ class Rest {
             $response = array(
                 'ID' => $row['id'],
                 'name' => $row['item_name'],
-                'image' => $row['item_image']
+                'image' => $row['item_image_location']
             );
         }
 
@@ -209,7 +209,7 @@ class Rest {
             $response['prize']['item'] = array(
                 'unique' => $uniqueItemID,
                 'name' => $item['item_name'],
-                'image' => $item['item_image']
+                'image' => $item['item_image_location']
             );
             $response['prize']['message'] = "Congratulations, you won!";
 
