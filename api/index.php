@@ -119,6 +119,7 @@ class Rest {
     public function createCheckin($data) {
         // Check if existing place
         $place = $this->placeExists($data);
+        error_log(print_r($place,true));
         if( !empty($place) ) {
             // EXISTING Place
             $place_id = $place['id'];
