@@ -104,8 +104,8 @@ class Rest {
         foreach ($this->db->query("SELECT * FROM item WHERE id = $item_id LIMIT 1") as $row) {
             $response = array(
                 'ID' => $row['id'],
-                'name' => $row['i_name'],
-                'image' => $row['i_image']
+                'name' => $row['item_name'],
+                'image' => $row['item_image']
             );
         }
 
@@ -193,23 +193,23 @@ class Rest {
             $item = $itemQuery->fetch(PDO::FETCH_ASSOC);
             $itemID = $item['id'];
 
-            $countQuery = $this->db->prepare("SELECT COUNT(*) AS 'count' FROM user_item WHERE i_id = $itemID;");
+            $countQuery = $this->db->prepare("SELECT COUNT(*) AS 'count' FROM user_item WHERE item_id = $itemID;");
             $countQuery->execute();
             $uniqeItemCount = $countQuery->fetch(PDO::FETCH_ASSOC);
             $uniqueItemID = (int)$uniqeItemCount['count'];
             $uniqueItemID++;
 
-            $query = $this->db->prepare("INSERT INTO user_item (unique_id, u_id, i_id) VALUES (:unique, :user, :item)");
-            $query->bindParam(':unique', $uniqueItemID);
+            $query = $this->db->prepare("INSERT INTO user_item (user_id, item_id, unique_id) VALUES (:user, :item, :unique)");
             $query->bindParam(':user', $user);
             $query->bindParam(':item', $itemID);
+            $query->bindParam(':unique', $uniqueItemID);
             $query->execute();
 
             $response['prize']['success'] = true;
             $response['prize']['item'] = array(
                 'unique' => $uniqueItemID,
-                'name' => $item['i_name'],
-                'image' => $item['i_image']
+                'name' => $item['item_name'],
+                'image' => $item['item_image']
             );
             $response['prize']['message'] = "Congratulations, you won!";
 
