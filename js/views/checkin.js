@@ -124,7 +124,6 @@ var CheckinView = Backbone.View.extend({
             longitude: this.selectedVenue.location.lng,
             review: !_.isEmpty($(e.currentTarget).find('.checkinMessageInput').val()) ? $(e.currentTarget).find('.checkinMessageInput').val() : null
         });
-        console.log(checkin);
         checkin.save({}, {
             success: function (model, respose, options) {
                 console.log(model);

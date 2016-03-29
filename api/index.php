@@ -121,7 +121,7 @@ class Rest {
         $place = $this->placeExists($data);
         if( !empty($place) ) {
             // EXISTING Place
-            $place_id = $place->id;
+            $place_id = $place['id'];
         }else{
             $place_id = $this->addPlace($data);
         }
