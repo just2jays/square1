@@ -321,7 +321,7 @@ var MainRouter = Backbone.Router.extend({
     defaultIndex: function () {
         console.log('show default checkin');
         if (this.checkinView == null) {
-            console.log('yep null for now');
+            console.log('yep null defaults for now');
             this.checkinView = new CheckinView();
         }
         console.log(this);
@@ -332,6 +332,7 @@ var MainRouter = Backbone.Router.extend({
     timelineView: function () {
         console.log('show timeline');
         if (this.timelineView == null) {
+            console.log('yep null timeline for now');
             this.timelineView = new MapView();
         }
         console.log(this);
