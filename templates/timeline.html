@@ -19,8 +19,14 @@
 			<div class="panel panel-default">
                 <div class="panel-body">
                     <ul class="timeline">
-                        <% _.each(data, function(dat){ %>
-                            <% console.log(dat); %>
+                        <% _.each(data, function(checkin){ %>
+                            <% console.log(checkin); %>
+                            <li>
+                                <div class="timeline-badge"><i class="fa fa-check"></i></div>
+                                <div class="timeline-panel">
+                                    <h4 class="timeline-title">TITLE</h4>
+                                    <blockquote><p>review</p></blockquote>
+                            </li>
                         <% }); %>
                     </ul>
                 </div>
