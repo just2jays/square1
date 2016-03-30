@@ -19,13 +19,14 @@
 			<div class="panel panel-default">
                 <div class="panel-body">
                     <ul class="timeline">
-                        <% _.each(data, function(checkin){ %>
-                            <% console.log(checkin); %>
-                            <li>
+                        <% _.each(data, function(checkin, index){ %>
+                            <li class="<% if (index%2 ==0) { %>timeline-inverted<% } %>">
                                 <div class="timeline-badge"><i class="fa fa-check"></i></div>
                                 <div class="timeline-panel">
                                     <h4 class="timeline-title"><%= checkin.name %></h4>
-                                    <blockquote><p><%= checkin.review %></p></blockquote>
+                                    <% if ( !_.isEmpty(checkin.review) ){ %>
+                                        <blockquote><p><%= checkin.review %></p></blockquote>
+                                    <% } %>
                                     <p><small><i class="fa fa-clock-o"></i>checkin.timestamp</small></p>
                                 </div>
                             </li>
