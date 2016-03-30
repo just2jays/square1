@@ -9,7 +9,7 @@ var MainRouter = Backbone.Router.extend({
 
     routes: {
         "": "defaultIndex",
-        "timeline": "timelineView"
+        "timeline": "showTimeline"
     },
 
     defaultIndex: function () {
@@ -21,7 +21,7 @@ var MainRouter = Backbone.Router.extend({
         this.container.render();
     },
 
-    timelineView: function () {
+    showTimeline: function () {
         if (this.timelineView == null) {
             this.timelineView = new MapView();
         }
