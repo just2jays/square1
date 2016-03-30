@@ -76,6 +76,17 @@ var Place = Backbone.Model.extend({
     }
 });
 
+var ContainerView = Backbone.View.extend({
+     myChildView: null,
+
+     render: function() {
+        this.$el.html('<div id=""></div><div class="">');
+
+        this.$el.append(this.myChildView.$el);
+        return this;
+    }
+});
+
 var CheckinView = Backbone.View.extend({
     template: JST['templates/checkin.html'],
 
@@ -302,23 +313,21 @@ var checkinView = new CheckinView({ el: $("#checkinContainer") });
 var myRouter = Backbone.Router.extend({
 
     container: null,
-    view1: null,
-    view2: null,
-    view3: null,
 
     initialize: function() {
-        this.container = new MapView({ el: $("#mapContainer") });
+        this.container = new ContainerView({ el: $("#appContainer") });
     },
 
     routes: {
+        "":"defaultIndex",
         "timeline": "handleTimeline"
     },
 
-    handleTimeline: function () {
-        console.log('handle this!');
+    defaultIndex: function() {
+        console.log('default!!');
+    },
+
+    handleTimeline: function() {
         this.loadView(new HomeView());
     }
 });
-
-router = new myRouter();
-Backbone.history.start();
