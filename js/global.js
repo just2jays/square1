@@ -2,5 +2,7 @@
 
 //var mapView = new MapView({ el: $("#mapContainer") });
 
-var router = new MainRouter();
-Backbone.history.start();
+$(document).ready(function () {
+    router = new MainRouter();
+    Backbone.history.start();
+})

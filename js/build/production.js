@@ -333,7 +333,7 @@ var MainRouter = Backbone.Router.extend({
         if (this.timelineView == null) {
             this.timelineView = new MapView();
         }
-        console.log(this.timelineView);
+
         this.container.myChildView = this.timelineView;
         this.container.render();
     }
@@ -343,5 +343,7 @@ var MainRouter = Backbone.Router.extend({
 
 //var mapView = new MapView({ el: $("#mapContainer") });
 
-var router = new MainRouter();
-Backbone.history.start();
+$(document).ready(function () {
+    router = new MainRouter();
+    Backbone.history.start();
+})
