@@ -239,6 +239,7 @@ var CheckinView = Backbone.View.extend({
 
 var MapView = Backbone.View.extend({
     template: JST['templates/timeline.html'],
+    listTemplate: JST['templates/timeline-list.html'],
 
     initialize: function(){
 
@@ -271,7 +272,7 @@ var MapView = Backbone.View.extend({
         var checkinsCollection = new CheckinsCollection();
         checkinsCollection.fetch({
             success: _.bind(function (checkinsCollection, response) {
-                var timelineListTemplate = _.template(JST['templates/timeline-list.html']);
+                var timelineListTemplate = _.template(listTemplate);
                 var timelineListHtml = timelineListTemplate( response );
                 $('.timeline').html( timelineListHtml );
                 console.log(response);
