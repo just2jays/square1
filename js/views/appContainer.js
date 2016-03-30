@@ -1,4 +1,4 @@
-var ContainerView = Backbone.View.extend({
+var AppContainerView = Backbone.View.extend({
      myChildView: null,
 
      render: function() {

@@ -76,7 +76,7 @@ var Place = Backbone.Model.extend({
     }
 });
 
-var ContainerView = Backbone.View.extend({
+var AppContainerView = Backbone.View.extend({
      myChildView: null,
 
      render: function() {
@@ -306,31 +306,42 @@ var CheckinsCollection = Backbone.Collection.extend({
     url: 'api/Checkins'
 });
 
-var checkinView = new CheckinView({ el: $("#checkinContainer") });
-
-//var mapView = new MapView({ el: $("#mapContainer") });
-
-var Router = Backbone.Router.extend({
-
+var MainRouter = Backbone.Router.extend({
     container: null,
+    checkinView: null,
+    timelineView: null,
 
-    initialize: function() {
-        this.container = new ContainerView({ el: $("#appContainer") });
+    initialize: function () {
+        this.container = new AppContainerView({ el: $("#appContainer") });
     },
 
     routes: {
-        "":"defaultIndex",
-        "timeline": "handleTimeline"
+        "": "defaultIndex",
+        "timeline": "timelineView"
     },
 
-    defaultIndex: function() {
-        console.log('default!!');
+    defaultIndex: function () {
+        if (this.checkinView == null) {
+            this.checkinView = new CheckinView();
+        }
+
+        this.container.myChildView = this.checkinView;
+        this.container.render();
     },
 
-    handleTimeline: function() {
-        this.loadView(new HomeView());
+    timelineView: function () {
+        if (this.timelineView == null) {
+            this.timelineView = new View2({ model: this.greeting });
+        }
+
+        this.container.myChildView = this.timelineView;
+        this.container.render();
     }
 });
 
-var router = new Router();
+//var checkinView = new CheckinView({ el: $("#checkinContainer") });
+
+//var mapView = new MapView({ el: $("#mapContainer") });
+
+var router = new MainRouter();
 Backbone.history.start();

@@ -59,6 +59,7 @@ module.exports = function(grunt) {
                     'js/models/*.js', // All JS in the models folder
                     'js/views/*.js', // All JS in the views folder
                     'js/collections/*.js', // All JS in the views folder
+                    'js/routes.js',  // This specific file
                     'js/global.js'  // This specific file
                 ],
                 dest: 'js/build/production.js',
