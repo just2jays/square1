@@ -2,6 +2,7 @@ var MapView = Backbone.View.extend({
     template: JST['templates/map.html'],
 
     initialize: function(){
+        console.log('even this!?');
         this.render();
     },
 
@@ -15,7 +16,6 @@ var MapView = Backbone.View.extend({
         // Compile the template using underscore
         var template = this.template(variables);
 
-        console.log(template);
         // Load the compiled HTML into the Backbone "el"
         this.$el.html( template );
 
