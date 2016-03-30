@@ -36,8 +36,8 @@ var MapView = Backbone.View.extend({
                 _.each(response, function(checkin) {
                     var latLng = new google.maps.LatLng(checkin.latitude, checkin.longitude);
                     var marker = new google.maps.Marker({
-                        position: latLng
-                        //title: data.title
+                        position: latLng,
+                        title: checkin.name
                     });
                     marker.setMap(map);
                 });

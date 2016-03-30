@@ -13,3 +13,9 @@ var __t, __p = '', __e = _.escape;
 __p += '<div class="container">\n    <div class="col-md-8 col-md-offset-2">\n        <div class="mapWrapper">\n            <div id="map-canvas" style="width: 100%; height: 400px;"></div>\n        </div>\n    </div><!--col-md-8-->\n</div><!-- container -->\n';
 return __p
 };
+
+this["JST"]["templates/timeline.html"] = function(data) {
+var __t, __p = '', __e = _.escape;
+__p += '';
+return __p
+};

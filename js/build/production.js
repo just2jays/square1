@@ -13,6 +13,12 @@ var __t, __p = '', __e = _.escape;
 __p += '<div class="container">\n    <div class="col-md-8 col-md-offset-2">\n        <div class="mapWrapper">\n            <div id="map-canvas" style="width: 100%; height: 400px;"></div>\n        </div>\n    </div><!--col-md-8-->\n</div><!-- container -->\n';
 return __p
 };
+
+this["JST"]["templates/timeline.html"] = function(data) {
+var __t, __p = '', __e = _.escape;
+__p += '';
+return __p
+};
 var Checkin = Backbone.Model.extend({
     defaults: {
     },
@@ -260,8 +266,8 @@ var MapView = Backbone.View.extend({
                 _.each(response, function(checkin) {
                     var latLng = new google.maps.LatLng(checkin.latitude, checkin.longitude);
                     var marker = new google.maps.Marker({
-                        position: latLng
-                        //title: data.title
+                        position: latLng,
+                        title: checkin.name
                     });
                     marker.setMap(map);
                 });
@@ -291,4 +297,24 @@ var CheckinsCollection = Backbone.Collection.extend({
 
 var checkinView = new CheckinView({ el: $("#checkinContainer") });
 
-var mapView = new MapView({ el: $("#mapContainer") });
+//var mapView = new MapView({ el: $("#mapContainer") });
+
+var myRouter = Backbone.Router.extend({
+
+    container: null,
+    view1: null,
+    view2: null,
+    view3: null,
+
+    initialize: function() {
+        this.container = new MapView({ el: $("#mapContainer") });
+    },
+
+    routes: {
+        "timeline": "handleTimeline"
+    },
+
+    handleTimeline: function () {
+        this.loadView(new HomeView());
+    }
+});
