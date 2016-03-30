@@ -20,6 +20,7 @@
                 <div class="panel-body">
                     <ul class="timeline">
                         <% _.each(data, function(checkin, index){ %>
+                            <% console.log(checkin) %>
                             <li class="<% if (index%2 ==0) { %>timeline-inverted<% } %>">
                                 <div class="timeline-badge"><i class="fa fa-check"></i></div>
                                 <div class="timeline-panel">
