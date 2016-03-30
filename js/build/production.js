@@ -310,7 +310,7 @@ var checkinView = new CheckinView({ el: $("#checkinContainer") });
 
 //var mapView = new MapView({ el: $("#mapContainer") });
 
-var myRouter = Backbone.Router.extend({
+var Router = Backbone.Router.extend({
 
     container: null,
 
@@ -331,3 +331,6 @@ var myRouter = Backbone.Router.extend({
         this.loadView(new HomeView());
     }
 });
+
+var router = new Router();
+Backbone.history.start();
