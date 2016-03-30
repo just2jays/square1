@@ -1,6 +1,5 @@
 var MapView = Backbone.View.extend({
     template: JST['templates/timeline.html'],
-    listTemplate: JST['templates/timeline-list.html'],
 
     initialize: function(){
 
@@ -10,19 +9,21 @@ var MapView = Backbone.View.extend({
     },
 
     render: function(){
-        //Pass variables in using Underscore.js Template
-        var variables = {};
+        var checkinsCollection = new CheckinsCollection();
+        checkinsCollection.fetch({
+            success: _.bind(function (checkinsCollection, response) {
+                // Compile the template using underscore
+                var template = this.template(response);
 
-        // Compile the template using underscore
-        var template = this.template(variables);
+                // Load the compiled HTML into the Backbone "el"
+                this.$el.html( template );
 
-        // Load the compiled HTML into the Backbone "el"
-        this.$el.html( template );
-
-        this.plotCheckinPoints();
+                this.plotCheckinPoints(response);
+            }, this)
+        });
     },
 
-    plotCheckinPoints: function() {
+    plotCheckinPoints: function(response) {
         var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
         var mapOptions = {
           zoom: 8,
@@ -30,25 +31,17 @@ var MapView = Backbone.View.extend({
         };
         var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
 
-        var checkinsCollection = new CheckinsCollection();
-        checkinsCollection.fetch({
-            success: _.bind(function (checkinsCollection, response) {
-                var timelineListTemplate = _.template(this.listTemplate);
-                var timelineListHtml = timelineListTemplate( response );
-                $('.timeline').html( timelineListHtml );
-                console.log(response);
-                _.each(response, function(checkin) {
-                    var latLng = new google.maps.LatLng(checkin.latitude, checkin.longitude);
-                    var marker = new google.maps.Marker({
-                        position: latLng,
-                        title: checkin.name
-                    });
-                    marker.setMap(map);
-                });
-
-                this.reCenter(map, response);
-            }, this)
+        console.log(response);
+        _.each(response, function(checkin) {
+            var latLng = new google.maps.LatLng(checkin.latitude, checkin.longitude);
+            var marker = new google.maps.Marker({
+                position: latLng,
+                title: checkin.name
+            });
+            marker.setMap(map);
         });
+
+        this.reCenter(map, response);
     },
 
     reCenter: function(map, response) {

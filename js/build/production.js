@@ -8,12 +8,6 @@ __p += '<div class="container">\n    <h2 class="widget-title text-center">Check 
 return __p
 };
 
-this["JST"]["templates/timeline-list.html"] = function(data) {
-var __t, __p = '', __e = _.escape;
-__p += '<% _.each(data, function(dat){\n    console.log(dat);\n});\n';
-return __p
-};
-
 this["JST"]["templates/timeline.html"] = function(data) {
 var __t, __p = '', __e = _.escape;
 __p += '<div class="container">\n    <div class="row">\n        <div class="col-md-8">\n            <div class="mapWrapper">\n                <div id="map-canvas" style="width: 100%; height: 400px;"></div>\n            </div>\n        </div><!--col-md-8-->\n        <div class="col-md-4">\n            <p>LAST SEEN AT:</p>\n            <h4 class="lastSeenLabel">PLACE NAME</h4>\n            --REVIEW--\n        </div><!--col-md-4-->\n    </div>\n</div><!-- container -->\n\n<div class="container">\n\t<div class="row">\n\t\t<div class="col-md-8 col-md-offset-2">\n\t\t\t<div class="panel panel-default">\n                <div class="panel-body">\n                    <ul class="timeline"></ul>\n                </div>\n            </div>\n\t\t</div><!-- col-md-8 -->\n\t</div><!-- row -->\n</div><!-- container -->\n';
@@ -239,7 +233,6 @@ var CheckinView = Backbone.View.extend({
 
 var MapView = Backbone.View.extend({
     template: JST['templates/timeline.html'],
-    listTemplate: JST['templates/timeline-list.html'],
 
     initialize: function(){
 
@@ -249,19 +242,21 @@ var MapView = Backbone.View.extend({
     },
 
     render: function(){
-        //Pass variables in using Underscore.js Template
-        var variables = {};
+        var checkinsCollection = new CheckinsCollection();
+        checkinsCollection.fetch({
+            success: _.bind(function (checkinsCollection, response) {
+                // Compile the template using underscore
+                var template = this.template(response);
 
-        // Compile the template using underscore
-        var template = this.template(variables);
+                // Load the compiled HTML into the Backbone "el"
+                this.$el.html( template );
 
-        // Load the compiled HTML into the Backbone "el"
-        this.$el.html( template );
-
-        this.plotCheckinPoints();
+                this.plotCheckinPoints(response);
+            }, this)
+        });
     },
 
-    plotCheckinPoints: function() {
+    plotCheckinPoints: function(response) {
         var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
         var mapOptions = {
           zoom: 8,
@@ -269,25 +264,17 @@ var MapView = Backbone.View.extend({
         };
         var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
 
-        var checkinsCollection = new CheckinsCollection();
-        checkinsCollection.fetch({
-            success: _.bind(function (checkinsCollection, response) {
-                var timelineListTemplate = _.template(this.listTemplate);
-                var timelineListHtml = timelineListTemplate( response );
-                $('.timeline').html( timelineListHtml );
-                console.log(response);
-                _.each(response, function(checkin) {
-                    var latLng = new google.maps.LatLng(checkin.latitude, checkin.longitude);
-                    var marker = new google.maps.Marker({
-                        position: latLng,
-                        title: checkin.name
-                    });
-                    marker.setMap(map);
-                });
-
-                this.reCenter(map, response);
-            }, this)
+        console.log(response);
+        _.each(response, function(checkin) {
+            var latLng = new google.maps.LatLng(checkin.latitude, checkin.longitude);
+            var marker = new google.maps.Marker({
+                position: latLng,
+                title: checkin.name
+            });
+            marker.setMap(map);
         });
+
+        this.reCenter(map, response);
     },
 
     reCenter: function(map, response) {
