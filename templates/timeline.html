@@ -7,8 +7,8 @@
         </div><!--col-md-8-->
         <div class="col-md-4">
             <p>LAST SEEN AT:</p>
-            <h4 class="lastSeenLabel">PLACE NAME</h4>
-            --REVIEW--
+            <h4 class="lastSeenLabel"><%= data[0].name %></h4>
+            <%= data[0].review %>
         </div><!--col-md-4-->
     </div>
 </div><!-- container -->
@@ -27,7 +27,7 @@
                                     <% if ( !_.isEmpty(checkin.review) ){ %>
                                         <blockquote><p><%= checkin.review %></p></blockquote>
                                     <% } %>
-                                    <p><small><i class="fa fa-clock-o"></i>checkin.timestamp</small></p>
+                                    <p><small><i class="fa fa-clock-o"></i><%= checkin.timestamp %></small></p>
                                 </div>
                             </li>
                         <% }); %>
