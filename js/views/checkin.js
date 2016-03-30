@@ -92,7 +92,6 @@ var CheckinView = Backbone.View.extend({
     },
 
     openVenueDetails: function(e){
-        console.log('hmmmmm');
         e.preventDefault();
         chosen_venue_index = $(e.currentTarget).data('venueIndex');
         chosen_venue_id = $(e.currentTarget).data('venueIdentifier');
