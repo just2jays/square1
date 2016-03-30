@@ -13,7 +13,9 @@ var MainRouter = Backbone.Router.extend({
     },
 
     defaultIndex: function () {
+        console.log('show default checkin');
         if (this.checkinView == null) {
+            console.log('yep null for now');
             this.checkinView = new CheckinView();
         }
         console.log(this);
