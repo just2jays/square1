@@ -319,3 +319,6 @@ var myRouter = Backbone.Router.extend({
         this.loadView(new HomeView());
     }
 });
+
+router = new myRouter();
+Backbone.history.start();
