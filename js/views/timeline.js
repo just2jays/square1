@@ -1,5 +1,5 @@
 var MapView = Backbone.View.extend({
-    template: JST['templates/map.html'],
+    template: JST['templates/timeline.html'],
 
     initialize: function(){
 
