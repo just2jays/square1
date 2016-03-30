@@ -2,7 +2,7 @@ var MapView = Backbone.View.extend({
     template: JST['templates/map.html'],
 
     initialize: function(){
-        this.render();
+        //this.render();
     },
 
     events: {

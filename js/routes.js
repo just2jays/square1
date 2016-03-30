@@ -28,5 +28,6 @@ var MainRouter = Backbone.Router.extend({
 
         this.container.myChildView = this.timelineView;
         this.container.render();
+        this.timelineView.render();
     }
 });
