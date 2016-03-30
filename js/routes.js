@@ -23,7 +23,7 @@ var MainRouter = Backbone.Router.extend({
 
     timelineView: function () {
         if (this.timelineView == null) {
-            this.timelineView = new View2({ model: this.greeting });
+            this.timelineView = new MapView();
         }
 
         this.container.myChildView = this.timelineView;
