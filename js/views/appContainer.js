@@ -2,7 +2,9 @@ var AppContainerView = Backbone.View.extend({
      myChildView: null,
 
      render: function() {
-        this.$el.append(this.myChildView.$el);
+        //this.$el.html('<div id=""></div><div class="">');
+
+        this.$el.html(this.myChildView.$el);
         return this;
     }
 });
