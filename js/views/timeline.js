@@ -32,6 +32,9 @@ var MapView = Backbone.View.extend({
         var checkinsCollection = new CheckinsCollection();
         checkinsCollection.fetch({
             success: _.bind(function (checkinsCollection, response) {
+                var timelineListTemplate = _.template(JST['templates/timeline.html']);
+                var timelineListHtml = timelineListTemplate( response );
+                $('.timeline').html( timelineListHtml );
                 console.log(response);
                 _.each(response, function(checkin) {
                     var latLng = new google.maps.LatLng(checkin.latitude, checkin.longitude);
