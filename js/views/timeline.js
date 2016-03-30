@@ -13,6 +13,7 @@ var MapView = Backbone.View.extend({
         checkinsCollection.fetch({
             success: _.bind(function (checkinsCollection, response) {
                 // Compile the template using underscore
+                console.log(checkinsCollection);
                 var template = this.template(checkinsCollection);
 
                 // Load the compiled HTML into the Backbone "el"
