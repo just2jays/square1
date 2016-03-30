@@ -30,8 +30,6 @@ var MapView = Backbone.View.extend({
           center: myLatlng
         };
         var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
-
-        console.log(response);
         _.each(response, function(checkin) {
             var latLng = new google.maps.LatLng(checkin.latitude, checkin.longitude);
             var marker = new google.maps.Marker({

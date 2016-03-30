@@ -18,7 +18,11 @@
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-default">
                 <div class="panel-body">
-                    <ul class="timeline"></ul>
+                    <ul class="timeline">
+                        <% _.each(data, function(dat){
+                            console.log(dat);
+                        });
+                    </ul>
                 </div>
             </div>
 		</div><!-- col-md-8 -->
