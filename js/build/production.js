@@ -319,18 +319,20 @@ var MainRouter = Backbone.Router.extend({
     },
 
     defaultIndex: function () {
-        if (this.checkinView == null) {
-            this.checkinView = new CheckinView();
+        if (this.checkinView != null) {
+            this.checkinView.remove();
         }
+        this.checkinView = new CheckinView();
 
         this.container.myChildView = this.checkinView;
         this.container.render();
     },
 
     showTimeline: function () {
-        if (this.timelineView == null) {
-            this.timelineView = new MapView();
+        if (this.timelineView != null) {
+            this.timelineView.remove();
         }
+        this.timelineView = new MapView();
 
         this.container.myChildView = this.timelineView;
         this.container.render();
