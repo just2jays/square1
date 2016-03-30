@@ -18,6 +18,7 @@ var myRouter = Backbone.Router.extend({
     },
 
     handleTimeline: function () {
+        console.log('handle this!');
         this.loadView(new HomeView());
     }
 });
