@@ -243,7 +243,6 @@ var MapView = Backbone.View.extend({
     template: JST['templates/map.html'],
 
     initialize: function(){
-        console.log('even this!?');
         this.render();
     },
 
@@ -332,6 +331,7 @@ var MainRouter = Backbone.Router.extend({
 
     timelineView: function () {
         if (this.timelineView == null) {
+            console.log('whaaat');
             this.timelineView = new MapView();
         }
 

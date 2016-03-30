@@ -23,6 +23,7 @@ var MainRouter = Backbone.Router.extend({
 
     timelineView: function () {
         if (this.timelineView == null) {
+            console.log('whaaat');
             this.timelineView = new MapView();
         }
 
