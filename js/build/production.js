@@ -324,7 +324,7 @@ var MainRouter = Backbone.Router.extend({
         if (this.checkinView == null) {
             this.checkinView = new CheckinView();
         }
-
+        console.log(this);
         this.container.myChildView = this.checkinView;
         this.container.render();
     },
@@ -333,7 +333,7 @@ var MainRouter = Backbone.Router.extend({
         if (this.timelineView == null) {
             this.timelineView = new MapView();
         }
-
+        console.log(this);
         this.container.myChildView = this.timelineView;
         this.container.render();
     }
