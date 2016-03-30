@@ -24,8 +24,10 @@
                             <li>
                                 <div class="timeline-badge"><i class="fa fa-check"></i></div>
                                 <div class="timeline-panel">
-                                    <h4 class="timeline-title">TITLE</h4>
-                                    <blockquote><p>review</p></blockquote>
+                                    <h4 class="timeline-title"><%= checkin.name %></h4>
+                                    <blockquote><p><%= checkin.review %></p></blockquote>
+                                    <p><small><i class="fa fa-clock-o"></i>checkin.timestamp</small></p>
+                                </div>
                             </li>
                         <% }); %>
                     </ul>

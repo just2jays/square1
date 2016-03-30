@@ -15,7 +15,11 @@ __p += '<div class="container">\n    <div class="row">\n        <div class="col-
  _.each(data, function(checkin){ ;
 __p += '\n                            ';
  console.log(checkin); ;
-__p += '\n                            <li>\n                                <div class="timeline-badge"><i class="fa fa-check"></i></div>\n                                <div class="timeline-panel">\n                                    <h4 class="timeline-title">TITLE</h4>\n                                    <blockquote><p>review</p></blockquote>\n                            </li>\n                        ';
+__p += '\n                            <li>\n                                <div class="timeline-badge"><i class="fa fa-check"></i></div>\n                                <div class="timeline-panel">\n                                    <h4 class="timeline-title">' +
+((__t = ( checkin.name )) == null ? '' : __t) +
+'</h4>\n                                    <blockquote><p>' +
+((__t = ( checkin.review )) == null ? '' : __t) +
+'</p></blockquote>\n                                    <p><small><i class="fa fa-clock-o"></i>checkin.timestamp</small></p>\n                                </div>\n                            </li>\n                        ';
  }); ;
 __p += '\n                    </ul>\n                </div>\n            </div>\n\t\t</div><!-- col-md-8 -->\n\t</div><!-- row -->\n</div><!-- container -->\n';
 return __p
