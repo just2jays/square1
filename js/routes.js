@@ -28,6 +28,10 @@ var MainRouter = Backbone.Router.extend({
 
         this.container.myChildView = this.timelineView;
         this.container.render();
+
+        /* timelineView does NOT render on init() because we ned to render
+            render the map DOM element before loading Google Maps
+            ...thus we load it last */
         this.timelineView.render();
     }
 });

@@ -80,7 +80,7 @@ var AppContainerView = Backbone.View.extend({
      myChildView: null,
 
      render: function() {
-        this.$el.append(this.myChildView.$el);
+        this.$el.html(this.myChildView.$el);
         return this;
     }
 });
@@ -241,7 +241,7 @@ var MapView = Backbone.View.extend({
     template: JST['templates/map.html'],
 
     initialize: function(){
-        //this.render();
+
     },
 
     events: {
@@ -334,6 +334,10 @@ var MainRouter = Backbone.Router.extend({
 
         this.container.myChildView = this.timelineView;
         this.container.render();
+
+        /* timelineView does NOT render on init() because we ned to render
+            render the map DOM element before loading Google Maps
+            ...thus we load it last */
         this.timelineView.render();
     }
 });
