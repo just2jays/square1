@@ -147,7 +147,7 @@ class Rest {
                 'latitude' => $row['checkin_latitude'],
                 'longitude' => $row['checkin_longitude'],
                 'review' => $row['checkin_review'],
-                'timestamp' => date('D, M j, \'y @ g:i a', $row['checkin_timestamp'])
+                'timestamp' => date('D, M j, \'y @ g:i a', strtotime($row['checkin_timestamp']))
             );
         }
 
