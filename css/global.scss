@@ -32,6 +32,9 @@ TIMELINE
     }
 
     li {
+        position: relative;
+        margin-bottom: 20px;
+        
         &::before,
         ::after {
             content: " ";
