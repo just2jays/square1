@@ -64,8 +64,6 @@ var CheckinView = Backbone.View.extend({
     	var day = ("0" + d.getDate()).slice(-2);
     	var getUrl = 'https://api.foursquare.com/v2/venues/search?ll='+latitude+','+longitude+'&client_id=C1LVPW1U2RT313HW4B0DRHFHSYFC2YQYTMUPZ0FF0SPVDDV2&client_secret=K2ZGG5FKKV24AVUTTQHKEA1UHNZKODSOYCDMWHVD2CQJ2IWP&v='+year+month+day;
 
-        $('.fetchFromFoursquare .loading-indicator').fadeIn();
-
     	$.get(getUrl, _.bind(function(data) {
     		// set fetched Foursquare data for global availability
     		fetchObj = data;
@@ -112,6 +110,8 @@ var CheckinView = Backbone.View.extend({
 
     beginCheckin: function( event ){
         // Button clicked, you can access the element that was clicked with event.currentTarget
+        $('.fetchFromFoursquare .location-list').html('');
+		$('.fetchFromFoursquare .loading-indicator').fadeIn();
         this.getGeoInfo('foursquare');
     },
 
@@ -129,6 +129,7 @@ var CheckinView = Backbone.View.extend({
         checkin.save({}, {
             success: function (model, respose, options) {
                 console.log(model);
+                $('.fetchFromFoursquare .location-list').html('');
                 $('#foursquareModal .modal-footer').slideUp();
                 $('#foursquareModal .modal-body.response-body .prize-well').html('');
                 $('#foursquareModal .modal-body h3').html('<i class="fa fa-check-circle-o fa-3"></i> '+model.get('prize').message);
