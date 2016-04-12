@@ -168,12 +168,14 @@ var CheckinView = Backbone.View.extend({
     	var day = ("0" + d.getDate()).slice(-2);
     	var getUrl = 'https://api.foursquare.com/v2/venues/search?ll='+latitude+','+longitude+'&client_id=C1LVPW1U2RT313HW4B0DRHFHSYFC2YQYTMUPZ0FF0SPVDDV2&client_secret=K2ZGG5FKKV24AVUTTQHKEA1UHNZKODSOYCDMWHVD2CQJ2IWP&v='+year+month+day;
 
+        $('.fetchFromFoursquare .loading-indicator').fadeIn();
+
     	$.get(getUrl, _.bind(function(data) {
     		// set fetched Foursquare data for global availability
     		fetchObj = data;
 
     		// hide the loading indicator
-    		$('.fetchFromFoursquare .loading-indicator').hide();
+    		$('.fetchFromFoursquare .loading-indicator').fadeOut();
 
     		$.each(data.response.venues, _.bind(function(index, venue){
                 this.venues.push(venue);
