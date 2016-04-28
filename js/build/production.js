@@ -161,6 +161,7 @@ var CheckinView = Backbone.View.extend({
      *     as a response from getGeoInfo();
      */
     fetchNearbyFoursquareVenues: function(position){
+        console.log(position);
     	latitude = position.coords.latitude;
     	longitude = position.coords.longitude;
     	var d = new Date();
