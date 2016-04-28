@@ -31,6 +31,7 @@ var CheckinView = Backbone.View.extend({
      */
     getGeoInfo: function(caller){
     	if(navigator.geolocation){
+            console.log('a');
     		switch (caller){
     			case 'foursquare':
     				var options = { timeout: 31000, enableHighAccuracy: true, maximumAge: 60000 };
