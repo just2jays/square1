@@ -151,6 +151,7 @@ var CheckinView = Backbone.View.extend({
     },
 
     geoError: function(positionError){
+        console.warn('ERROR(' + err.code + '): ' + err.message);
     	alert('Error 420 - Try Again');
     	$('.fetchFromFoursquare .loading-indicator').fadeOut();
     },
