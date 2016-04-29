@@ -37,7 +37,7 @@ var CheckinView = Backbone.View.extend({
                     $.post("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyBR4ZbiSLS-Rl7cKghQ3eZT3Ima_IsLgd4",function(data){
                       _.bind(this.fetchNearbyFoursquareVenues(data), this)
                     });
-    				navigator.geolocation.getCurrentPosition(_.bind(this.fetchNearbyFoursquareVenues, this), this.geoError, options );
+    				//navigator.geolocation.getCurrentPosition(_.bind(this.fetchNearbyFoursquareVenues, this), this.geoError, options );
     				break;
     			case 'current':
     				navigator.geolocation.getCurrentPosition(showLocation);
