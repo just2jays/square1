@@ -33,7 +33,10 @@ var CheckinView = Backbone.View.extend({
     	if(navigator.geolocation){
     		switch (caller){
     			case 'foursquare':
-    				var options = { timeout: 31000, enableHighAccuracy: true, maximumAge: 60000 };
+    				//var options = { timeout: 31000, enableHighAccuracy: true, maximumAge: 60000 };
+                    $.post("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyBR4ZbiSLS-Rl7cKghQ3eZT3Ima_IsLgd4",function(data){
+                      _.bind(this.fetchNearbyFoursquareVenues(data), this)
+                    });
     				navigator.geolocation.getCurrentPosition(_.bind(this.fetchNearbyFoursquareVenues, this), this.geoError, options );
     				break;
     			case 'current':
@@ -56,6 +59,7 @@ var CheckinView = Backbone.View.extend({
      *     as a response from getGeoInfo();
      */
     fetchNearbyFoursquareVenues: function(position){
+        console.log(position);
     	latitude = position.coords.latitude;
     	longitude = position.coords.longitude;
     	var d = new Date();
