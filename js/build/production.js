@@ -138,9 +138,9 @@ var CheckinView = Backbone.View.extend({
     		switch (caller){
     			case 'foursquare':
     				//var options = { timeout: 31000, enableHighAccuracy: true, maximumAge: 60000 };
-                    $.post("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyBR4ZbiSLS-Rl7cKghQ3eZT3Ima_IsLgd4",function(data){
+                    $.post("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyBR4ZbiSLS-Rl7cKghQ3eZT3Ima_IsLgd4",_.bind(function(data){
                       _.bind(this.fetchNearbyFoursquareVenues(data), this);
-                    });
+                    }, this));
     				//navigator.geolocation.getCurrentPosition(_.bind(this.fetchNearbyFoursquareVenues, this), this.geoError, options );
     				break;
     			case 'current':
