@@ -151,9 +151,16 @@ var CheckinView = Backbone.View.extend({
     },
 
     geoError: function(positionError){
-        console.log(positionError);
+        this.googleMapsLocationFetch();
     	alert('Error 420 - Try Again');
     	$('.fetchFromFoursquare .loading-indicator').fadeOut();
+    },
+
+    googleMapsLocationFetch: function(){
+        //var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
+        $.post('https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyBR4ZbiSLS-Rl7cKghQ3eZT3Ima_IsLgd4', function(data){
+            console.log(data);
+        });
     },
 
     /*
