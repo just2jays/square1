@@ -47,7 +47,7 @@ var CheckinView = Backbone.View.extend({
     },
 
     geoError: function(positionError){
-        this.googleMapsLocationFetch();
+        console.log(positionError);
     	alert('Error 420 - Try Again');
     	$('.fetchFromFoursquare .loading-indicator').fadeOut();
     },
@@ -119,6 +119,7 @@ var CheckinView = Backbone.View.extend({
     },
 
     beginCheckin: function( event ){
+        this.googleMapsLocationFetch();
         // Button clicked, you can access the element that was clicked with event.currentTarget
         $('.fetchFromFoursquare .location-list').html('');
 		$('.fetchFromFoursquare .loading-indicator').fadeIn();
