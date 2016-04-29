@@ -31,7 +31,6 @@ var CheckinView = Backbone.View.extend({
      */
     getGeoInfo: function(caller){
     	if(navigator.geolocation){
-            console.log(navigator);
     		switch (caller){
     			case 'foursquare':
     				var options = { timeout: 31000, enableHighAccuracy: true, maximumAge: 60000 };
@@ -47,16 +46,8 @@ var CheckinView = Backbone.View.extend({
     },
 
     geoError: function(positionError){
-        console.log(positionError);
     	alert('Error 420 - Try Again');
     	$('.fetchFromFoursquare .loading-indicator').fadeOut();
-    },
-
-    googleMapsLocationFetch: function(){
-        //var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
-        $.post('https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyBR4ZbiSLS-Rl7cKghQ3eZT3Ima_IsLgd4', function(data){
-            console.log(data);
-        });
     },
 
     /*
@@ -65,7 +56,6 @@ var CheckinView = Backbone.View.extend({
      *     as a response from getGeoInfo();
      */
     fetchNearbyFoursquareVenues: function(position){
-        console.log(position);
     	latitude = position.coords.latitude;
     	longitude = position.coords.longitude;
     	var d = new Date();
@@ -119,7 +109,6 @@ var CheckinView = Backbone.View.extend({
     },
 
     beginCheckin: function( event ){
-        this.googleMapsLocationFetch();
         // Button clicked, you can access the element that was clicked with event.currentTarget
         $('.fetchFromFoursquare .location-list').html('');
 		$('.fetchFromFoursquare .loading-indicator').fadeIn();
@@ -139,7 +128,6 @@ var CheckinView = Backbone.View.extend({
         });
         checkin.save({}, {
             success: function (model, respose, options) {
-                console.log(model);
                 $('.fetchFromFoursquare .location-list').html('');
                 $('#foursquareModal .modal-footer').slideUp();
                 $('#foursquareModal .modal-body.response-body .prize-well').html('');
