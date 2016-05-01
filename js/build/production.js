@@ -113,6 +113,7 @@ var Place = Backbone.Model.extend({
 
 var User = Backbone.Model.extend({
     defaults: {
+        ID: 0,
         username: '',
     },
     idAttribute: "ID",
