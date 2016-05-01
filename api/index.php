@@ -280,7 +280,7 @@ class Rest {
     }
 
     public function checkUserLogin() {
-        $response[] = array(
+        $response = array(
             'loggedin' => true
         );
 
