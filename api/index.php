@@ -77,7 +77,18 @@ class Rest {
                 }
 
                 break;
+            case 'Users':
+                switch ($this->method) {
+                    case 'GET':
+                        $this->getUser($this->request[1]);
+                        break;
 
+                    default:
+                        $this->error('Unsupported request method');
+                        break;
+                }
+
+                break;
             case 'Utilities':
                 switch ($this->request[1]) {
                     case 'checkPrize':
@@ -98,14 +109,18 @@ class Rest {
 	}
 
 /*--------------------------
+ * USER
+ *-------------------------*/
+
+/*--------------------------
  * ITEM
  *-------------------------*/
-    public function getItem($item_id) {
-        foreach ($this->db->query("SELECT * FROM item WHERE id = $item_id LIMIT 1") as $row) {
+    public function getUser($username) {
+        foreach ($this->db->query("SELECT * FROM user WHERE username = $username LIMIT 1") as $row) {
             $response = array(
                 'ID' => $row['id'],
-                'name' => $row['item_name'],
-                'image' => $row['item_image_location']
+                'username' => $row['username'],
+                'password' => $row['password']
             );
         }
 
@@ -222,6 +237,29 @@ class Rest {
         }
 
         return $response;
+    },
+
+    function encrypt_decrypt($action, $string) {
+        $output = false;
+
+        $encrypt_method = "AES-256-CBC";
+        $secret_key = 'trapped in time';
+        $secret_iv = 'trey fish gordo page';
+
+        // hash
+        $key = hash('sha256', $secret_key);
+
+        // iv - encrypt method AES-256-CBC expects 16 bytes - else you will get a warning
+        $iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+        if( $action == 'encrypt' ) {
+            $output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
+            $output = base64_encode($output);
+        }else if( $action == 'decrypt' ){
+            $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+        }
+
+        return $output;
     }
 }
 ?>

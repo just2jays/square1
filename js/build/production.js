@@ -8,6 +8,24 @@ __p += '<div class="container">\n    <h2 class="widget-title text-center">Check 
 return __p
 };
 
+this["JST"]["templates/inventory.html"] = function(data) {
+var __t, __p = '', __e = _.escape;
+__p += '<div class="container inventoryContainer">\n    <div class="row">\n        <div class="col-sm-6 col-md-4">\n            <div class="thumbnail inventoryItem">\n                <img src="" />\n                <div class="caption">\n                    <h3>item name</h3>\n                    <p>This is item #[unique_id] of the set!<br />You won this prize [some hours, days and/or mins] ago</p>\n                </div>\n            </div>\n        </div>\n    </div><!-- row -->\n</div><!-- container -->\n';
+return __p
+};
+
+this["JST"]["templates/login.html"] = function(data) {
+var __t, __p = '', __e = _.escape;
+__p += '<div class="container">\n    <form class="form-signin">\n        <h2 class="form-signin-heading">Please sign in</h2>\n        <label for="inputEmail" class="sr-only">Email address</label>\n        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>\n        <label for="inputPassword" class="sr-only">Password</label>\n        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>\n        <div class="checkbox">\n            <label>\n                <input type="checkbox" value="remember-me"> Remember me\n            </label>\n        </div>\n        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>\n    </form>\n</div> <!-- /container -->\n';
+return __p
+};
+
+this["JST"]["templates/register.html"] = function(data) {
+var __t, __p = '', __e = _.escape;
+__p += '<div class="container">\n    <form class="form-signin">\n        <h2 class="form-signin-heading">Please sign in</h2>\n        <label for="inputEmail" class="sr-only">Email address</label>\n        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>\n        <label for="inputPassword" class="sr-only">Password</label>\n        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>\n        <div class="checkbox">\n            <label>\n                <input type="checkbox" value="remember-me"> Remember me\n            </label>\n        </div>\n        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>\n    </form>\n</div> <!-- /container -->\n';
+return __p
+};
+
 this["JST"]["templates/timeline.html"] = function(data) {
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
@@ -91,6 +109,25 @@ var Place = Backbone.Model.extend({
     rename: function(newName) {
         this.set({ name: newName });
     }
+});
+
+var User = Backbone.Model.extend({
+    defaults: {
+        username: '',
+    },
+    idAttribute: "ID",
+    initialize: function(){
+        this.on("invalid", function(model, error){
+            console.log("We have an issue: " + error);
+        });
+    },
+    constructor: function (attributes, options) {
+        Backbone.Model.apply(this, arguments);
+    },
+    // local dev api
+    //urlRoot: 'http://localhost/api/Items'
+    // production api
+    urlRoot: 'api/Users'
 });
 
 var AppContainerView = Backbone.View.extend({
@@ -260,6 +297,73 @@ var CheckinView = Backbone.View.extend({
     }
 });
 
+var InventoryView = Backbone.View.extend({
+    template: JST['templates/inventory.html'],
+
+    initialize: function(){
+        this.render();
+    },
+
+    events: {
+    },
+
+    render: function(){
+        //Pass variables in using Underscore.js Template
+        var variables = { search_label: "Here Now" };
+
+        // Compile the template using underscore
+        var template = this.template(variables);
+
+        // Load the compiled HTML into the Backbone "el"
+        this.$el.html( template );
+    }
+});
+
+var loginView = Backbone.View.extend({
+    template: JST['templates/login.html'],
+
+    initialize: function(){
+        this.render();
+    },
+
+    events: {
+    },
+
+    render: function(){
+        //Pass variables in using Underscore.js Template
+        var variables = { search_label: "Here Now" };
+
+        // Compile the template using underscore
+        var template = this.template(variables);
+
+        // Load the compiled HTML into the Backbone "el"
+        this.$el.html( template );
+    }
+});
+
+var RegisterView = Backbone.View.extend({
+    template: JST['templates/register.html'],
+
+    initialize: function(){
+        this.render();
+    },
+
+    events: {
+
+    },
+
+    render: function(){
+        //Pass variables in using Underscore.js Template
+        var variables = { search_label: "Here Now" };
+
+        // Compile the template using underscore
+        var template = this.template(variables);
+
+        // Load the compiled HTML into the Backbone "el"
+        this.$el.html( template );
+    }
+});
+
 var MapView = Backbone.View.extend({
     template: JST['templates/timeline.html'],
 
@@ -333,7 +437,10 @@ var MainRouter = Backbone.Router.extend({
 
     routes: {
         "": "defaultIndex",
-        "timeline": "showTimeline"
+        "timeline": "showTimeline",
+        "inventory": "showInventory",
+        "login": "showLogin",
+        "register": "showRegister"
     },
 
     defaultIndex: function () {
@@ -359,6 +466,36 @@ var MainRouter = Backbone.Router.extend({
             render the map DOM element before loading Google Maps
             ...thus we load it last */
         this.timelineView.render();
+    },
+
+    showInventory: function () {
+        if (this.inventoryView != null) {
+            this.inventoryView.remove();
+        }
+        this.inventoryView = new inventoryView();
+
+        this.container.myChildView = this.inventoryView;
+        this.container.render();
+    },
+
+    showLogin: function () {
+        if (this.loginView != null) {
+            this.loginView.remove();
+        }
+        this.loginView = new loginView();
+
+        this.container.myChildView = this.loginView;
+        this.container.render();
+    },
+
+    showRegister: function () {
+        if (this.registerView != null) {
+            this.registerView.remove();
+        }
+        this.registerView = new registerView();
+
+        this.container.myChildView = this.registerView;
+        this.container.render();
     }
 });
 

@@ -8,6 +8,24 @@ __p += '<div class="container">\n    <h2 class="widget-title text-center">Check 
 return __p
 };
 
+this["JST"]["templates/inventory.html"] = function(data) {
+var __t, __p = '', __e = _.escape;
+__p += '<div class="container inventoryContainer">\n    <div class="row">\n        <div class="col-sm-6 col-md-4">\n            <div class="thumbnail inventoryItem">\n                <img src="" />\n                <div class="caption">\n                    <h3>item name</h3>\n                    <p>This is item #[unique_id] of the set!<br />You won this prize [some hours, days and/or mins] ago</p>\n                </div>\n            </div>\n        </div>\n    </div><!-- row -->\n</div><!-- container -->\n';
+return __p
+};
+
+this["JST"]["templates/login.html"] = function(data) {
+var __t, __p = '', __e = _.escape;
+__p += '<div class="container">\n    <form class="form-signin">\n        <h2 class="form-signin-heading">Please sign in</h2>\n        <label for="inputEmail" class="sr-only">Email address</label>\n        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>\n        <label for="inputPassword" class="sr-only">Password</label>\n        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>\n        <div class="checkbox">\n            <label>\n                <input type="checkbox" value="remember-me"> Remember me\n            </label>\n        </div>\n        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>\n    </form>\n</div> <!-- /container -->\n';
+return __p
+};
+
+this["JST"]["templates/register.html"] = function(data) {
+var __t, __p = '', __e = _.escape;
+__p += '<div class="container">\n    <form class="form-signin">\n        <h2 class="form-signin-heading">Please sign in</h2>\n        <label for="inputEmail" class="sr-only">Email address</label>\n        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>\n        <label for="inputPassword" class="sr-only">Password</label>\n        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>\n        <div class="checkbox">\n            <label>\n                <input type="checkbox" value="remember-me"> Remember me\n            </label>\n        </div>\n        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>\n    </form>\n</div> <!-- /container -->\n';
+return __p
+};
+
 this["JST"]["templates/timeline.html"] = function(data) {
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }

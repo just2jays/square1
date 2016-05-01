@@ -9,7 +9,10 @@ var MainRouter = Backbone.Router.extend({
 
     routes: {
         "": "defaultIndex",
-        "timeline": "showTimeline"
+        "timeline": "showTimeline",
+        "inventory": "showInventory",
+        "login": "showLogin",
+        "register": "showRegister"
     },
 
     defaultIndex: function () {
@@ -35,5 +38,35 @@ var MainRouter = Backbone.Router.extend({
             render the map DOM element before loading Google Maps
             ...thus we load it last */
         this.timelineView.render();
+    },
+
+    showInventory: function () {
+        if (this.inventoryView != null) {
+            this.inventoryView.remove();
+        }
+        this.inventoryView = new inventoryView();
+
+        this.container.myChildView = this.inventoryView;
+        this.container.render();
+    },
+
+    showLogin: function () {
+        if (this.loginView != null) {
+            this.loginView.remove();
+        }
+        this.loginView = new loginView();
+
+        this.container.myChildView = this.loginView;
+        this.container.render();
+    },
+
+    showRegister: function () {
+        if (this.registerView != null) {
+            this.registerView.remove();
+        }
+        this.registerView = new registerView();
+
+        this.container.myChildView = this.registerView;
+        this.container.render();
     }
 });
