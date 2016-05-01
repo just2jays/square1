@@ -136,6 +136,8 @@ var User = Backbone.Model.extend({
                             callback();
                         }, this)
                     });
+                }else{
+                    callback();
                 }
         	},this))
         	.done(function() {
