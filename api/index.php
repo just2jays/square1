@@ -315,6 +315,7 @@ class Rest {
         error_log($usersession);
         $stmt = $this->db->prepare("SELECT * FROM user WHERE id=$userid AND password=$usersession LIMIT 1");
         $result = $stmt->execute();
+        error_log(print_r($result,true));
         if($result) {
             $loggedin = true;
         }else{
