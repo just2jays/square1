@@ -16,6 +16,7 @@ var User = Backbone.Model.extend({
         if( !_.isNull(docCookies.getItem('userid')) && !_.isNull(docCookies.getItem('usersession')) ){
             console.log('first');
             $.get( this.urlRoot+'/checkLoginState', _.bind(function(data) {
+                console.log(data);
         		if(data.loggedin) {
                     appUser.fetch({
                         success: _.bind(function () {
