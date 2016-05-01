@@ -79,11 +79,8 @@ class Rest {
                 break;
             case 'Users':
                 switch ($this->request[1]) {
-                    case 'login':
-                        error_log(print_r($_POST,true));
-                        $data = json_decode(file_get_contents('php://input'));
-                        error_log($data);
-                        $this->loginUser($data);
+                    case 'login':;
+                        $this->loginUser();
                         break;
 
                     case 'register':
@@ -137,7 +134,27 @@ class Rest {
     }
 
     public function loginUser($data){
-        error_log(print_r($data,true));
+        $stmt = $this->db->prepare("SELECT * FROM user WHERE username=$data['username'] LIMIT 1");
+        $result = $stmt->execute();
+        if($result) {
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            //if( $this->encrypt_decrypt('encrypt',$data['password']) == $user['password']){
+            if( $data['password'] == $user['password']){
+                $response['loggedin'] = true;
+                $response['message'] = "Success! Logging in...";
+                setcookie( "userid", $user['id'], strtotime( '+7 days' ) );
+                setcookie( "usersession", $user['password'], strtotime( '+7 days' ) );
+            }else{
+                $response['message'] = "Incorrect Password";
+                $response['loggedin'] = false;
+            }
+        }else{
+            $response['message'] = "User Not Found";
+            $response['loggedin'] = false;
+        }
+
+        $this->response = json_encode($response);
+        $this->send();
     }
 
 /*--------------------------
