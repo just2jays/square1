@@ -4,5 +4,8 @@
 
 $(document).ready(function () {
     router = new MainRouter();
+
+    var user = new User();
+
     Backbone.history.start();
 })
