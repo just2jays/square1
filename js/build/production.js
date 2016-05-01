@@ -125,25 +125,26 @@ var User = Backbone.Model.extend({
         Backbone.Model.apply(this, arguments);
     },
 
-    isLoggedIn: function() {
-        $.get( this.urlRoot+'/checkLoginState', _.bind(function(data) {
-    		if(data.loggedin) {
-                return true;
-            }else{
+    handleUser: function(callback) {
+        if( !_.isNull(docCookies.getItem('userid')) && !_.isNull(docCookies.getItem('usersession')) ){
+            $.get( this.urlRoot+'/checkLoginState', _.bind(function(data) {
+        		if(data.loggedin) {
+                    appUser.fetch();
+                }
+        	},this))
+        	.done(function() {
+        	})
+        	.fail(function() {
                 return false;
-            }
-    	},this))
-    	.done(function() {
-    	})
-    	.fail(function() {
-            return false;
-    	})
-    	.always(function() {
-    	}, "json");
+        	})
+        	.always(function() {
+        	}, "json");
+        }else{
+            callback();
+        }
     },
 
     userLogin: function(userdata) {
-        console.log(userdata);
         $.post( this.urlRoot+"/login", userdata, function(data) {
             console.log(data);
         })
@@ -549,12 +550,11 @@ $(document).ready(function () {
     appUser = new User({
         'ID': docCookies.getItem('userid'),
     });
-    if( !_.isNull(docCookies.getItem('userid')) && !_.isNull(docCookies.getItem('usersession')) ) {
-        console.loggedin(appUser.isLoggedIn());
-    }else{
-        appUser.set({'loggedin': false});
-    }
-    Backbone.history.start();
+
+    // Check user is logged
+    appUser.handleUser(function(){
+        Backbone.history.start();
+    });
 });
 
 var docCookies = {

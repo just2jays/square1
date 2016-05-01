@@ -4,12 +4,11 @@ $(document).ready(function () {
     appUser = new User({
         'ID': docCookies.getItem('userid'),
     });
-    if( !_.isNull(docCookies.getItem('userid')) && !_.isNull(docCookies.getItem('usersession')) ) {
-        console.loggedin(appUser.isLoggedIn());
-    }else{
-        appUser.set({'loggedin': false});
-    }
-    Backbone.history.start();
+
+    // Check user is logged
+    appUser.handleUser(function(){
+        Backbone.history.start();
+    });
 });
 
 var docCookies = {
