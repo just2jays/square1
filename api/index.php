@@ -102,6 +102,10 @@ class Rest {
 
                 break;
 
+            case 'checkUserLogin':
+                $this->checkUserLogin();
+                break;
+
 			default:
 				$this->error('Unknown content type');
 				break;
@@ -111,18 +115,18 @@ class Rest {
 /*--------------------------
  * USER
  *-------------------------*/
- public function getUser($username) {
-     foreach ($this->db->query("SELECT * FROM user WHERE username = $username LIMIT 1") as $row) {
-         $response = array(
-             'ID' => $row['id'],
-             'username' => $row['username'],
-             'password' => $row['password']
-         );
-     }
+    public function getUser($user_id) {
+        foreach ($this->db->query("SELECT * FROM user WHERE id = $user_id LIMIT 1") as $row) {
+            $response = array(
+                'ID' => $row['id'],
+                'username' => $row['username'],
+                'password' => $row['password']
+            );
+        }
 
-     $this->response = json_encode($response);
-     $this->send();
- }
+        $this->response = json_encode($response);
+        $this->send();
+    }
 
 /*--------------------------
  * ITEM
@@ -206,6 +210,7 @@ class Rest {
 
         return $this->db->lastInsertId();
     }
+
 /*--------------------------
  * UTILITY FUNCTIONS
  *-------------------------*/
@@ -272,6 +277,10 @@ class Rest {
         }
 
         return $output;
+    }
+
+    public function checkUserLogin() {
+        return true;
     }
 }
 ?>
