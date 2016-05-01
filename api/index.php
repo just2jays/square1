@@ -311,11 +311,9 @@ class Rest {
     public function checkLoginState() {
         $userid = $_COOKIE['userid'];
         $usersession = $_COOKIE['usersession'];
-        error_log($userid);
-        error_log($usersession);
         $stmt = $this->db->prepare("SELECT * FROM user WHERE id=$userid AND password=\"".$usersession."\" LIMIT 1");
         $result = $stmt->execute();
-        error_log($result);
+
         if($result) {
             $loggedin = true;
         }else{
@@ -325,8 +323,8 @@ class Rest {
         $response = array(
             'loggedin' => $loggedin
         );
-        error_log(print_r($response,true));
-        $this->response = json_encode($response);
+
+        $this->response = $response;
         $this->send();
     }
 }
