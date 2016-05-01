@@ -6,6 +6,7 @@ $(document).ready(function () {
         'ID': docCookies.getItem('userid'),
         'session': docCookies.getItem('usersession')
     });
+    console.log(appUser);
     Backbone.history.start();
 });
 
