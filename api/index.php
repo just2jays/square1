@@ -280,8 +280,12 @@ class Rest {
     }
 
     public function checkUserLogin() {
-        error_log('checking');
-        return json_encode(array("loggedin"=>true));
+        $response[] = array(
+            'loggedin' => true
+        );
+
+        $this->response = json_encode($response);
+        $this->send();
     }
 }
 ?>
