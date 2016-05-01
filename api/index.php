@@ -320,9 +320,7 @@ class Rest {
             $loggedin = false;
         }
 
-        $response = array(
-            'loggedin' => $loggedin
-        );
+        $response['loggedin'] = $loggedin;
 
         $this->response = json_encode($response);
         $this->send();
