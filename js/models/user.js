@@ -19,7 +19,7 @@ var User = Backbone.Model.extend({
             $.get( this.urlRoot+'/checkLoginState', _.bind(function(data) {
                 console.log(data);
         		if(data.loggedin) {
-                    appUser.fetch({
+                    this.fetch({
                         success: _.bind(function () {
                             callback();
                         }, this),
