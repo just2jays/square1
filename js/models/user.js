@@ -14,17 +14,21 @@ var User = Backbone.Model.extend({
 
     isLoggedIn: function() {
         $.get('api/checkUserLogin', _.bind(function(data) {
-    		// set fetched Foursquare data for global availability
-    		console.log(data);
+    		if(data.loggedin) {
+                return true;
+            }else{
+                return false;
+            }
     	},this))
     	.done(function() {
     	})
     	.fail(function() {
+            return false;
     	})
     	.always(function() {
     	}, "json");
     },
-    
+
     // local dev api
     //urlRoot: 'http://localhost/api/Items'
     // production api

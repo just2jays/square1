@@ -127,17 +127,21 @@ var User = Backbone.Model.extend({
 
     isLoggedIn: function() {
         $.get('api/checkUserLogin', _.bind(function(data) {
-    		// set fetched Foursquare data for global availability
-    		console.log(data);
+    		if(data.loggedin) {
+                return true;
+            }else{
+                return false;
+            }
     	},this))
     	.done(function() {
     	})
     	.fail(function() {
+            return false;
     	})
     	.always(function() {
     	}, "json");
     },
-    
+
     // local dev api
     //urlRoot: 'http://localhost/api/Items'
     // production api
@@ -516,19 +520,13 @@ var MainRouter = Backbone.Router.extend({
 
 $(document).ready(function () {
     router = new MainRouter();
-    console.log(docCookies.getItem('userid'));
-    console.log(docCookies.getItem('usersession'));
-    appUser = new User({
-        'ID': docCookies.getItem('userid'),
-        'session': docCookies.getItem('usersession')
-    });
-    
-    if( !_.isNull(appUser.get('ID')) ) {
-        appUser.fetch();
+
+
+    if( !_.isNull(docCookies.getItem('userid')) && !_.isNull(docCookies.getItem('usersession')) ) {
+        console.loggedin(appUser.isLoggedIn());
     }else{
         appUser.set({'loggedin': false});
     }
-    console.log(appUser);
     Backbone.history.start();
 });
 

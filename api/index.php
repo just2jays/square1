@@ -280,8 +280,18 @@ class Rest {
     }
 
     public function checkUserLogin() {
+        $userid = $_COOKIE['userid'];
+        $usersession = $_COOKIE['usersession'];
+        $stmt = $this->db->prepare("SELECT * FROM user WHERE id=$userid AND password=$usersession LIMIT 1");
+        $result = $stmt->execute();
+        if($result) {
+            $loggedin = true;
+        }else{
+            $loggedin = false;
+        }
+
         $response = array(
-            'loggedin' => true
+            'loggedin' => $loggedin
         );
 
         $this->response = json_encode($response);
