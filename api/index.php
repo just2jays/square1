@@ -280,6 +280,7 @@ class Rest {
     }
 
     public function checkUserLogin() {
+        error_log('checking');
         return json_encode(array("loggedin"=>true));
     }
 }
