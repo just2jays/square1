@@ -19,10 +19,7 @@ var MapView = Backbone.View.extend({
                 this.$el.html( template );
 
                 this.plotCheckinPoints(response);
-            }, this),
-            error: (function (e) {
-                console.log(' Service request failure: ' + e);
-            })
+            }, this)
         });
     },
 

@@ -21,7 +21,10 @@ var User = Backbone.Model.extend({
                     appUser.fetch({
                         success: _.bind(function () {
                             callback();
-                        }, this)
+                        }, this),
+                        error: (function (e) {
+                            console.log(' Service request failure: ' + e);
+                        })
                     });
                 }else{
                     callback();

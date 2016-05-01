@@ -134,7 +134,10 @@ var User = Backbone.Model.extend({
                     appUser.fetch({
                         success: _.bind(function () {
                             callback();
-                        }, this)
+                        }, this),
+                        error: (function (e) {
+                            console.log(' Service request failure: ' + e);
+                        })
                     });
                 }else{
                     callback();
@@ -439,10 +442,7 @@ var MapView = Backbone.View.extend({
                 this.$el.html( template );
 
                 this.plotCheckinPoints(response);
-            }, this),
-            error: (function (e) {
-                console.log(' Service request failure: ' + e);
-            })
+            }, this)
         });
     },
 
