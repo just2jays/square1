@@ -80,6 +80,7 @@ class Rest {
             case 'Users':
                 switch ($this->request[1]) {
                     case 'login':;
+                        error_log(print_r($_POST,true));
                         $this->loginUser($_POST);
                         break;
 
