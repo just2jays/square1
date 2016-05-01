@@ -6,6 +6,7 @@ var loginView = Backbone.View.extend({
     },
 
     events: {
+        "submit #userLoginForm": "loginUser"
     },
 
     render: function(){
@@ -17,5 +18,16 @@ var loginView = Backbone.View.extend({
 
         // Load the compiled HTML into the Backbone "el"
         this.$el.html( template );
+    },
+
+    loginUser: function(){
+        e.preventDefault();
+
+        var userData = {
+            username: $(e.currentTarget).find('#inputUsername').val(),
+            password: $(e.currentTarget).find('#inputPassword').val()
+        };
+
+        console.log(userData);
     }
 });

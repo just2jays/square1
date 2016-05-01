@@ -13,7 +13,7 @@ var User = Backbone.Model.extend({
     },
 
     isLoggedIn: function() {
-        $.get('api/checkUserLogin', _.bind(function(data) {
+        $.get('api/Users/checkLoginState', _.bind(function(data) {
     		if(data.loggedin) {
                 return true;
             }else{

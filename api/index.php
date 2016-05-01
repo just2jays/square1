@@ -78,9 +78,19 @@ class Rest {
 
                 break;
             case 'Users':
-                switch ($this->method) {
-                    case 'GET':
-                        $this->getUser($this->request[1]);
+                switch ($this->request[1]) {
+                    case 'login':
+                        $data = json_decode(file_get_contents('php://input'));
+                        $this->loginUser($data);
+                        break;
+
+                    case 'register':
+                        $data = json_decode(file_get_contents('php://input'));
+                        $this->registerUser($data);
+                        break;
+
+                    case 'checkLoginState':
+                        $this->checkLoginState();
                         break;
 
                     default:
@@ -100,10 +110,6 @@ class Rest {
                         break;
                 }
 
-                break;
-
-            case 'checkUserLogin':
-                $this->checkUserLogin();
                 break;
 
 			default:
@@ -279,7 +285,7 @@ class Rest {
         return $output;
     }
 
-    public function checkUserLogin() {
+    public function checkLoginState() {
         $userid = $_COOKIE['userid'];
         $usersession = $_COOKIE['usersession'];
         $stmt = $this->db->prepare("SELECT * FROM user WHERE id=$userid AND password=$usersession LIMIT 1");
