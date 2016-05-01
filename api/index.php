@@ -135,9 +135,6 @@ class Rest {
     }
 
     public function loginUser($data){
-        error_log("weaiofjaweir");
-        error_log("SELECT * FROM user WHERE username=\"$data['username']\" LIMIT 1");
-        error_log(print_r($data,true));
         $stmt = $this->db->prepare("SELECT * FROM user WHERE username = \"".$data['username']."\" LIMIT 1");
         $result = $stmt->execute();
         if($result) {
