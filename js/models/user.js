@@ -30,6 +30,7 @@ var User = Backbone.Model.extend({
     },
 
     userLogin: function(userdata) {
+        console.log(userdata);
         $.post( this.urlRoot+"/login", userdata, function(data) {
             console.log(data);
         })
