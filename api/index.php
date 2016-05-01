@@ -80,7 +80,7 @@ class Rest {
             case 'Users':
                 switch ($this->request[1]) {
                     case 'login':;
-                        $this->loginUser();
+                        $this->loginUser($_POST);
                         break;
 
                     case 'register':
