@@ -20,7 +20,7 @@ var loginView = Backbone.View.extend({
         this.$el.html( template );
     },
 
-    loginUser: function(){
+    loginUser: function(e){
         e.preventDefault();
 
         var userData = {
