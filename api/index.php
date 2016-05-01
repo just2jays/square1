@@ -134,6 +134,10 @@ class Rest {
         $this->send();
     }
 
+    public function loginUser($data){
+        error_log(print_r($data,true));
+    }
+
 /*--------------------------
  * ITEM
  *-------------------------*/

@@ -13,7 +13,7 @@ var User = Backbone.Model.extend({
     },
 
     isLoggedIn: function() {
-        $.get('api/Users/checkLoginState', _.bind(function(data) {
+        $.get( this.urlRoot+'/checkLoginState', _.bind(function(data) {
     		if(data.loggedin) {
                 return true;
             }else{
@@ -27,6 +27,19 @@ var User = Backbone.Model.extend({
     	})
     	.always(function() {
     	}, "json");
+    },
+
+    userLogin: function(userdata) {
+        $.post( this.urlRoot+"/login", userdata, function(data) {
+            console.log(data);
+        })
+        .done(function() {
+        })
+        .fail(function() {
+            console.log('oops error!');
+        })
+        .always(function() {
+        });
     },
 
     // local dev api

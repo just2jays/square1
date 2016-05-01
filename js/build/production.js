@@ -126,7 +126,7 @@ var User = Backbone.Model.extend({
     },
 
     isLoggedIn: function() {
-        $.get('api/Users/checkLoginState', _.bind(function(data) {
+        $.get( this.urlRoot+'/checkLoginState', _.bind(function(data) {
     		if(data.loggedin) {
                 return true;
             }else{
@@ -140,6 +140,19 @@ var User = Backbone.Model.extend({
     	})
     	.always(function() {
     	}, "json");
+    },
+
+    userLogin: function(userdata) {
+        $.post( this.urlRoot+"/login", userdata, function(data) {
+            console.log(data);
+        })
+        .done(function() {
+        })
+        .fail(function() {
+            console.log('oops error!');
+        })
+        .always(function() {
+        });
     },
 
     // local dev api
@@ -367,7 +380,7 @@ var loginView = Backbone.View.extend({
             password: $(e.currentTarget).find('#inputPassword').val()
         };
 
-        console.log(userData);
+        appUser.userLogin(userData)
     }
 });
 
@@ -534,7 +547,6 @@ $(document).ready(function () {
 
     appUser = new User({
         'ID': docCookies.getItem('userid'),
-        'session': docCookies.getItem('usersession')
     });
     if( !_.isNull(docCookies.getItem('userid')) && !_.isNull(docCookies.getItem('usersession')) ) {
         console.loggedin(appUser.isLoggedIn());
