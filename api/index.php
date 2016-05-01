@@ -325,7 +325,6 @@ class Rest {
         );
 
         $this->response = json_encode($response);
-        error_log($this->response);
         $this->send();
     }
 }
