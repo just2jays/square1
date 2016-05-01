@@ -80,7 +80,6 @@ class Rest {
             case 'Users':
                 switch ($this->request[1]) {
                     case 'login':;
-                        error_log(print_r($_POST,true));
                         $this->loginUser($_POST);
                         break;
 
@@ -143,8 +142,8 @@ class Rest {
             if( $data['password'] == $user['password']){
                 $response['loggedin'] = true;
                 $response['message'] = "Success! Logging in...";
-                setcookie( "userid", $user['id'], strtotime( '+7 days' ) );
-                setcookie( "usersession", $user['password'], strtotime( '+7 days' ) );
+                setcookie( "userid", $user['id'], strtotime( '+7 days' ), "/" );
+                setcookie( "usersession", $user['password'], strtotime( '+7 days' ), "/" );
             }else{
                 $response['message'] = "Incorrect Password";
                 $response['loggedin'] = false;
