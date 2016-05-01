@@ -2,10 +2,16 @@ $(document).ready(function () {
     router = new MainRouter();
     console.log(docCookies.getItem('userid'));
     console.log(docCookies.getItem('usersession'));
-    var appUser = new User({
+    appUser = new User({
         'ID': docCookies.getItem('userid'),
         'session': docCookies.getItem('usersession')
     });
+    
+    if( !_.isNull(appUser.get('ID')) ) {
+        appUser.fetch();
+    }else{
+        appUser.set({'loggedin': false});
+    }
     console.log(appUser);
     Backbone.history.start();
 });
