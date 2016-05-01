@@ -313,9 +313,9 @@ class Rest {
         $usersession = $_COOKIE['usersession'];
         error_log($userid);
         error_log($usersession);
-        $stmt = $this->db->prepare("SELECT * FROM user WHERE id=$userid AND password=$usersession LIMIT 1");
+        $stmt = $this->db->prepare("SELECT * FROM user WHERE id=$userid AND password=\"".$usersession."\" LIMIT 1");
         $result = $stmt->execute();
-        error_log(print_r($result,true));
+        error_log($result);
         if($result) {
             $loggedin = true;
         }else{
