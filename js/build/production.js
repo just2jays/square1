@@ -506,7 +506,7 @@ var MainRouter = Backbone.Router.extend({
 $(document).ready(function () {
     router = new MainRouter();
 
-    var user = new User();
+    appUser = new User();
 
     Backbone.history.start();
 })
