@@ -111,16 +111,28 @@ class Rest {
 /*--------------------------
  * USER
  *-------------------------*/
+ public function getUser($username) {
+     foreach ($this->db->query("SELECT * FROM user WHERE username = $username LIMIT 1") as $row) {
+         $response = array(
+             'ID' => $row['id'],
+             'username' => $row['username'],
+             'password' => $row['password']
+         );
+     }
+
+     $this->response = json_encode($response);
+     $this->send();
+ }
 
 /*--------------------------
  * ITEM
  *-------------------------*/
-    public function getUser($username) {
-        foreach ($this->db->query("SELECT * FROM user WHERE username = $username LIMIT 1") as $row) {
+    public function getItem($item_id) {
+        foreach ($this->db->query("SELECT * FROM item WHERE id = $item_id LIMIT 1") as $row) {
             $response = array(
                 'ID' => $row['id'],
-                'username' => $row['username'],
-                'password' => $row['password']
+                'name' => $row['item_name'],
+                'image' => $row['item_image_location']
             );
         }
 
@@ -237,9 +249,9 @@ class Rest {
         }
 
         return $response;
-    },
+    }
 
-    function encrypt_decrypt($action, $string) {
+    public function encrypt_decrypt($action, $string) {
         $output = false;
 
         $encrypt_method = "AES-256-CBC";
