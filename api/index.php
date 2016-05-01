@@ -311,6 +311,8 @@ class Rest {
     public function checkLoginState() {
         $userid = $_COOKIE['userid'];
         $usersession = $_COOKIE['usersession'];
+        error_log($userid);
+        error_log($usersession);
         $stmt = $this->db->prepare("SELECT * FROM user WHERE id=$userid AND password=$usersession LIMIT 1");
         $result = $stmt->execute();
         if($result) {
