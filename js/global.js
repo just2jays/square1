@@ -1,7 +1,10 @@
 $(document).ready(function () {
     router = new MainRouter();
 
-
+    appUser = new User({
+        'ID': docCookies.getItem('userid'),
+        'session': docCookies.getItem('usersession')
+    });
     if( !_.isNull(docCookies.getItem('userid')) && !_.isNull(docCookies.getItem('usersession')) ) {
         console.loggedin(appUser.isLoggedIn());
     }else{
