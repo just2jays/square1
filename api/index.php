@@ -134,7 +134,7 @@ class Rest {
     }
 
     public function loginUser($data){
-        $stmt = $this->db->prepare("SELECT * FROM user WHERE username=$data['username'] LIMIT 1");
+        $stmt = $this->db->prepare("SELECT * FROM user WHERE username=\"$data['username']\" LIMIT 1");
         $result = $stmt->execute();
         if($result) {
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
