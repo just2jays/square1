@@ -2,6 +2,7 @@ var User = Backbone.Model.extend({
     defaults: {
         ID: 0,
         username: '',
+        loggedin: false
     },
     idAttribute: "ID",
     initialize: function(){
@@ -15,32 +16,22 @@ var User = Backbone.Model.extend({
 
     handleUser: function(callback) {
         if( !_.isNull(docCookies.getItem('userid')) && !_.isNull(docCookies.getItem('usersession')) ){
-            console.log('first');
             $.get( this.urlRoot+'/checkLoginState', _.bind(function(data) {
-                console.log(data);
         		if(data.loggedin) {
-                    this.fetch({
-                        success: _.bind(function () {
-                            callback();
-                        }, this),
-                        error: (function (e) {
-                            console.log(e);
-                            console.log(' Service request failure: ' + e);
-                        })
-                    });
-                }else{
-                    callback();
+                    this.id = data.id;
+                    this.loggedin = true;
+                    this.username = data.username;
                 }
+                callback();
         	},this))
         	.done(function() {
         	})
         	.fail(function() {
-                return false;
         	})
         	.always(function() {
         	}, "json");
         }else{
-            console.log('else');
+            this.loggedin = false;
             callback();
         }
     },

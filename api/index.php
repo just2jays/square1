@@ -315,12 +315,13 @@ class Rest {
         $result = $stmt->execute();
 
         if($result) {
-            $loggedin = true;
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            $loggedin['loggedin'] = true;
+            $loggedin['id'] = $user['id'];
+            $response['username'] = $user['username'];
         }else{
-            $loggedin = false;
+            $response=['loggedin'] = false;
         }
-
-        $response['loggedin'] = $loggedin;
 
         $this->response = json_encode($response);
         $this->send();
