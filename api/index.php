@@ -141,6 +141,8 @@ class Rest {
             //if( $this->encrypt_decrypt('encrypt',$data['password']) == $user['password']){
             if( $data['password'] == $user['password']){
                 $response['loggedin'] = true;
+                $response['id'] = $user['id'];
+                $response['username'] = $user['username'];
                 $response['message'] = "Success! Logging in...";
                 setcookie( "userid", $user['id'], strtotime( '+7 days' ), "/" );
                 setcookie( "usersession", $user['password'], strtotime( '+7 days' ), "/" );
