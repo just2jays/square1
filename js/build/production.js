@@ -16,7 +16,7 @@ return __p
 
 this["JST"]["templates/login.html"] = function(data) {
 var __t, __p = '', __e = _.escape;
-__p += '<div class="container">\n    <form id="userLoginForm" class="form-signin">\n        <h2 class="form-signin-heading">Please sign in</h2>\n        <label for="inputUsername" class="sr-only">Username</label>\n        <input type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus>\n        <label for="inputPassword" class="sr-only">Password</label>\n        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>\n        <div class="checkbox">\n            <label>\n                <input type="checkbox" value="remember-me"> Remember me\n            </label>\n        </div>\n        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>\n    </form>\n</div> <!-- /container -->\n';
+__p += '<div class="container">\n    <div class="row">\n        <div class="col-sm-6 col-sm-offset-3">\n            <form id="userLoginForm" class="form-signin">\n                <h2 class="form-signin-heading">Please sign in</h2>\n                <div class="form-group">\n                    <label for="inputUsername" class="sr-only">Username</label>\n                    <input type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus>\n                </div>\n                <div class="form-group">\n                    <label for="inputPassword" class="sr-only">Password</label>\n                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>\n                </div>\n                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>\n            </form>\n        </div>\n    </div>\n</div> <!-- /container -->\n';
 return __p
 };
 
@@ -584,7 +584,7 @@ var MainRouter = Backbone.Router.extend({
     handleLogout: function() {
         docCookies.removeItem('userid');
         docCookies.removeItem('usersession');
-        this.showLogin();
+        window.location.href = "http://worldisending.com/#/login";
     }
 });
 

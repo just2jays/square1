@@ -74,6 +74,6 @@ var MainRouter = Backbone.Router.extend({
     handleLogout: function() {
         docCookies.removeItem('userid');
         docCookies.removeItem('usersession');
-        this.showLogin();
+        window.location.href = "http://worldisending.com/#/login";
     }
 });
