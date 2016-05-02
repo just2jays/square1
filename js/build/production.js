@@ -316,7 +316,7 @@ var CheckinView = Backbone.View.extend({
         e.preventDefault();
 
         var checkin = new Checkin({
-            user_id: appUser.get('id'),
+            user_id: appUser.get('ID'),
             foursquare_venue_id: this.selectedVenue.id,
             name: this.selectedVenue.name,
             latitude: this.selectedVenue.location.lat,
