@@ -1,9 +1,7 @@
 $(document).ready(function () {
     router = new MainRouter();
 
-    appUser = new User({
-        'ID': docCookies.getItem('userid'),
-    });
+    appUser = new User({});
 
     // Check user is logged
     appUser.handleUser(function(){

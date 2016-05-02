@@ -20,7 +20,7 @@ var User = Backbone.Model.extend({
                 console.log(data);
         		if(data.loggedin) {
                     this.set({
-                        'id': data.id,
+                        'ID': data.id,
                         'loggedin': true,
                         'username': data.username
                     });

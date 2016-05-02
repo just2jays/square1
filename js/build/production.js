@@ -133,7 +133,7 @@ var User = Backbone.Model.extend({
                 console.log(data);
         		if(data.loggedin) {
                     this.set({
-                        'id': data.id,
+                        'ID': data.id,
                         'loggedin': true,
                         'username': data.username
                     });
@@ -555,9 +555,7 @@ var MainRouter = Backbone.Router.extend({
 $(document).ready(function () {
     router = new MainRouter();
 
-    appUser = new User({
-        'ID': docCookies.getItem('userid'),
-    });
+    appUser = new User({});
 
     // Check user is logged
     appUser.handleUser(function(){
