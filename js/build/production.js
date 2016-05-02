@@ -523,6 +523,7 @@ var MainRouter = Backbone.Router.extend({
 
     routes: {
         "": "defaultIndex",
+        "checkin": "defaultIndex",
         "timeline": "showTimeline",
         "inventory": "showInventory",
         "login": "showLogin",
