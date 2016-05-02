@@ -130,6 +130,7 @@ var User = Backbone.Model.extend({
     handleUser: function(callback) {
         if( !_.isNull(docCookies.getItem('userid')) && !_.isNull(docCookies.getItem('usersession')) ){
             $.get( this.urlRoot+'/checkLoginState', _.bind(function(data) {
+                console.log(data);
         		if(data.loggedin) {
                     this.id = data.id;
                     this.loggedin = true;
