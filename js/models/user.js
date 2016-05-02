@@ -40,16 +40,23 @@ var User = Backbone.Model.extend({
     },
 
     userLogin: function(userdata) {
-        $.post( this.urlRoot+"/login", userdata, function(data) {
-            console.log(data);
-        })
+        $.post( this.urlRoot+"/login", userdata, _.bind(function(data) {
+            this.set({
+                'ID': data.id,
+                'loggedin': true,
+                'username': data.username
+            });
+        },this))
         .done(function() {
         })
         .fail(function() {
-            console.log('oops error!');
         })
         .always(function() {
         });
+    },
+
+    setUserInterface: function() {
+
     },
 
     // local dev api

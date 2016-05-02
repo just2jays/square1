@@ -153,16 +153,23 @@ var User = Backbone.Model.extend({
     },
 
     userLogin: function(userdata) {
-        $.post( this.urlRoot+"/login", userdata, function(data) {
-            console.log(data);
-        })
+        $.post( this.urlRoot+"/login", userdata, _.bind(function(data) {
+            this.set({
+                'ID': data.id,
+                'loggedin': true,
+                'username': data.username
+            });
+        },this))
         .done(function() {
         })
         .fail(function() {
-            console.log('oops error!');
         })
         .always(function() {
         });
+    },
+
+    setUserInterface: function() {
+
     },
 
     // local dev api
@@ -428,18 +435,22 @@ var MapView = Backbone.View.extend({
     },
 
     render: function(){
-        var checkinsCollection = new CheckinsCollection();
-        checkinsCollection.fetch({
-            success: _.bind(function (checkinsCollection, response) {
-                // Compile the template using underscore
-                var template = this.template(response);
+        if(appUser.loggedin){
+            var checkinsCollection = new CheckinsCollection();
+            checkinsCollection.fetch({
+                success: _.bind(function (checkinsCollection, response) {
+                    // Compile the template using underscore
+                    var template = this.template(response);
 
-                // Load the compiled HTML into the Backbone "el"
-                this.$el.html( template );
+                    // Load the compiled HTML into the Backbone "el"
+                    this.$el.html( template );
 
-                this.plotCheckinPoints(response);
-            }, this)
-        });
+                    this.plotCheckinPoints(response);
+                }, this)
+            });
+        }else{
+            this.$el.html( '<div class="container"><div class="row"><div class="col-sm-8 col-sm-offset-2">Please Login</div></div></div>' );
+        }
     },
 
     plotCheckinPoints: function(response) {
