@@ -24,6 +24,7 @@ var User = Backbone.Model.extend({
                             callback();
                         }, this),
                         error: (function (e) {
+                            console.log(e);
                             console.log(' Service request failure: ' + e);
                         })
                     });
