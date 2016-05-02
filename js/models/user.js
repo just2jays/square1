@@ -41,6 +41,7 @@ var User = Backbone.Model.extend({
 
     userLogin: function(userdata) {
         $.post( this.urlRoot+"/login", userdata, _.bind(function(data) {
+            console.log(data);
             this.set({
                 'ID': data.id,
                 'loggedin': true,
