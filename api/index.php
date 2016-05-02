@@ -325,6 +325,8 @@ class Rest {
             $response['loggedin'] = false;
         }
 
+        error_log(print_r($response,true));
+
         $this->response = json_encode($response);
         $this->send();
     }
