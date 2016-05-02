@@ -28,6 +28,7 @@ var User = Backbone.Model.extend({
                     docCookies.setItem('userid', data.id);
                     docCookies.setItem('usersession', data.usersession);
                     this.setUserInterface("loggedin");
+                    window.location.hash = 'checkin';
                 }
                 callback();
         	},this))
@@ -55,6 +56,7 @@ var User = Backbone.Model.extend({
             docCookies.setItem('userid', data.id);
             docCookies.setItem('usersession', data.usersession);
             this.setUserInterface("loggedin");
+            window.location.hash = 'checkin';
         },this))
         .done(function() {
         })
