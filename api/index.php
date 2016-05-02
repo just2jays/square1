@@ -320,7 +320,7 @@ class Rest {
             $response['loggedin'] = true;
             $response['id'] = $user['id'];
             $response['username'] = $user['username'];
-            $response['usersession'] = $user['password']
+            $response['usersession'] = $user['password'];
         }else{
             $response['loggedin'] = false;
         }
