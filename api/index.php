@@ -321,6 +321,8 @@ class Rest {
             $response['loggedin'] = true;
             $response['id'] = $user['id'];
             $response['username'] = $user['username'];
+            setcookie( "userid", $user['id'], strtotime( '+7 days' ), "/" );
+            setcookie( "usersession", $user['password'], strtotime( '+7 days' ), "/" );
         }else{
             $response['loggedin'] = false;
         }
