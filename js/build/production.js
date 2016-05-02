@@ -435,7 +435,7 @@ var MapView = Backbone.View.extend({
     },
 
     render: function(){
-        if(appUser.loggedin){
+        if(appUser.get('loggedin')){
             var checkinsCollection = new CheckinsCollection();
             checkinsCollection.fetch({
                 success: _.bind(function (checkinsCollection, response) {
