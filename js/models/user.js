@@ -19,9 +19,11 @@ var User = Backbone.Model.extend({
             $.get( this.urlRoot+'/checkLoginState', _.bind(function(data) {
                 console.log(data);
         		if(data.loggedin) {
-                    this.set('id') = data.id;
-                    this.set('loggedin') = true;
-                    this.set('username') = data.username;
+                    this.set({
+                        'id': data.id,
+                        'loggedin': true,
+                        'username': data.username
+                    });
                 }
                 callback();
         	},this))
