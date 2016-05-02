@@ -17,6 +17,8 @@ var MainRouter = Backbone.Router.extend({
     },
 
     defaultIndex: function () {
+        if(!appUser.loggedin) this.showLogin();
+
         if (this.checkinView != null) {
             this.checkinView.remove();
         }
@@ -27,6 +29,8 @@ var MainRouter = Backbone.Router.extend({
     },
 
     showTimeline: function () {
+        if(!appUser.loggedin) this.showLogin();
+
         if (this.timelineView != null) {
             this.timelineView.remove();
         }
@@ -42,6 +46,8 @@ var MainRouter = Backbone.Router.extend({
     },
 
     showInventory: function () {
+        if(!appUser.loggedin) this.showLogin();
+
         if (this.inventoryView != null) {
             this.inventoryView.remove();
         }
@@ -74,6 +80,7 @@ var MainRouter = Backbone.Router.extend({
     handleLogout: function() {
         docCookies.removeItem('userid');
         docCookies.removeItem('usersession');
+        appUser = new User({});
         window.location.href = "http://worldisending.com/#/login";
     }
 });
