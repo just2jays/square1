@@ -143,9 +143,8 @@ class Rest {
                 $response['loggedin'] = true;
                 $response['id'] = $user['id'];
                 $response['username'] = $user['username'];
+                $response['usersession'] = $user['password'];
                 $response['message'] = "Success! Logging in...";
-                setcookie( "userid", $user['id'], strtotime( '+7 days' ), "/" );
-                setcookie( "usersession", $user['password'], strtotime( '+7 days' ), "/" );
             }else{
                 $response['message'] = "Incorrect Password";
                 $response['loggedin'] = false;
@@ -321,8 +320,7 @@ class Rest {
             $response['loggedin'] = true;
             $response['id'] = $user['id'];
             $response['username'] = $user['username'];
-            setcookie( "userid", $user['id'], strtotime( '+7 days' ), "/" );
-            setcookie( "usersession", $user['password'], strtotime( '+7 days' ), "/" );
+            $response['usersession'] = $user['password']
         }else{
             $response['loggedin'] = false;
         }

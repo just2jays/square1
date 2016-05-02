@@ -137,6 +137,9 @@ var User = Backbone.Model.extend({
                         'loggedin': true,
                         'username': data.username
                     });
+
+                    docCookies.setItem('userid', data.id);
+                    docCookies.setItem('usersession', data.usersession);
                 }
                 callback();
         	},this))
@@ -160,6 +163,9 @@ var User = Backbone.Model.extend({
                 'loggedin': true,
                 'username': data.username
             });
+
+            docCookies.setItem('userid', data.id);
+            docCookies.setItem('usersession', data.usersession);
         },this))
         .done(function() {
         })
