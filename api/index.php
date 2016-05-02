@@ -316,11 +316,11 @@ class Rest {
 
         if($result) {
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
-            $loggedin['loggedin'] = true;
-            $loggedin['id'] = $user['id'];
+            $response['loggedin'] = true;
+            $response['id'] = $user['id'];
             $response['username'] = $user['username'];
         }else{
-            $response=['loggedin'] = false;
+            $response['loggedin'] = false;
         }
 
         $this->response = json_encode($response);
