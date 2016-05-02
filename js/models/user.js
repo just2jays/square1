@@ -27,6 +27,7 @@ var User = Backbone.Model.extend({
 
                     docCookies.setItem('userid', data.id);
                     docCookies.setItem('usersession', data.usersession);
+                    this.setUserInterface("loggedin");
                 }
                 callback();
         	},this))
@@ -53,6 +54,7 @@ var User = Backbone.Model.extend({
 
             docCookies.setItem('userid', data.id);
             docCookies.setItem('usersession', data.usersession);
+            this.setUserInterface("loggedin");
         },this))
         .done(function() {
         })
@@ -62,8 +64,12 @@ var User = Backbone.Model.extend({
         });
     },
 
-    setUserInterface: function() {
-
+    setUserInterface: function(type) {
+        if( type == "loggedin" ) {
+            $('.navbar .navbar-right').html('<li><a href="/#/logout">Logout</a></li>')
+        }else{
+            $('.navbar .navbar-right').html('<li><a href="/#/login">Login</a></li>')
+        }
     },
 
     // local dev api

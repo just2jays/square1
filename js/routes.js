@@ -12,6 +12,7 @@ var MainRouter = Backbone.Router.extend({
         "timeline": "showTimeline",
         "inventory": "showInventory",
         "login": "showLogin",
+        "logout": "handleLogout",
         "register": "showRegister"
     },
 
@@ -68,5 +69,11 @@ var MainRouter = Backbone.Router.extend({
 
         this.container.myChildView = this.registerView;
         this.container.render();
+    },
+
+    handleLogout: function() {
+        docCookies.removeItem('userid');
+        docCookies.removeItem('usersession');
+        this.showLogin();
     }
 });
