@@ -21,7 +21,11 @@ var CheckinView = Backbone.View.extend({
         var template = this.template(variables);
 
         // Load the compiled HTML into the Backbone "el"
-        this.$el.html( template );
+        if(appUser.get('loggedin')){
+            this.$el.html( template );
+        }else{
+            this.$el.html( '<div class="container"><div class="row"><div class="col-sm-8 col-sm-offset-2 text-center">Please Login</div></div></div>' );
+        }
     },
 
     /*
@@ -123,7 +127,7 @@ var CheckinView = Backbone.View.extend({
         e.preventDefault();
 
         var checkin = new Checkin({
-            user_id: 1,
+            user_id: appUser.get('id'),
             foursquare_venue_id: this.selectedVenue.id,
             name: this.selectedVenue.name,
             latitude: this.selectedVenue.location.lat,

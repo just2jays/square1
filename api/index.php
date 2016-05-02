@@ -194,7 +194,7 @@ class Rest {
         $query->bindParam(':review', $data->review);
         $query->execute();
 
-        $response = $this->checkPrize();
+        $response = $this->checkPrize($data->user_id);
         $this->response = json_encode($response);
         $this->send();
     }
@@ -243,8 +243,8 @@ class Rest {
 /*--------------------------
  * UTILITY FUNCTIONS
  *-------------------------*/
-    public function checkPrize() {
-        $user = 1;
+    public function checkPrize($userid) {
+        $user = $userid;
         $limit = 10;
         $simple_roll = rand( 1,$limit );
 

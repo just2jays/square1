@@ -23,7 +23,7 @@ var MapView = Backbone.View.extend({
                 }, this)
             });
         }else{
-            this.$el.html( '<div class="container"><div class="row"><div class="col-sm-8 col-sm-offset-2">Please Login</div></div></div>' );
+            this.$el.html( '<div class="container"><div class="row"><div class="col-sm-8 col-sm-offset-2 text-center">Please Login</div></div></div>' );
         }
     },
 
