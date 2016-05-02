@@ -390,7 +390,7 @@ var loginView = Backbone.View.extend({
             password: $(e.currentTarget).find('#inputPassword').val()
         };
 
-        appUser.userLogin(userData)
+        appUser.userLogin(userData);
     }
 });
 
