@@ -16,7 +16,7 @@ return __p
 
 this["JST"]["templates/login.html"] = function(data) {
 var __t, __p = '', __e = _.escape;
-__p += '<div class="container">\n    <div class="row">\n        <div class="col-sm-6 col-sm-offset-3">\n            <form id="userLoginForm" class="form-signin">\n                <h2 class="form-signin-heading">Please sign in</h2>\n                <div class="form-group">\n                    <label for="inputUsername" class="sr-only">Username</label>\n                    <input type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus>\n                </div>\n                <div class="form-group">\n                    <label for="inputPassword" class="sr-only">Password</label>\n                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>\n                </div>\n                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>\n            </form>\n        </div>\n    </div>\n</div> <!-- /container -->\n';
+__p += '<div class="container">\n    <div class="row">\n        <div class="col-sm-6 col-sm-offset-3">\n            <form id="userLoginForm" class="form-signin">\n                <h2 class="form-signin-heading">Please sign in</h2>\n                <div class="form-group">\n                    <label for="inputUsername" class="sr-only">Username</label>\n                    <input type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus>\n                </div>\n                <div class="form-group">\n                    <label for="inputPassword" class="sr-only">Password</label>\n                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>\n                </div>\n                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>\n            </form>\n            <div class="error_msg text-center"></div>\n        </div>\n    </div>\n</div> <!-- /container -->\n';
 return __p
 };
 
@@ -130,7 +130,7 @@ var User = Backbone.Model.extend({
     handleUser: function(callback) {
         if( !_.isNull(docCookies.getItem('userid')) && !_.isNull(docCookies.getItem('usersession')) ){
             $.get( this.urlRoot+'/checkLoginState', _.bind(function(data) {
-                console.log(data);
+                //console.log(data);
         		if(data.loggedin) {
                     this.set({
                         'ID': data.id,
@@ -159,17 +159,21 @@ var User = Backbone.Model.extend({
 
     userLogin: function(userdata) {
         $.post( this.urlRoot+"/login", userdata, _.bind(function(data) {
-            console.log(data);
-            this.set({
-                'ID': data.id,
-                'loggedin': true,
-                'username': data.username
-            });
+            //console.log(data);
+            if(data.loggedin) {
+                this.set({
+                    'ID': data.id,
+                    'loggedin': true,
+                    'username': data.username
+                });
 
-            docCookies.setItem('userid', data.id);
-            docCookies.setItem('usersession', data.usersession);
-            this.setUserInterface("loggedin");
-            window.location.hash = 'checkin';
+                docCookies.setItem('userid', data.id);
+                docCookies.setItem('usersession', data.usersession);
+                this.setUserInterface("loggedin");
+                window.location.hash = 'checkin';
+            }else{
+                $(router.container.myChildView.$el).find('form .error_msg').html(data.message);
+            }
         },this))
         .done(function() {
         })

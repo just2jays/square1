@@ -17,7 +17,7 @@ var User = Backbone.Model.extend({
     handleUser: function(callback) {
         if( !_.isNull(docCookies.getItem('userid')) && !_.isNull(docCookies.getItem('usersession')) ){
             $.get( this.urlRoot+'/checkLoginState', _.bind(function(data) {
-                console.log(data);
+                //console.log(data);
         		if(data.loggedin) {
                     this.set({
                         'ID': data.id,
@@ -46,17 +46,21 @@ var User = Backbone.Model.extend({
 
     userLogin: function(userdata) {
         $.post( this.urlRoot+"/login", userdata, _.bind(function(data) {
-            console.log(data);
-            this.set({
-                'ID': data.id,
-                'loggedin': true,
-                'username': data.username
-            });
+            //console.log(data);
+            if(data.loggedin) {
+                this.set({
+                    'ID': data.id,
+                    'loggedin': true,
+                    'username': data.username
+                });
 
-            docCookies.setItem('userid', data.id);
-            docCookies.setItem('usersession', data.usersession);
-            this.setUserInterface("loggedin");
-            window.location.hash = 'checkin';
+                docCookies.setItem('userid', data.id);
+                docCookies.setItem('usersession', data.usersession);
+                this.setUserInterface("loggedin");
+                window.location.hash = 'checkin';
+            }else{
+                $(router.container.myChildView.$el).find('form .error_msg').html(data.message);
+            }
         },this))
         .done(function() {
         })
