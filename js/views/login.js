@@ -23,6 +23,8 @@ var loginView = Backbone.View.extend({
     loginUser: function(e){
         e.preventDefault();
 
+        $(router.container.myChildView.$el).find('.error_msg').html('');
+
         var userData = {
             username: $(e.currentTarget).find('#inputUsername').val(),
             password: $(e.currentTarget).find('#inputPassword').val()

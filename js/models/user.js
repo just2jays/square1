@@ -46,7 +46,7 @@ var User = Backbone.Model.extend({
 
     userLogin: function(userdata) {
         $.post( this.urlRoot+"/login", userdata, _.bind(function(data) {
-            console.log($(router.container.myChildView.$el));
+            //console.log(data);
             if(data.loggedin) {
                 this.set({
                     'ID': data.id,
@@ -59,7 +59,7 @@ var User = Backbone.Model.extend({
                 this.setUserInterface("loggedin");
                 window.location.hash = 'checkin';
             }else{
-                $(router.container.myChildView.$el).find('form .error_msg').html(data.message);
+                $(router.container.myChildView.$el).find('.error_msg').html(data.message);
             }
         },this))
         .done(function() {
