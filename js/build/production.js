@@ -21,9 +21,9 @@ __p += '\n            <div class="col-sm-6 col-md-4">\n                <div clas
 ((__t = ( item.item_name )) == null ? '' : __t) +
 '</h3>\n                        <p>This is item #' +
 ((__t = ( item.unique_id )) == null ? '' : __t) +
-' of the set!<br />You won this prize ' +
+' of the set!<br />You won this prize on ' +
 ((__t = ( item.timestamp )) == null ? '' : __t) +
-' ago</p>\n                    </div>\n                </div>\n            </div>\n        ';
+'</p>\n                    </div>\n                </div>\n            </div>\n        ';
  }); ;
 __p += '\n    </div><!-- row -->\n</div><!-- container -->\n';
 return __p
