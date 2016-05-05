@@ -1,14 +1,16 @@
 <% console.log(data); %>
 <div class="container inventoryContainer">
     <div class="row">
-        <div class="col-sm-6 col-md-4">
-            <div class="thumbnail inventoryItem">
-                <img src="" />
-                <div class="caption">
-                    <h3>item name</h3>
-                    <p>This is item #[unique_id] of the set!<br />You won this prize [some hours, days and/or mins] ago</p>
+        <% _.each(data, function(item){ %>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail inventoryItem">
+                    <img src="" />
+                    <div class="caption">
+                        <h3><%= item.item_name %></h3>
+                        <p>This is item #<%= item.unique_id %> of the set!<br />You won this prize [some hours, days and/or mins] ago</p>
+                    </div>
                 </div>
             </div>
-        </div>
+        <% }); %>
     </div><!-- row -->
 </div><!-- container -->

@@ -13,7 +13,15 @@ var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 
  console.log(data); ;
-__p += '\n<div class="container inventoryContainer">\n    <div class="row">\n        <div class="col-sm-6 col-md-4">\n            <div class="thumbnail inventoryItem">\n                <img src="" />\n                <div class="caption">\n                    <h3>item name</h3>\n                    <p>This is item #[unique_id] of the set!<br />You won this prize [some hours, days and/or mins] ago</p>\n                </div>\n            </div>\n        </div>\n    </div><!-- row -->\n</div><!-- container -->\n';
+__p += '\n<div class="container inventoryContainer">\n    <div class="row">\n        ';
+ _.each(data, function(item){ ;
+__p += '\n            <div class="col-sm-6 col-md-4">\n                <div class="thumbnail inventoryItem">\n                    <img src="" />\n                    <div class="caption">\n                        <h3>' +
+((__t = ( item.item_name )) == null ? '' : __t) +
+'</h3>\n                        <p>This is item #' +
+((__t = ( item.unique_id )) == null ? '' : __t) +
+' of the set!<br />You won this prize [some hours, days and/or mins] ago</p>\n                    </div>\n                </div>\n            </div>\n        ';
+ }); ;
+__p += '\n    </div><!-- row -->\n</div><!-- container -->\n';
 return __p
 };
 
