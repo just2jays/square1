@@ -417,7 +417,12 @@ var InventoryView = Backbone.View.extend({
         var template = this.template(variables);
 
         // Load the compiled HTML into the Backbone "el"
-        this.$el.html( template );
+        if(appUser.get('loggedin')){
+            this.$el.html( template );
+        }else{
+            this.$el.html( '<div class="container"><div class="row"><div class="col-sm-8 col-sm-offset-2 text-center">Please Login</div></div></div>' );
+            window.location.hash = 'login';
+        }
     },
 
     setItems: function() {
