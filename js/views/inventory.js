@@ -2,7 +2,7 @@ var InventoryView = Backbone.View.extend({
     template: JST['templates/inventory.html'],
 
     initialize: function(){
-        this.listenTo(appUser.ownedItems, 'change', this.setItems);
+        this.listenTo(appUser.get('ownedItems'), 'change', this.setItems);
         appUser.getUserInventory();
         this.render();
     },
@@ -23,7 +23,7 @@ var InventoryView = Backbone.View.extend({
 
     setItems: function() {
         console.log('I HEAR YOU!!!!!!');
-        
+
         this.render();
     }
 });
