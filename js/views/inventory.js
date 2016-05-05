@@ -3,6 +3,7 @@ var InventoryView = Backbone.View.extend({
 
     initialize: function(){
         this.itemData = appUser.getUserInventory();
+        console.log(this.itemData);
         this.listenTo(appUser.ownedItems, 'change', this.testdis);
         this.render();
     },

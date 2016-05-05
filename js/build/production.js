@@ -387,6 +387,7 @@ var InventoryView = Backbone.View.extend({
 
     initialize: function(){
         this.itemData = appUser.getUserInventory();
+        console.log(this.itemData);
         this.listenTo(appUser.ownedItems, 'change', this.testdis);
         this.render();
     },
@@ -534,6 +535,15 @@ var CheckinsCollection = Backbone.Collection.extend({
     //url: 'http://localhost/api/Checkins'
     // production api
     url: 'api/Checkins'
+});
+
+var ItemsCollection = Backbone.Collection.extend({
+    model: Item,
+
+    // local dev api
+    //url: 'http://localhost/api/Checkins'
+    // production api
+    url: 'api/Items'
 });
 
 var MainRouter = Backbone.Router.extend({
