@@ -133,7 +133,6 @@ var User = Backbone.Model.extend({
     handleUser: function(callback) {
         if( !_.isNull(docCookies.getItem('userid')) && !_.isNull(docCookies.getItem('usersession')) ){
             $.get( this.urlRoot+'/checkLoginState', _.bind(function(data) {
-                //console.log(data);
         		if(data.loggedin) {
                     this.set({
                         'ID': data.id,
@@ -162,7 +161,6 @@ var User = Backbone.Model.extend({
 
     userLogin: function(userdata) {
         $.post( this.urlRoot+"/login", userdata, _.bind(function(data) {
-            //console.log(data);
             if(data.loggedin) {
                 this.set({
                     'ID': data.id,
