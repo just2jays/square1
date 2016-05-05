@@ -93,7 +93,7 @@ class Rest {
                         break;
 
                     case 'fetchInventory':
-                        this->fetchInventory($this->request[2]);
+                        $this->fetchInventory($this->request[2]);
                         break;
 
                     default:
