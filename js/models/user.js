@@ -78,7 +78,7 @@ var User = Backbone.Model.extend({
 
     getUserInventory: function() {
         $.get( this.urlRoot+'/fetchInventory/'+this.get('ID'), _.bind(function(data) {
-            console.log(data);
+            this.ownedItems = data.items;
             return data;
         },this))
         .done(function() {
