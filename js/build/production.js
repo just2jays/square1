@@ -385,7 +385,7 @@ var InventoryView = Backbone.View.extend({
 
     initialize: function(){
         this.itemData = appUser.getUserInventory();
-        this.listenTo(appUser.ownedItems, 'change', this.render);
+        this.listenTo(appUser.ownedItems, 'change', this.testdis);
         this.render();
     },
 
@@ -401,6 +401,10 @@ var InventoryView = Backbone.View.extend({
 
         // Load the compiled HTML into the Backbone "el"
         this.$el.html( template );
+    },
+
+    testdis: function() {
+        console.log('I HEAR YOU!!!!!!');
     }
 });
 
