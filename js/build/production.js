@@ -393,7 +393,7 @@ var InventoryView = Backbone.View.extend({
     },
 
     render: function(){
-
+        console.log(itemData);
         //Pass variables in using Underscore.js Template
         var variables = this.itemData;
 
