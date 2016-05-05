@@ -92,6 +92,10 @@ class Rest {
                         $this->checkLoginState();
                         break;
 
+                    case 'fetchInventory':
+                        this->fetchInventory($this->request[2]);
+                        break;
+
                     default:
                         $this->error('Unsupported request method');
                         break;
@@ -152,6 +156,23 @@ class Rest {
         }else{
             $response['message'] = "User Not Found";
             $response['loggedin'] = false;
+        }
+
+        $this->response = json_encode($response);
+        $this->send();
+    }
+
+    public function fetchInventory(userid) {
+        $itemArray = array();
+        foreach ($this->db->query("SELECT i.item_name, i.item_image_location, ui.unique_id, ui.timestamp FROM user_item ui INNER JOIN items i ON ui.item_id = item.id WHERE ui.user_id = '.$userid.' ORDER BY ui.timestamp DESC LIMIT 20;") as $row) {
+            $itemArray[] = $row;
+        }
+
+        $response['items'] = $itemArray;
+        if (count($itemArray > 0)) {
+            $response['message'] = "Take a gander at all your treasure:";
+        }else{
+            $response['message'] = "Sorry, you have no items yet!";
         }
 
         $this->response = json_encode($response);

@@ -2,6 +2,7 @@ var InventoryView = Backbone.View.extend({
     template: JST['templates/inventory.html'],
 
     initialize: function(){
+        this.itemData = appUser.getUserInventory();
         this.render();
     },
 
@@ -9,8 +10,9 @@ var InventoryView = Backbone.View.extend({
     },
 
     render: function(){
+
         //Pass variables in using Underscore.js Template
-        var variables = { search_label: "Here Now" };
+        var variables = this.itemData;
 
         // Compile the template using underscore
         var template = this.template(variables);

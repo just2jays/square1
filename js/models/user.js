@@ -78,6 +78,18 @@ var User = Backbone.Model.extend({
         }
     },
 
+    getUserInventory: function() {
+        $.get( this.urlRoot+'/fetchInventory/'+this.ID, _.bind(function(data) {
+            return data;
+        },this))
+        .done(function() {
+        })
+        .fail(function() {
+        })
+        .always(function() {
+        }, "json");
+    },
+
     // local dev api
     //urlRoot: 'http://localhost/api/Items'
     // production api
