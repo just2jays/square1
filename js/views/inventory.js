@@ -3,8 +3,10 @@ var InventoryView = Backbone.View.extend({
 
     initialize: function(){
         this.listenTo(appUser.get('ownedItems'), 'change', this.setItems);
-        appUser.getUserInventory();
-        this.render();
+        appUser.getUserInventory(function(items){
+            this.itemData = items;
+            this.render();
+        });
     },
 
     events: {
@@ -23,7 +25,5 @@ var InventoryView = Backbone.View.extend({
 
     setItems: function() {
         console.log('I HEAR YOU!!!!!!');
-
-        this.render();
     }
 });
