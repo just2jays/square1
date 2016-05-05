@@ -25,10 +25,17 @@ LOGIN
     #userLoginForm{
 
     }
-    
+
     .error_msg {
         margin-top: 10px;
     }
+}
+
+/************
+INVENTORY
+************/
+.inventoryContainer .inventoryItem img{
+    max-height: 125px;
 }
 
 /************
