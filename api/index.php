@@ -164,9 +164,9 @@ class Rest {
 
     public function fetchInventory($userid) {
         $itemArray = array();
-        foreach ($this->db->query("SELECT i.item_name, i.item_image_location, ui.unique_id, ui.timestamp FROM user_item ui INNER JOIN item i ON ui.item_id = i.id WHERE ui.user_id = $userid ORDER BY ui.timestamp DESC LIMIT 20;") as $row) {
+        foreach ($this->db->query("SELECT i.item_name, i.item_image_location, ui.unique_id, ui.timestamp FROM user_item ui INNER JOIN item i ON ui.item_id = i.id WHERE ui.user_id = $userid ORDER BY ui.timestamp DESC LIMIT 20;") as $index => $row) {
             $itemArray[] = $row;
-            $itemArray['timestamp'] = date('D, M j, \'y @ g:i a', strtotime($row['timestamp']));
+            $itemArray[$index]['timestamp'] = date('D, M j, \'y @ g:i a', strtotime($row['timestamp']));
         }
         $response['items'] = $itemArray;
         if (count($itemArray > 0)) {
