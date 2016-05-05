@@ -573,12 +573,12 @@ var MainRouter = Backbone.Router.extend({
     },
 
     showInventory: function () {
-        if (this.inventoryView != null) {
-            this.inventoryView.remove();
+        if (this.InventoryView != null) {
+            this.InventoryView.remove();
         }
-        this.inventoryView = new inventoryView();
+        this.InventoryView = new InventoryView();
 
-        this.container.myChildView = this.inventoryView;
+        this.container.myChildView = this.InventoryView;
         this.container.render();
     },
 
