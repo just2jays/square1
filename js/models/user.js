@@ -15,6 +15,11 @@ var User = Backbone.Model.extend({
     },
 
     handleUser: function(callback) {
+        var firstDay = new Date();
+var nextWeek = new Date(firstDay.getTime() + 7 * 24 * 60 * 60 * 1000);
+
+console.log(firstDay);
+console.log(nextWeek);
         if( !_.isNull(docCookies.getItem('userid')) && !_.isNull(docCookies.getItem('usersession')) ){
             $.get( this.urlRoot+'/checkLoginState', _.bind(function(data) {
         		if(data.loggedin) {
