@@ -53,16 +53,8 @@ LOGIN
 /************
 INVENTORY
 ************/
-.inventoryContainer .inventoryItem {
-    .inventory-image {
-        margin: 0px auto;
-        max-width: 60%;
-        padding: 15px 0px;
-        
-        img{
-            width: 100%;
-        }
-    }
+.inventoryContainer .inventoryItem img{
+    max-height: 125px;
 }
 
 /************
