@@ -143,11 +143,6 @@ var User = Backbone.Model.extend({
     },
 
     handleUser: function(callback) {
-        var firstDay = new Date();
-var nextWeek = new Date(firstDay.getTime() + 7 * 24 * 60 * 60 * 1000);
-
-console.log(firstDay);
-console.log(nextWeek);
         if( !_.isNull(docCookies.getItem('userid')) && !_.isNull(docCookies.getItem('usersession')) ){
             $.get( this.urlRoot+'/checkLoginState', _.bind(function(data) {
         		if(data.loggedin) {
@@ -157,8 +152,8 @@ console.log(nextWeek);
                         'username': data.username
                     });
 
-                    docCookies.setItem('userid', data.id);
-                    docCookies.setItem('usersession', data.usersession);
+                    docCookies.setItem('userid', data.id, new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000));
+                    docCookies.setItem('usersession', data.usersession, new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000));
                     this.setUserInterface("loggedin");
                     window.location.hash = 'checkin';
                 }
@@ -185,8 +180,8 @@ console.log(nextWeek);
                     'username': data.username
                 });
 
-                docCookies.setItem('userid', data.id);
-                docCookies.setItem('usersession', data.usersession);
+                docCookies.setItem('userid', data.id, new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000));
+                docCookies.setItem('usersession', data.usersession, new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000));
                 this.setUserInterface("loggedin");
                 window.location.hash = 'checkin';
             }else{
