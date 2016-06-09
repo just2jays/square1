@@ -168,15 +168,31 @@ class Rest {
             $itemArray[] = $row;
             $itemArray[$index]['timestamp'] = date('D, M j, \'y @ g:i a', strtotime($row['timestamp']));
         }
-        $response['items'] = $itemArray;
+        $response['data']['items'] = $itemArray;
         if (count($itemArray > 0)) {
             $response['message'] = "Take a gander at all your treasure:";
         }else{
             $response['message'] = "Sorry, you have no items yet!";
         }
 
+        // Grab users total cash money for display
+        $response['data']['money'] = $this->fetchMoney($userid);
+
         $this->response = json_encode($response);
         $this->send();
+    }
+
+    public function fetchMoney($userid) {
+        $stmt = $this->db->prepare("SELECT money FROM user WHERE user_id = $userid;");
+        $result = $stmt->execute();
+        if($result) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $userMoney = $row['money'];
+        }else{
+            $userMoney = "You're broke!";
+        }
+
+        return $userMoney;
     }
 
 /*--------------------------

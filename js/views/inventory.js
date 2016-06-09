@@ -2,9 +2,10 @@ var InventoryView = Backbone.View.extend({
     template: JST['templates/inventory.html'],
 
     initialize: function(){
-        this.listenTo(appUser.get('ownedItems'), 'change', this.setItems);
-        appUser.getUserInventory(_.bind(function(items){
-            this.itemData = items;
+        //this.listenTo(appUser.get('ownedItems'), 'change', this.setItems);
+        appUser.getUserInventory(_.bind(function(data){
+            console.log(data);
+            this.itemData = data.items;
             this.render();
         }, this));
     },
@@ -14,7 +15,8 @@ var InventoryView = Backbone.View.extend({
 
     render: function(){
         //Pass variables in using Underscore.js Template
-        var variables = this.itemData;
+        var variables = {};
+        variables.inventoryItems = this.itemData;
 
         // Compile the template using underscore
         var template = this.template(variables);

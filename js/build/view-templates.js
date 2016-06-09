@@ -11,10 +11,8 @@ return __p
 this["JST"]["templates/inventory.html"] = function(data) {
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
-
- console.log(data); ;
-__p += '\n<div class="container inventoryContainer">\n    <div class="row">\n        ';
- _.each(data, function(item){ ;
+__p += '<div class="container inventoryContainer">\n    <div class="row">\n        ';
+ _.each(data.inventoryItems, function(item){ ;
 __p += '\n            <div class="col-sm-6 col-md-4">\n                <div class="thumbnail inventoryItem box-shadow--4dp">\n                    <div class="inventory-image">\n                        <img src="' +
 ((__t = ( item.item_image_location )) == null ? '' : __t) +
 '" />\n                    </div>\n                    <div class="caption">\n                        <h3>' +

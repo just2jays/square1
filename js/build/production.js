@@ -11,10 +11,8 @@ return __p
 this["JST"]["templates/inventory.html"] = function(data) {
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
-
- console.log(data); ;
-__p += '\n<div class="container inventoryContainer">\n    <div class="row">\n        ';
- _.each(data, function(item){ ;
+__p += '<div class="container inventoryContainer">\n    <div class="row">\n        ';
+ _.each(data.inventoryItems, function(item){ ;
 __p += '\n            <div class="col-sm-6 col-md-4">\n                <div class="thumbnail inventoryItem box-shadow--4dp">\n                    <div class="inventory-image">\n                        <img src="' +
 ((__t = ( item.item_image_location )) == null ? '' : __t) +
 '" />\n                    </div>\n                    <div class="caption">\n                        <h3>' +
@@ -399,9 +397,10 @@ var InventoryView = Backbone.View.extend({
     template: JST['templates/inventory.html'],
 
     initialize: function(){
-        this.listenTo(appUser.get('ownedItems'), 'change', this.setItems);
-        appUser.getUserInventory(_.bind(function(items){
-            this.itemData = items;
+        //this.listenTo(appUser.get('ownedItems'), 'change', this.setItems);
+        appUser.getUserInventory(_.bind(function(data){
+            console.log(data);
+            this.itemData = data.items;
             this.render();
         }, this));
     },
@@ -411,7 +410,8 @@ var InventoryView = Backbone.View.extend({
 
     render: function(){
         //Pass variables in using Underscore.js Template
-        var variables = this.itemData;
+        var variables = {};
+        variables.inventoryItems = this.itemData;
 
         // Compile the template using underscore
         var template = this.template(variables);
