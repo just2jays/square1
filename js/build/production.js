@@ -209,7 +209,7 @@ var User = Backbone.Model.extend({
             this.set({
                 ownedItems: userItemsCollection
             });
-            callback(data.items);
+            callback(data);
         },this))
         .done(function() {
         })

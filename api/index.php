@@ -183,7 +183,7 @@ class Rest {
     }
 
     public function fetchMoney($userid) {
-        $stmt = $this->db->prepare("SELECT money FROM user WHERE user_id = $userid;");
+        $stmt = $this->db->prepare("SELECT money FROM user WHERE id = $userid;");
         $result = $stmt->execute();
         if($result) {
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
