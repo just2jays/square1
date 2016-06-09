@@ -168,7 +168,7 @@ class Rest {
             $itemArray[] = $row;
             $itemArray[$index]['timestamp'] = date('D, M j, \'y @ g:i a', strtotime($row['timestamp']));
         }
-        $response['data']['items'] = $itemArray;
+        $response['items'] = $itemArray;
         if (count($itemArray > 0)) {
             $response['message'] = "Take a gander at all your treasure:";
         }else{
@@ -176,7 +176,7 @@ class Rest {
         }
 
         // Grab users total cash money for display
-        $response['data']['money'] = $this->fetchMoney($userid);
+        $response['money'] = $this->fetchMoney($userid);
 
         $this->response = json_encode($response);
         $this->send();
