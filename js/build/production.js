@@ -382,6 +382,9 @@ var CheckinView = Backbone.View.extend({
                     $('#foursquareModal .modal-body.response-body .prize-well').append('<div class="prizeBox"><img src="'+model.get('prize').item.image+'" /><div class="item-name">'+model.get('prize').item.name+' #'+model.get('prize').item.unique+'</div></div>');
                 }
 
+                // Even losers are winners!
+                $('#foursquareModal .modal-body.response-body .prize-well div').append('<div>'+model.get('prize').money+'</div>');
+
                 $('#foursquareModal .modal-body.default-body').fadeOut();
                 $('#foursquareModal .modal-body.response-body').fadeIn();
                 $('.loading-indicator').hide();

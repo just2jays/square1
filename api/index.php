@@ -321,7 +321,20 @@ class Rest {
             $response['prize']['message'] = "Sorry, you didn't win. Better luck next time!";
         }
 
+        // Give 'em something!
+        $response['prize']['money'] = "...but you did find ".$this->getMoney($userid)." coins!";
+
         return $response;
+    }
+
+    public function getMoney($userid) {
+        $limit = 15;
+        $money = rand( 2,$limit );
+
+        $stmt = $this->db->prepare("UPDATE user SET money + $money WHERE id = $userid;");
+        $result = $stmt->execute();
+
+        return $money;
     }
 
     public function encrypt_decrypt($action, $string) {
