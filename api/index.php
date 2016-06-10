@@ -331,7 +331,7 @@ class Rest {
         $limit = 15;
         $money = rand( 2,$limit );
 
-        $stmt = $this->db->prepare("UPDATE user SET (money + $money) WHERE id = $userid;");
+        $stmt = $this->db->prepare("UPDATE user SET money = money + $money WHERE id = $userid;");
         $result = $stmt->execute();
 
         return $money;
