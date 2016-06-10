@@ -52,13 +52,20 @@ LOGIN
 /************
 INVENTORY
 ************/
-.inventoryContainer .inventoryItem {
-    .inventory-image {
-        text-align: center;
-        margin-top: 10px;
+.inventoryContainer {
+    .inventory-money-display {
+        .moneyIcon {
+            color: gold;
+        }
+    }
+    .inventoryItem {
+        .inventory-image {
+            text-align: center;
+            margin-top: 10px;
 
-        img{
-            max-height: 125px;
+            img{
+                max-height: 125px;
+            }
         }
     }
 }
