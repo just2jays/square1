@@ -322,7 +322,7 @@ class Rest {
         }
 
         // Give 'em something!
-        $response['prize']['money'] = "...but you did find ".$this->getMoney($userid)." coins!";
+        $response['prize']['money'] = "You found ".$this->getMoney($userid)." coins!";
 
         return $response;
     }

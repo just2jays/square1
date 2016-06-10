@@ -11,7 +11,7 @@ return __p
 this["JST"]["templates/inventory.html"] = function(data) {
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
-__p += '<div class="container inventoryContainer">\n    <div class="row">\n        <div class="col-sm-3 col-sm-offset-9">\n            <div class="well inventory-money-display">\n                <i class="moneyIcon fa fa-money fa-2" aria-hidden="true"></i> Money: ' +
+__p += '<div class="container inventoryContainer">\n    <div class="row">\n        <div class="col-sm-4 col-sm-offset-4">\n            <div class="well inventory-money-display">\n                <i class="moneyIcon fa fa-money fa-2" aria-hidden="true"></i> Money: ' +
 ((__t = ( data.money )) == null ? '' : __t) +
 '\n            </div>\n        </div>\n    </div>\n    <div class="row">\n        ';
  _.each(data.inventoryItems, function(item){ ;
