@@ -1,5 +1,10 @@
 <div class="container inventoryContainer">
     <div class="row">
+        <div class="col-sm-3 col-sm-offset-9">
+            <i class="fa fa-money fa-2" aria-hidden="true"></i> <%= data.money %>
+        </div>
+    </div>
+    <div class="row">
         <% _.each(data.inventoryItems, function(item){ %>
             <div class="col-sm-6 col-md-4">
                 <div class="thumbnail inventoryItem box-shadow--4dp">

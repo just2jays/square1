@@ -131,7 +131,7 @@ var CheckinView = Backbone.View.extend({
             longitude: this.selectedVenue.location.lng,
             review: !_.isEmpty($(e.currentTarget).find('.checkinMessageInput').val()) ? $(e.currentTarget).find('.checkinMessageInput').val() : null
         });
-        console.log(checkin);
+
         checkin.save({}, {
             success: function (model, respose, options) {
                 $('.fetchFromFoursquare .location-list').html('');
@@ -147,7 +147,8 @@ var CheckinView = Backbone.View.extend({
                 }
 
                 // Even losers are winners!
-                $('#foursquareModal .modal-body.response-body .prize-well div').append('<div>'+model.get('prize').money+'</div>');
+                $('#foursquareModal .modal-body.response-body .money-well').html('');
+                $('#foursquareModal .modal-body.response-body .money-well').html('<div>'+model.get('prize').money+'</div>');
 
                 $('#foursquareModal .modal-body.default-body').fadeOut();
                 $('#foursquareModal .modal-body.response-body').fadeIn();
