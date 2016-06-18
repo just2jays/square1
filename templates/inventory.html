@@ -4,7 +4,12 @@
             <div class="well inventory-money-display">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="moneyIcon fa fa-money fa-2" aria-hidden="true"></i></span>
-                    <input type="text" class="form-control" aria-label="Amount" value="<%= data.money %>"><% if(data.money >= 100){ %><span class="giftIcon input-group-addon"><i class="fa fa-gift" aria-hidden="true"></i></span><% } %>
+                    <input readonly type="text" class="form-control" aria-label="Amount" value="<%= data.money %>">
+                    <% if(data.money >= 100){ %>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button"><i class="fa fa-gift" aria-hidden="true"></i></button>
+                        </span>
+                    <% } %>
                 </div>
             </div>
         </div>

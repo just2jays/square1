@@ -11,11 +11,11 @@ return __p
 this["JST"]["templates/inventory.html"] = function(data) {
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
-__p += '<div class="container inventoryContainer">\n    <div class="row">\n        <div class="col-sm-6 col-sm-offset-3">\n            <div class="well inventory-money-display">\n                <div class="input-group">\n                    <span class="input-group-addon"><i class="moneyIcon fa fa-money fa-2" aria-hidden="true"></i></span>\n                    <input type="text" class="form-control" aria-label="Amount" value="' +
+__p += '<div class="container inventoryContainer">\n    <div class="row">\n        <div class="col-sm-6 col-sm-offset-3">\n            <div class="well inventory-money-display">\n                <div class="input-group">\n                    <span class="input-group-addon"><i class="moneyIcon fa fa-money fa-2" aria-hidden="true"></i></span>\n                    <input readonly type="text" class="form-control" aria-label="Amount" value="' +
 ((__t = ( data.money )) == null ? '' : __t) +
-'">';
+'">\n                    ';
  if(data.money >= 100){ ;
-__p += '<span class="giftIcon input-group-addon"><i class="fa fa-gift" aria-hidden="true"></i></span>';
+__p += '\n                        <span class="input-group-btn">\n                            <button class="btn btn-default" type="button"><i class="fa fa-gift" aria-hidden="true"></i></button>\n                        </span>\n                    ';
  } ;
 __p += '\n                </div>\n            </div>\n        </div>\n    </div>\n    <div class="row">\n        ';
  _.each(data.inventoryItems, function(item){ ;
