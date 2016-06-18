@@ -5,6 +5,9 @@ var MainRouter = Backbone.Router.extend({
 
     initialize: function () {
         this.container = new AppContainerView({ el: $("#appContainer") });
+
+        // Collapse the nav on item click
+        this.bind( "all", function(){ $('.navbar-collapse').collapse('hide'); } );
     },
 
     routes: {
