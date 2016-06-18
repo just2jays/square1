@@ -1,8 +1,11 @@
 <div class="container inventoryContainer">
     <div class="row">
-        <div class="col-sm-4 col-sm-offset-4">
+        <div class="col-sm-6 col-sm-offset-3">
             <div class="well inventory-money-display">
-                <i class="moneyIcon fa fa-money fa-2" aria-hidden="true"></i> Money: <%= data.money %>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="moneyIcon fa fa-money fa-2" aria-hidden="true"></i></span>
+                    <input type="text" class="form-control" aria-label="Amount" value="<%= data.money %>"><% if(data.money >= 100){ %><span class="giftIcon input-group-addon"><i class="fa fa-gift" aria-hidden="true"></i></span><% } %>
+                </div>
             </div>
         </div>
     </div>

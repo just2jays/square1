@@ -105,7 +105,11 @@ class Rest {
             case 'Utilities':
                 switch ($this->request[1]) {
                     case 'checkPrize':
-                        $this->checkPrize($data);
+                        $this->checkPrize($this->request[2]);
+                        break;
+
+                    case 'forcePrize':
+                        $this->checkPrize($this->request[2], true);
                         break;
 
                     default:
@@ -282,12 +286,12 @@ class Rest {
 /*--------------------------
  * UTILITY FUNCTIONS
  *-------------------------*/
-    public function checkPrize($userid) {
+    public function checkPrize($userid, $force = false) {
         $user = $userid;
         $limit = 10;
         $simple_roll = rand( 1,$limit );
 
-        if( $simple_roll < ( $limit/2 ) ){
+        if( ($simple_roll < ( $limit/2 )) || $force ){
             // WIN
             $itemQuery = $this->db->prepare("SELECT * FROM item ORDER BY RAND() LIMIT 1;");
             $itemQuery->execute();

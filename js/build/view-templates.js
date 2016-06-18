@@ -11,9 +11,13 @@ return __p
 this["JST"]["templates/inventory.html"] = function(data) {
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
-__p += '<div class="container inventoryContainer">\n    <div class="row">\n        <div class="col-sm-4 col-sm-offset-4">\n            <div class="well inventory-money-display">\n                <i class="moneyIcon fa fa-money fa-2" aria-hidden="true"></i> Money: ' +
+__p += '<div class="container inventoryContainer">\n    <div class="row">\n        <div class="col-sm-6 col-sm-offset-3">\n            <div class="well inventory-money-display">\n                <div class="input-group">\n                    <span class="input-group-addon"><i class="moneyIcon fa fa-money fa-2" aria-hidden="true"></i></span>\n                    <input type="text" class="form-control" aria-label="Amount" value="' +
 ((__t = ( data.money )) == null ? '' : __t) +
-'\n            </div>\n        </div>\n    </div>\n    <div class="row">\n        ';
+'">';
+ if(data.money >= 100){ ;
+__p += '<span class="giftIcon input-group-addon"><i class="fa fa-gift" aria-hidden="true"></i></span>';
+ } ;
+__p += '\n                </div>\n            </div>\n        </div>\n    </div>\n    <div class="row">\n        ';
  _.each(data.inventoryItems, function(item){ ;
 __p += '\n            <div class="col-sm-6 col-md-4">\n                <div class="thumbnail inventoryItem box-shadow--4dp">\n                    <div class="inventory-image">\n                        <img src="' +
 ((__t = ( item.item_image_location )) == null ? '' : __t) +
