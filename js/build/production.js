@@ -441,7 +441,7 @@ var InventoryView = Backbone.View.extend({
         //Pass variables in using Underscore.js Template
         var variables = {};
         variables.inventoryItems = this.itemData;
-        variables.money = this.money;
+        variables.money = appUser.get('money');
 
         // Compile the template using underscore
         var template = this.template(variables);
