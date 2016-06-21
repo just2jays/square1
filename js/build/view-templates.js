@@ -15,7 +15,7 @@ __p += '<div class="container inventoryContainer">\n    <div class="row">\n     
 ((__t = ( data.money )) == null ? '' : __t) +
 '">\n                    ';
  if(data.money >= 100){ ;
-__p += '\n                        <span class="input-group-btn">\n                            <button class="btn btn-default" type="button"><i class="prizeGift fa fa-gift" aria-hidden="true"></i></button>\n                        </span>\n                    ';
+__p += '\n                        <span class="input-group-btn">\n                            <button class="prizeGift btn btn-default" type="button"><i class="prizeGiftIcon fa fa-gift" aria-hidden="true"></i></button>\n                        </span>\n                    ';
  } ;
 __p += '\n                </div>\n            </div>\n        </div>\n    </div>\n    <div class="row">\n        ';
  _.each(data.inventoryItems, function(item){ ;
