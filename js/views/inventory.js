@@ -45,6 +45,6 @@ var InventoryView = Backbone.View.extend({
     },
 
     setMoney: function() {
-        this.$el.find('.inventory-money-display input').value(appUser.get('money'));
+        $(this.$el).find('.inventory-money-display input').value(appUser.get('money'));
     }
 });
