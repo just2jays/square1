@@ -203,7 +203,7 @@ class Rest {
         }
 
         if($direct_response) {
-            json_encode($userMoney);
+            $this->response = json_encode(array("money" => $userMoney));
             $this->send();
         }else{
             return $userMoney;
