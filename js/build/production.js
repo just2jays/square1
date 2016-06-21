@@ -460,6 +460,9 @@ var InventoryView = Backbone.View.extend({
         $.get( 'api/Utilities/forcePrize/'+appUser.id, _.bind(function(data) {
             console.log(data);
             appUser.fetchUserMoney();
+            $('#payForPrizeModal .modal-header h4').html('WOW! Nice find!');
+            $('#payForPrizeModal .the-gift-cover').addClass('animated hinge');
+            $('#payForPrizeModal .the-gift-reveal').fadeIn();
             //$('#foursquareModal .the-gift-reveal .prize-well').html('<div>'+data.get('prize').message+'</div>');
         },this))
         .done(function() {
