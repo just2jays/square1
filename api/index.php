@@ -30,6 +30,7 @@ class Rest {
 	}
 
     public function error($message) {
+        error_log("You done messed up...");
         $this->response['error'] = $message;
         $this->send();
     }
@@ -97,7 +98,7 @@ class Rest {
                         break;
 
                     case 'fetchUserMoney':
-                        $this->fetchmoney($this->request[2]);
+                        $this->fetchmoney($this->request[2], true);
 
                     default:
                         $this->error('Unsupported request method');
@@ -190,7 +191,7 @@ class Rest {
         $this->send();
     }
 
-    public function fetchMoney($userid) {
+    public function fetchMoney($userid, $direct_response = false) {
         $stmt = $this->db->prepare("SELECT money FROM user WHERE id = $userid;");
         $result = $stmt->execute();
         if($result) {
@@ -200,7 +201,13 @@ class Rest {
             $userMoney = "You're broke!";
         }
 
-        return $userMoney;
+        if($direct_response) {
+            json_encode($userMoney);
+            $this->send();
+        }else{
+            return $userMoney;
+        }
+
     }
 
 /*--------------------------
