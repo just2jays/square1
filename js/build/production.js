@@ -29,7 +29,7 @@ __p += '\n            <div class="col-sm-6 col-md-4">\n                <div clas
 ((__t = ( item.timestamp )) == null ? '' : __t) +
 '</p>\n                    </div>\n                </div>\n            </div>\n        ';
  }); ;
-__p += '\n    </div><!-- row -->\n</div><!-- container -->\n\n<div id="payForPrizeModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="payForPrizeModal" aria-hidden="true">\n    <div class="modal-dialog">\n        <div class="modal-content">\n            <div class="modal-header">\n                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\n                <h4 class="modal-title" id="myModalLabel">Well, open it...</h4>\n            </div>\n            <div class="the-gift-cover text-center modal-body">\n                <i class="the-gift fa fa-gift fa-5"></i>\n            </div>\n            <div class="the-gift-reveal text-center modal-body">\n                <div class="well prize-well"></div>\n            </div>\n            <div class="modal-footer">\n                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\n            </div>\n        </div>\n    </div>\n</div>\n';
+__p += '\n    </div><!-- row -->\n</div><!-- container -->\n\n<div id="payForPrizeModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="payForPrizeModal" aria-hidden="true">\n    <div class="modal-dialog">\n        <div class="modal-content">\n            <div class="modal-header">\n                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\n                <h4 class="modal-title" id="myModalLabel">Well, open it...</h4>\n            </div>\n            <div class="the-gift-cover text-center modal-body">\n                <i class="the-gift fa fa-gift fa-5"></i>\n            </div>\n            <div class="the-gift-reveal text-center modal-body">\n                <div class="well prize-well"></div>\n                <div class="well money-well"></div>\n            </div>\n            <div class="modal-footer">\n                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\n            </div>\n        </div>\n    </div>\n</div>\n';
 return __p
 };
 
@@ -457,10 +457,13 @@ var InventoryView = Backbone.View.extend({
     },
 
     payForPrize: function() {
+        $('#payForPrizeModal .the-gift-reveal .prize-well').html('');
+        $('#payForPrizeModal .the-gift-reveal .money-well').html('');
         $('#payForPrizeModal .the-gift-cover .the-gift').addClass('animated hinge');
         $.get( 'api/Utilities/forcePrize/'+appUser.id, _.bind(function(data) {
             $('#payForPrizeModal .modal-header h4').html('WOW! Nice find!');
             $('#payForPrizeModal .the-gift-reveal .prize-well').html('<div class="prizeBox"><img src="'+data.prize.item.image+'" /><div class="item-name">'+data.prize.item.name+' #'+data.prize.item.unique+'</div></div>');
+            $('#payForPrizeModal .the-gift-reveal .money-well').html('<div>'+data.prize.money+'</div>');
             $('#payForPrizeModal .the-gift-cover').fadeOut();
             $('#payForPrizeModal .the-gift-reveal').fadeIn();
         },this))
