@@ -425,7 +425,7 @@ var InventoryView = Backbone.View.extend({
     template: JST['templates/inventory.html'],
 
     initialize: function(){
-        this.listenTo(appUser.get('money'), 'change', this.setMoney);
+        this.listenTo(appUser, 'change', this.setMoney);
         appUser.getUserInventory(_.bind(function(inventory){
             this.itemData = inventory.items;
             this.money = inventory.money;
