@@ -53,6 +53,7 @@ var InventoryView = Backbone.View.extend({
     },
 
     openPrizeModal: function() {
+        this.$el.prepend( JST['templates/prize_overlay.html'] );
         $('#payForPrizeModal').modal();
     },
 

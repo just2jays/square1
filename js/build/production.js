@@ -29,13 +29,19 @@ __p += '\n            <div class="col-sm-6 col-md-4">\n                <div clas
 ((__t = ( item.timestamp )) == null ? '' : __t) +
 '</p>\n                    </div>\n                </div>\n            </div>\n        ';
  }); ;
-__p += '\n    </div><!-- row -->\n</div><!-- container -->\n\n<div id="payForPrizeModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="payForPrizeModal" aria-hidden="true">\n    <div class="modal-dialog">\n        <div class="modal-content">\n            <div class="modal-header">\n                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\n                <h4 class="modal-title" id="myModalLabel">Well, open it...</h4>\n            </div>\n            <div class="the-gift-cover text-center modal-body">\n                <i class="the-gift fa fa-gift fa-5"></i>\n            </div>\n            <div class="the-gift-reveal modal-body">\n                <div class="well prize-well"></div>\n            </div>\n            <div class="modal-footer">\n                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\n            </div>\n        </div>\n    </div>\n</div>\n';
+__p += '\n    </div><!-- row -->\n</div><!-- container -->\n<!--\n<div id="payForPrizeModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="payForPrizeModal" aria-hidden="true">\n    <div class="modal-dialog">\n        <div class="modal-content">\n            <div class="modal-header">\n                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\n                <h4 class="modal-title" id="myModalLabel">Well, open it...</h4>\n            </div>\n            <div class="the-gift-cover text-center modal-body">\n                <i class="the-gift fa fa-gift fa-5"></i>\n            </div>\n            <div class="the-gift-reveal modal-body">\n                <div class="well prize-well"></div>\n            </div>\n            <div class="modal-footer">\n                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\n            </div>\n        </div>\n    </div>\n</div>\n-->\n';
 return __p
 };
 
 this["JST"]["templates/login.html"] = function(data) {
 var __t, __p = '', __e = _.escape;
 __p += '<div class="container loginContainer">\n    <div class="row">\n        <div class="col-sm-6 col-sm-offset-3">\n            <form id="userLoginForm" class="form-signin">\n                <h2 class="form-signin-heading">Please sign in</h2>\n                <div class="form-group">\n                    <label for="inputUsername" class="sr-only">Username</label>\n                    <input type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus>\n                </div>\n                <div class="form-group">\n                    <label for="inputPassword" class="sr-only">Password</label>\n                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>\n                </div>\n                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>\n            </form>\n            <div class="error_msg text-center lead text-danger"></div>\n        </div>\n    </div>\n</div> <!-- /container -->\n';
+return __p
+};
+
+this["JST"]["templates/prize_overlay.html"] = function(data) {
+var __t, __p = '', __e = _.escape;
+__p += '<div id="payForPrizeModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="payForPrizeModal" aria-hidden="true">\n    <div class="modal-dialog">\n        <div class="modal-content">\n            <div class="modal-header">\n                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\n                <h4 class="modal-title" id="myModalLabel">Well, open it...</h4>\n            </div>\n            <div class="the-gift-cover text-center modal-body">\n                <i class="the-gift fa fa-gift fa-5"></i>\n            </div>\n            <div class="the-gift-reveal modal-body">\n                <div class="well prize-well"></div>\n            </div>\n            <div class="modal-footer">\n                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\n            </div>\n        </div>\n    </div>\n</div>\n';
 return __p
 };
 
@@ -476,6 +482,7 @@ var InventoryView = Backbone.View.extend({
     },
 
     openPrizeModal: function() {
+        this.$el.prepend( JST['templates/prize_overlay.html'] );
         $('#payForPrizeModal').modal();
     },
 
