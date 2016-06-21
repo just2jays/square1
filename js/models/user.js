@@ -15,6 +15,20 @@ var User = Backbone.Model.extend({
         Backbone.Model.apply(this, arguments);
     },
 
+    fetchUserMoney: function() {
+        $.get( this.urlRoot+'/fetchUserMoney'+this.id, _.bind(function(data) {
+            this.set({
+                'money': data.money
+            });
+        },this))
+        .done(function() {
+        })
+        .fail(function() {
+        })
+        .always(function() {
+        }, "json");
+    },
+
     handleUser: function(callback) {
         if( !_.isNull(docCookies.getItem('userid')) && !_.isNull(docCookies.getItem('usersession')) ){
             $.get( this.urlRoot+'/checkLoginState', _.bind(function(data) {
@@ -51,7 +65,8 @@ var User = Backbone.Model.extend({
                 this.set({
                     'ID': data.id,
                     'loggedin': true,
-                    'username': data.username
+                    'username': data.username,
+                    'money': data.money
                 });
 
                 docCookies.setItem('userid', data.id, new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000));

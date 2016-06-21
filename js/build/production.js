@@ -147,6 +147,20 @@ var User = Backbone.Model.extend({
         Backbone.Model.apply(this, arguments);
     },
 
+    fetchUserMoney: function() {
+        $.get( this.urlRoot+'/fetchUserMoney'+this.id, _.bind(function(data) {
+            this.set({
+                'money': data.money
+            });
+        },this))
+        .done(function() {
+        })
+        .fail(function() {
+        })
+        .always(function() {
+        }, "json");
+    },
+
     handleUser: function(callback) {
         if( !_.isNull(docCookies.getItem('userid')) && !_.isNull(docCookies.getItem('usersession')) ){
             $.get( this.urlRoot+'/checkLoginState', _.bind(function(data) {
@@ -183,7 +197,8 @@ var User = Backbone.Model.extend({
                 this.set({
                     'ID': data.id,
                     'loggedin': true,
-                    'username': data.username
+                    'username': data.username,
+                    'money': data.money
                 });
 
                 docCookies.setItem('userid', data.id, new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000));
@@ -410,7 +425,7 @@ var InventoryView = Backbone.View.extend({
     template: JST['templates/inventory.html'],
 
     initialize: function(){
-        this.listenTo(appUser.get('ownedItems'), 'change', this.setItems);
+        this.listenTo(appUser.get('money'), 'change', this.setMoney);
         appUser.getUserInventory(_.bind(function(inventory){
             this.itemData = inventory.items;
             this.money = inventory.money;
@@ -440,13 +455,9 @@ var InventoryView = Backbone.View.extend({
         }
     },
 
-    setItems: function() {
-        console.log('I HEAR YOU!!!!!!');
-    },
-
     payForPrize: function() {
         $.get( this.urlRoot+'/forcePrize/'+appUser.id, _.bind(function(data) {
-            
+
         },this))
         .done(function() {
         })
@@ -454,6 +465,11 @@ var InventoryView = Backbone.View.extend({
         })
         .always(function() {
         }, "json");
+    },
+
+    setMoney: function(bam) {
+        console.log(this);
+        console.log(bam);
     }
 });
 

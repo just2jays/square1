@@ -96,6 +96,9 @@ class Rest {
                         $this->fetchInventory($this->request[2]);
                         break;
 
+                    case 'fetchUserMoney':
+                        $this->fetchmoney($this->request[2]);
+
                     default:
                         $this->error('Unsupported request method');
                         break;

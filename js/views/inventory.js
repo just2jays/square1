@@ -2,7 +2,7 @@ var InventoryView = Backbone.View.extend({
     template: JST['templates/inventory.html'],
 
     initialize: function(){
-        this.listenTo(appUser.get('ownedItems'), 'change', this.setItems);
+        this.listenTo(appUser.get('money'), 'change', this.setMoney);
         appUser.getUserInventory(_.bind(function(inventory){
             this.itemData = inventory.items;
             this.money = inventory.money;
@@ -32,13 +32,9 @@ var InventoryView = Backbone.View.extend({
         }
     },
 
-    setItems: function() {
-        console.log('I HEAR YOU!!!!!!');
-    },
-
     payForPrize: function() {
         $.get( this.urlRoot+'/forcePrize/'+appUser.id, _.bind(function(data) {
-            
+
         },this))
         .done(function() {
         })
@@ -46,5 +42,10 @@ var InventoryView = Backbone.View.extend({
         })
         .always(function() {
         }, "json");
+    },
+
+    setMoney: function(bam) {
+        console.log(this);
+        console.log(bam);
     }
 });
