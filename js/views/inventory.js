@@ -34,13 +34,14 @@ var InventoryView = Backbone.View.extend({
     },
 
     payForPrize: function() {
+        $('#payForPrizeModal .the-gift-cover .the-gift').addClass('animated hinge');
         $.get( 'api/Utilities/forcePrize/'+appUser.id, _.bind(function(data) {
-            console.log(data);
-            appUser.fetchUserMoney();
             $('#payForPrizeModal .modal-header h4').html('WOW! Nice find!');
-            $('#payForPrizeModal .the-gift-cover').addClass('animated hinge');
+            $('#payForPrizeModal .the-gift-reveal .prize-well').html('<div class="prizeBox"><img src="'+data.item.image+'" /><div class="item-name">'+data.item.name+' #'+data.unique+'</div></div>');
+            $('#payForPrizeModal .the-gift-cover').fadeOut();
             $('#payForPrizeModal .the-gift-reveal').fadeIn();
-            //$('#foursquareModal .the-gift-reveal .prize-well').html('<div>'+data.get('prize').message+'</div>');
+            appUser.fetchInventory();
+            appUser.fetchUserMoney();
         },this))
         .done(function() {
         })
