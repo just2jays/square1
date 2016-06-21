@@ -22,7 +22,8 @@ var User = Backbone.Model.extend({
                     this.set({
                         'ID': data.id,
                         'loggedin': true,
-                        'username': data.username
+                        'username': data.username,
+                        'money': data.money
                     });
 
                     docCookies.setItem('userid', data.id, new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000));

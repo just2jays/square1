@@ -29,7 +29,7 @@ __p += '\n            <div class="col-sm-6 col-md-4">\n                <div clas
 ((__t = ( item.timestamp )) == null ? '' : __t) +
 '</p>\n                    </div>\n                </div>\n            </div>\n        ';
  }); ;
-__p += '\n    </div><!-- row -->\n</div><!-- container -->\n';
+__p += '\n    </div><!-- row -->\n</div><!-- container -->\n\n<div id="payForPrizeModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="payForPrizeModal" aria-hidden="true">\n\t\n</div>\n';
 return __p
 };
 
@@ -154,7 +154,8 @@ var User = Backbone.Model.extend({
                     this.set({
                         'ID': data.id,
                         'loggedin': true,
-                        'username': data.username
+                        'username': data.username,
+                        'money': data.money
                     });
 
                     docCookies.setItem('userid', data.id, new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000));
@@ -445,19 +446,7 @@ var InventoryView = Backbone.View.extend({
 
     payForPrize: function() {
         $.get( this.urlRoot+'/forcePrize/'+appUser.id, _.bind(function(data) {
-            if(data.loggedin) {
-                this.set({
-                    'ID': data.id,
-                    'loggedin': true,
-                    'username': data.username
-                });
-
-                docCookies.setItem('userid', data.id, new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000));
-                docCookies.setItem('usersession', data.usersession, new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000));
-                this.setUserInterface("loggedin");
-                window.location.hash = 'checkin';
-            }
-            callback();
+            
         },this))
         .done(function() {
         })

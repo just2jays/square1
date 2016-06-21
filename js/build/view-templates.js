@@ -29,7 +29,7 @@ __p += '\n            <div class="col-sm-6 col-md-4">\n                <div clas
 ((__t = ( item.timestamp )) == null ? '' : __t) +
 '</p>\n                    </div>\n                </div>\n            </div>\n        ';
  }); ;
-__p += '\n    </div><!-- row -->\n</div><!-- container -->\n';
+__p += '\n    </div><!-- row -->\n</div><!-- container -->\n\n<div id="payForPrizeModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="payForPrizeModal" aria-hidden="true">\n\t\n</div>\n';
 return __p
 };
 

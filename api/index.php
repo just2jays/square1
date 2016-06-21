@@ -311,6 +311,9 @@ class Rest {
             $query->bindParam(':unique', $uniqueItemID);
             $query->execute();
 
+            // Remove price of 100 coins for Inventory prize button
+            $this->deductPrizeMoney($user, 100);
+
             $response['prize']['success'] = true;
             $response['prize']['item'] = array(
                 'unique' => $uniqueItemID,
@@ -340,6 +343,13 @@ class Rest {
         $result = $stmt->execute();
 
         return $money;
+    }
+
+    public function deductPrizeMoney($userid, $amount = 0) {
+        $stmt = $this->db->prepare("UPDATE user SET money = money - $amount WHERE id = $userid;");
+        $result = $stmt->execute();
+
+        return true;
     }
 
     public function encrypt_decrypt($action, $string) {
