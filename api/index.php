@@ -114,7 +114,7 @@ class Rest {
                         break;
 
                     case 'forcePrize':
-                        $this->checkPrize($this->request[2], true);
+                        $this->checkPrize($this->request[2], true, true);
                         break;
 
                     default:
@@ -298,7 +298,7 @@ class Rest {
 /*--------------------------
  * UTILITY FUNCTIONS
  *-------------------------*/
-    public function checkPrize($userid, $force = false) {
+    public function checkPrize($userid, $force = false, $direct_response = false) {
         $user = $userid;
         $limit = 10;
         $simple_roll = rand( 1,$limit );
@@ -323,7 +323,9 @@ class Rest {
             $query->execute();
 
             // Remove price of 100 coins for Inventory prize button
-            $this->deductPrizeMoney($user, 100);
+            if($force) {
+                $this->deductPrizeMoney($user, 100);
+            }
 
             $response['prize']['success'] = true;
             $response['prize']['item'] = array(
@@ -343,7 +345,12 @@ class Rest {
         // Give 'em something!
         $response['prize']['money'] = "You found ".$this->getMoney($userid)." coins!";
 
-        return $response;
+        if($direct_response) {
+            $this->response = json_encode($response);
+            $this->send();
+        }else{
+            return $response;
+        }
     }
 
     public function getMoney($userid) {

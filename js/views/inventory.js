@@ -34,7 +34,7 @@ var InventoryView = Backbone.View.extend({
 
     payForPrize: function() {
         $.get( this.urlRoot+'/forcePrize/'+appUser.id, _.bind(function(data) {
-
+            
         },this))
         .done(function() {
         })
