@@ -11,8 +11,7 @@ var InventoryView = Backbone.View.extend({
     },
 
     events: {
-        "click .prizeGift": "openPrizeModal",
-        "click .the-gift": "payForPrize"
+        "click .prizeGift": "openPrizeModal"
     },
 
     render: function(){
@@ -53,7 +52,9 @@ var InventoryView = Backbone.View.extend({
     },
 
     openPrizeModal: function() {
+        $('#payForPrizeModal').remove();
         this.$el.before( JST['templates/prize_overlay.html'] );
+        $(this.$el).on('click', '.the-gift', this.payForPrize);
         $('#payForPrizeModal').modal();
     },
 
