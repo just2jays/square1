@@ -15,7 +15,8 @@ module.exports = function(grunt) {
                 },
                 files: {
                     'bootstrap.min.css': 'bootstrap/dist/css/bootstrap.min.css',
-                    'font-awesome.min.css': 'font-awesome/css/font-awesome.min.css'
+                    'font-awesome.min.css': 'font-awesome/css/font-awesome.min.css',
+                    'animate.min.css': 'animate.css/animate.min.css'
                 }
             },
 

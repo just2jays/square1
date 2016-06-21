@@ -6,7 +6,8 @@
     "jquery": "latest",
     "backbone": "latest",
     "components-underscore": "latest",
-    "font-awesome": "latest"
+    "font-awesome": "latest",
+    "animate.css": "^3.5.2"
   },
   "private": true
 }
