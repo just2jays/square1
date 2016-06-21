@@ -4,8 +4,14 @@
     display: none;
 }
 
-#payForPrizeModal .the-gift-reveal {
-    display: none;
+#payForPrizeModal {
+    .the-gift-cover {
+        font-size: 12em;
+    }
+
+    .the-gift-reveal {
+        display: none;
+    }
 }
 
 .box-shadow--2dp {
