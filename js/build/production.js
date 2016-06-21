@@ -148,7 +148,7 @@ var User = Backbone.Model.extend({
     },
 
     fetchUserMoney: function() {
-        $.get( this.urlRoot+'/fetchUserMoney'+this.id, _.bind(function(data) {
+        $.get( this.urlRoot+'/fetchUserMoney/'+this.id, _.bind(function(data) {
             this.set({
                 'money': data.money
             });
