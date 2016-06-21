@@ -11,7 +11,8 @@ var InventoryView = Backbone.View.extend({
     },
 
     events: {
-        "click .prizeGift": "openPrizeModal"
+        "click .prizeGift": "openPrizeModal",
+        "click .the-gift": "payForPrize"
     },
 
     render: function(){
@@ -39,9 +40,6 @@ var InventoryView = Backbone.View.extend({
             $('#payForPrizeModal .the-gift-reveal .prize-well').html('<div class="prizeBox"><img src="'+data.prize.item.image+'" /><div class="item-name">'+data.prize.item.name+' #'+data.prize.item.unique+'</div></div>');
             $('#payForPrizeModal .the-gift-cover').fadeOut();
             $('#payForPrizeModal .the-gift-reveal').fadeIn();
-            /*appUser.getUserInventory(function() {
-                appUser.fetchUserMoney();
-            });*/
         },this))
         .done(function() {
         })
@@ -52,9 +50,11 @@ var InventoryView = Backbone.View.extend({
     },
 
     openPrizeModal: function() {
-        $('#payForPrizeModal').remove();
-        this.$el.before( JST['templates/prize_overlay.html'] );
-        $(this.$el).on('click', '.the-gift', this.payForPrize);
+        $('#payForPrizeModal').on('hidden.bs.modal', function () {
+            appUser.getUserInventory(function() {
+                appUser.fetchUserMoney();
+            });
+        });
         $('#payForPrizeModal').modal();
     },
 
