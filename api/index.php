@@ -98,6 +98,7 @@ class Rest {
                         break;
 
                     case 'fetchUserMoney':
+                    error_log('this far');
                         $this->fetchmoney($this->request[2], true);
 
                     default:
