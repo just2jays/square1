@@ -434,7 +434,8 @@ var InventoryView = Backbone.View.extend({
     },
 
     events: {
-        "click .prizeGift": "payForPrize"
+        "click .prizeGift": "openPrizeModal",
+        "click .the-gift": "payForPrize"
     },
 
     render: function(){
@@ -467,6 +468,10 @@ var InventoryView = Backbone.View.extend({
         })
         .always(function() {
         }, "json");
+    },
+
+    openPrizeModal: function() {
+        $('#payForPrizeModal').modal();
     },
 
     setMoney: function() {
