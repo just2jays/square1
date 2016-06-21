@@ -151,6 +151,7 @@ class Rest {
                 $response['loggedin'] = true;
                 $response['id'] = $user['id'];
                 $response['username'] = $user['username'];
+                $response['money'] = $user['money'];
                 $response['usersession'] = $user['password'];
                 $response['message'] = "Success! Logging in...";
             }else{

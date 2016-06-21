@@ -15,7 +15,7 @@ __p += '<div class="container inventoryContainer">\n    <div class="row">\n     
 ((__t = ( data.money )) == null ? '' : __t) +
 '">\n                    ';
  if(data.money >= 100){ ;
-__p += '\n                        <span class="input-group-btn">\n                            <button class="btn btn-default" type="button"><i class="fa fa-gift" aria-hidden="true"></i></button>\n                        </span>\n                    ';
+__p += '\n                        <span class="input-group-btn">\n                            <button class="btn btn-default" type="button"><i class="prizeGift fa fa-gift" aria-hidden="true"></i></button>\n                        </span>\n                    ';
  } ;
 __p += '\n                </div>\n            </div>\n        </div>\n    </div>\n    <div class="row">\n        ';
  _.each(data.inventoryItems, function(item){ ;
@@ -134,7 +134,8 @@ var User = Backbone.Model.extend({
     defaults: {
         ID: 0,
         username: '',
-        loggedin: false
+        loggedin: false,
+        money: 0
     },
     idAttribute: "ID",
     initialize: function(){
@@ -358,7 +359,7 @@ var CheckinView = Backbone.View.extend({
     beginCheckin: function( event ){
         // Button clicked, you can access the element that was clicked with event.currentTarget
         $('.fetchFromFoursquare .location-list').html('');
-		$('.fetchFromFoursquare .loading-indicator').fadeIn();
+		$('.fetchFromFoursquare .loading-indicator').css('display', 'inline-block');
         this.getGeoInfo('foursquare');
     },
 
@@ -417,6 +418,7 @@ var InventoryView = Backbone.View.extend({
     },
 
     events: {
+        "click .prizeGift": "payForPrize"
     },
 
     render: function(){
@@ -439,6 +441,30 @@ var InventoryView = Backbone.View.extend({
 
     setItems: function() {
         console.log('I HEAR YOU!!!!!!');
+    },
+
+    payForPrize: function() {
+        $.get( this.urlRoot+'/forcePrize/'+appUser.id, _.bind(function(data) {
+            if(data.loggedin) {
+                this.set({
+                    'ID': data.id,
+                    'loggedin': true,
+                    'username': data.username
+                });
+
+                docCookies.setItem('userid', data.id, new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000));
+                docCookies.setItem('usersession', data.usersession, new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000));
+                this.setUserInterface("loggedin");
+                window.location.hash = 'checkin';
+            }
+            callback();
+        },this))
+        .done(function() {
+        })
+        .fail(function() {
+        })
+        .always(function() {
+        }, "json");
     }
 });
 

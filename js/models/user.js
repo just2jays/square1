@@ -2,7 +2,8 @@ var User = Backbone.Model.extend({
     defaults: {
         ID: 0,
         username: '',
-        loggedin: false
+        loggedin: false,
+        money: 0
     },
     idAttribute: "ID",
     initialize: function(){

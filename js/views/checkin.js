@@ -116,7 +116,7 @@ var CheckinView = Backbone.View.extend({
     beginCheckin: function( event ){
         // Button clicked, you can access the element that was clicked with event.currentTarget
         $('.fetchFromFoursquare .location-list').html('');
-		$('.fetchFromFoursquare .loading-indicator').fadeIn();
+		$('.fetchFromFoursquare .loading-indicator').css('display', 'inline-block');
         this.getGeoInfo('foursquare');
     },
 

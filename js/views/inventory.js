@@ -11,6 +11,7 @@ var InventoryView = Backbone.View.extend({
     },
 
     events: {
+        "click .prizeGift": "payForPrize"
     },
 
     render: function(){
@@ -33,5 +34,29 @@ var InventoryView = Backbone.View.extend({
 
     setItems: function() {
         console.log('I HEAR YOU!!!!!!');
+    },
+
+    payForPrize: function() {
+        $.get( this.urlRoot+'/forcePrize/'+appUser.id, _.bind(function(data) {
+            if(data.loggedin) {
+                this.set({
+                    'ID': data.id,
+                    'loggedin': true,
+                    'username': data.username
+                });
+
+                docCookies.setItem('userid', data.id, new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000));
+                docCookies.setItem('usersession', data.usersession, new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000));
+                this.setUserInterface("loggedin");
+                window.location.hash = 'checkin';
+            }
+            callback();
+        },this))
+        .done(function() {
+        })
+        .fail(function() {
+        })
+        .always(function() {
+        }, "json");
     }
 });
