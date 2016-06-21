@@ -97,7 +97,8 @@ var User = Backbone.Model.extend({
         $.get( this.urlRoot+'/fetchInventory/'+this.get('ID'), _.bind(function(data) {
             var userItemsCollection = new ItemsCollection(data.items);
             this.set({
-                ownedItems: userItemsCollection
+                ownedItems: userItemsCollection,
+                money: data.money
             });
             callback(data);
         },this))
