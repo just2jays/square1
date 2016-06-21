@@ -29,7 +29,7 @@ __p += '\n            <div class="col-sm-6 col-md-4">\n                <div clas
 ((__t = ( item.timestamp )) == null ? '' : __t) +
 '</p>\n                    </div>\n                </div>\n            </div>\n        ';
  }); ;
-__p += '\n    </div><!-- row -->\n</div><!-- container -->\n\n<div id="payForPrizeModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="payForPrizeModal" aria-hidden="true">\n\t\n</div>\n';
+__p += '\n    </div><!-- row -->\n</div><!-- container -->\n\n<div id="payForPrizeModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="payForPrizeModal" aria-hidden="true">\n    <div class="modal-dialog">\n        <div class="modal-content">\n            <div class="modal-header">\n                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\n                <h4 class="modal-title" id="myModalLabel">Well, open it...</h4>\n            </div>\n            <div class="the-gift-cover modal-body">\n                <i class="the-gift fa fa-gift fa-5"></i>\n            </div>\n            <div class="the-gift-reveal modal-body">\n                <div class="well prize-well"></div>\n            </div>\n            <div class="modal-footer">\n                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\n            </div>\n        </div>\n    </div>\n</div>\n';
 return __p
 };
 
@@ -457,7 +457,9 @@ var InventoryView = Backbone.View.extend({
 
     payForPrize: function() {
         $.get( this.urlRoot+'/forcePrize/'+appUser.id, _.bind(function(data) {
-            
+            console.log(data);
+            appUser.fetchUserMoney();
+            //$('#foursquareModal .the-gift-reveal .prize-well').html('<div>'+data.get('prize').message+'</div>');
         },this))
         .done(function() {
         })
@@ -469,7 +471,6 @@ var InventoryView = Backbone.View.extend({
 
     setMoney: function() {
         this.render();
-        //$('.inventoryContainer .inventory-money-display input').val(appUser.get('money'));
     }
 });
 

@@ -34,7 +34,9 @@ var InventoryView = Backbone.View.extend({
 
     payForPrize: function() {
         $.get( this.urlRoot+'/forcePrize/'+appUser.id, _.bind(function(data) {
-            
+            console.log(data);
+            appUser.fetchUserMoney();
+            //$('#foursquareModal .the-gift-reveal .prize-well').html('<div>'+data.get('prize').message+'</div>');
         },this))
         .done(function() {
         })
@@ -46,6 +48,5 @@ var InventoryView = Backbone.View.extend({
 
     setMoney: function() {
         this.render();
-        //$('.inventoryContainer .inventory-money-display input').val(appUser.get('money'));
     }
 });
