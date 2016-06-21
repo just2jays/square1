@@ -98,8 +98,8 @@ class Rest {
                         break;
 
                     case 'fetchUserMoney':
-                    error_log('this far');
-                        $this->fetchmoney($this->request[2], true);
+                        $this->fetchMoney($this->request[2], true);
+                        break;
 
                     default:
                         $this->error('Unsupported request method');
