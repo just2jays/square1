@@ -57,9 +57,9 @@ var MapView = Backbone.View.extend({
     },
 
     showFullTimelineImage: function(el) {
-        console.log(el);
-        //$('#the-modal-image').attr('src', $('#imageresource').attr('src')); // here asign the image to the modal when the user click the enlarge link
-        //$('#imagemodal').modal('show');
+        $('#the-modal-image').attr('src', el.target.src);
+        $('#imagemodal').modal('show');
+        
         return false;
     }
 });
