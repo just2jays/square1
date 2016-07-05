@@ -117,6 +117,12 @@ class Rest {
                         $this->checkPrize($this->request[2], true, true);
                         break;
 
+                    case 'uploadCheckinPhoto':
+                        error_log('what the hell');
+                        require('../UploadHandler.php');
+                        $upload_handler = new UploadHandler();
+                        break;
+
                     default:
                         $this->error('Unsupported request method');
                         break;
