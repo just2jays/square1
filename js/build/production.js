@@ -425,20 +425,23 @@ var CheckinView = Backbone.View.extend({
     },
 
     handleIncludedPhoto: function(e){
-        //console.log(e.currentTarget.files);
+        // DO NOT allow checkin submission without Photo response
+        $('.existing_save').addClass('disabled');
         var checkinImage = uploadcare.fileFrom('object', e.currentTarget.files[0]);
 
         // Upload to Uploadcare service
         checkinImage.done(function(fileInfo) {
-          // Upload successfully completed and file is ready.
-          console.log(fileInfo);
-          $('.include-checkin-photo-btn').removeClass('btn-primary').addClass('btn-success');
-          $('.include-checkin-photo-btn').html('').html('<i class="fa fa-camera-retro" aria-hidden="true"></i> Picture Added!');
+            if(fileInfo.isStored) {
+                $('.include-checkin-photo-btn').removeClass('btn-primary').addClass('btn-success');
+                $('.include-checkin-photo-btn').html('').html('<i class="fa fa-camera-retro" aria-hidden="true"></i> Picture Added!');
+            }
         }).fail(function(error, fileInfo) {
-          // Upload failed or something else went wrong.
-          checkinImage.cancel();
-          alert('Photo Error: Please try again...');
+            checkinImage.cancel();
+            alert('Photo Error: Please try again...');
         });
+
+        // Re-enable button to allow final checkin submission
+        $('.existing_save').removeClass('disabled');
     }
 });
 
