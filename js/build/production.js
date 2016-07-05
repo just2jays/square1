@@ -263,7 +263,7 @@ var CheckinView = Backbone.View.extend({
     initialize: function(){
         this.venues = [];
         this.selectedVenue = {};
-        this.includedPhoto = false;
+        this.includedPhoto = new FormData();
         this.render();
     },
 
@@ -426,7 +426,7 @@ var CheckinView = Backbone.View.extend({
 
     handleIncludedPhoto: function(e){
         //console.log(e.currentTarget.files);
-        this.includedPhoto = e.currentTarget.files[0];
+        this.includedPhoto.append('file', e.currentTarget.files[0]);
         $('.include-checkin-photo-btn').removeClass('btn-primary').addClass('btn-success');
         $('.include-checkin-photo-btn').html('').html('<i class="fa fa-camera-retro" aria-hidden="true"></i> Picture Added!');
     }
