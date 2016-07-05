@@ -9,6 +9,7 @@ var CheckinView = Backbone.View.extend({
 
     events: {
         "submit #existingLocationForm": "saveCheckin",
+        "click .include-checkin-photo": $('#checkin_photo').submit(),
         "click #BeginCheckin": "beginCheckin",
         "click .fetchFromFoursquare .location-list .foursquare_venue": "openVenueDetails"
     },
@@ -159,5 +160,9 @@ var CheckinView = Backbone.View.extend({
                 console.log("Something went wrong while saving the checkin");
             }
         });
+    },
+
+    includeCheckinPhoto: function() {
+        console.log('YOOO!');
     }
 });
