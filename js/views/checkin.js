@@ -4,6 +4,7 @@ var CheckinView = Backbone.View.extend({
     initialize: function(){
         this.venues = [];
         this.selectedVenue = {};
+        this.includedPhoto = false;
         this.render();
     },
 
@@ -11,7 +12,8 @@ var CheckinView = Backbone.View.extend({
         "submit #existingLocationForm": "saveCheckin",
         "click .include-checkin-photo": $('#checkin_photo').submit(),
         "click #BeginCheckin": "beginCheckin",
-        "click .fetchFromFoursquare .location-list .foursquare_venue": "openVenueDetails"
+        "click .fetchFromFoursquare .location-list .foursquare_venue": "openVenueDetails",
+        "change #include_photo_input": "handleIncludedPhoto"
     },
 
     render: function(){
@@ -162,7 +164,7 @@ var CheckinView = Backbone.View.extend({
         });
     },
 
-    includeCheckinPhoto: function() {
-        console.log('YOOO!');
+    handleIncludedPhoto: function(e){
+        console.dir(e.currentTarget.files);
     }
 });
