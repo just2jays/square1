@@ -241,7 +241,8 @@ class Rest {
         }
 
         // Check if user submitted photo with checkin
-        if( $data->inlcudedphoto ) {
+        if( $data->includedPhoto ) {
+            error_log(print_r($data->includedPhoto,true));
             $checkinPhoto = $this->uploadPhoto();
             error_log(print_r($checkinPhoto,true));
         }

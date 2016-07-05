@@ -133,7 +133,7 @@ var CheckinView = Backbone.View.extend({
             latitude: this.selectedVenue.location.lat,
             longitude: this.selectedVenue.location.lng,
             review: !_.isEmpty($(e.currentTarget).find('.checkinMessageInput').val()) ? $(e.currentTarget).find('.checkinMessageInput').val() : null,
-            inlcudedphoto: this.includedPhoto
+            includedPhoto: this.includedPhoto
         });
 
         checkin.save({}, {
@@ -167,7 +167,7 @@ var CheckinView = Backbone.View.extend({
 
     handleIncludedPhoto: function(e){
         //console.log(e.currentTarget.files);
-        this.includedPhoto = true;
+        this.includedPhoto = e.currentTarget.files[0];
         $('.include-checkin-photo-btn').removeClass('btn-primary').addClass('btn-success');
         $('.include-checkin-photo-btn').html('').html('<i class="fa fa-camera-retro" aria-hidden="true"></i> Picture Added!');
     }
