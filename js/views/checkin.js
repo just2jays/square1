@@ -4,6 +4,7 @@ var CheckinView = Backbone.View.extend({
     initialize: function(){
         this.venues = [];
         this.selectedVenue = {};
+        this.includedPhoto = new FileReader();
         this.render();
     },
 
@@ -166,16 +167,7 @@ var CheckinView = Backbone.View.extend({
 
     handleIncludedPhoto: function(e){
         console.log(e.currentTarget.files);
-        $('#include_photo_input').fileupload({
-            dataType: 'json',
-            done: function (e, data) {
-                $.each(data.result.files, function (index, file) {
-                    $('<p/>').text(file.name).appendTo(document.body);
-                });
-            }
-        });
-
-        //this.includedPhoto.readAsDataURL(e.currentTarget.files[0]);
+        this.includedPhoto.readAsDataURL(e.currentTarget.files[0]);
         $('.include-checkin-photo-btn').removeClass('btn-primary').addClass('btn-success');
         $('.include-checkin-photo-btn').html('').html('<i class="fa fa-camera-retro" aria-hidden="true"></i> Picture Added!');
     }
