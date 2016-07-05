@@ -424,7 +424,7 @@ var CheckinView = Backbone.View.extend({
     },
 
     handleIncludedPhoto: function(e){
-        //console.log(e.currentTarget.files);
+        console.log(e.currentTarget.files);
         $('#include_photo_input').fileupload({
             dataType: 'json',
             done: function (e, data) {
