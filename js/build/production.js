@@ -425,7 +425,7 @@ var CheckinView = Backbone.View.extend({
     },
 
     handleIncludedPhoto: function(e){
-        console.log(e.currentTarget.files);
+        //console.log(e.currentTarget.files);
         this.includedPhoto.readAsDataURL(e.currentTarget.files[0]);
         $('.include-checkin-photo-btn').removeClass('btn-primary').addClass('btn-success');
         $('.include-checkin-photo-btn').html('').html('<i class="fa fa-camera-retro" aria-hidden="true"></i> Picture Added!');
