@@ -126,8 +126,6 @@ var CheckinView = Backbone.View.extend({
     saveCheckin: function( e ){
         e.preventDefault();
 
-        console.log(this.includedPhoto);
-
         var checkin = new Checkin({
             user_id: appUser.get('ID'),
             foursquare_venue_id: this.selectedVenue.id,

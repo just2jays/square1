@@ -68,9 +68,6 @@ class Rest {
                             break;
                         }
                     case 'POST':
-                        error_log('======');
-                        error_log(print_r($_FILES,true));
-                        error_log('======');
                         $data = json_decode(file_get_contents('php://input'));
                         $this->createCheckin($data);
                         break;
