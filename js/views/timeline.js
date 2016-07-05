@@ -58,8 +58,8 @@ var MapView = Backbone.View.extend({
 
     showFullTimelineImage: function(el) {
         $('#the-modal-image').attr('src', el.target.src);
-        $('#imagemodal').modal('show');
-        
+        $('#timelineImageModal').modal('show');
+
         return false;
     }
 });
