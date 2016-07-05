@@ -170,9 +170,9 @@ var CheckinView = Backbone.View.extend({
     handleIncludedPhoto: function(e){
         // DO NOT allow checkin submission without Photo response
         $('.existing_save').addClass('disabled');
-        var checkinImage = uploadcare.fileFrom('object', e.currentTarget.files[0]);
 
         // Upload to Uploadcare service
+        var checkinImage = uploadcare.fileFrom('object', e.currentTarget.files[0]);
         checkinImage.done(_.bind(function(fileInfo) {
             if(fileInfo.isStored) {
                 this.includedPhoto = true;
