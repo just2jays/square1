@@ -173,7 +173,7 @@ var CheckinView = Backbone.View.extend({
         var checkinImage = uploadcare.fileFrom('object', e.currentTarget.files[0]);
 
         // Upload to Uploadcare service
-        checkinImage.done(_bind(function(fileInfo) {
+        checkinImage.done(_.bind(function(fileInfo) {
             if(fileInfo.isStored) {
                 this.includedPhoto = true;
                 this.photoUUID = fileInfo.uuid;
