@@ -422,6 +422,7 @@ class Rest {
 
     public function uploadPhoto() {
         $target_dir = "uploads/";
+        error_log(print_r($_FILES,true));
         $target_file = $target_dir . basename($_FILES["checkinPhoto"]["name"]);
         $uploadOk = true;
         $photoResponse = array();
@@ -434,7 +435,6 @@ class Rest {
 
         if ( !$uploadOk ) {
             $photoResponse['message'] = "Sorry, your file was not uploaded.";
-            // if everything is ok, try to upload file
         } else {
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                 $photoResponse['message'] = "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
