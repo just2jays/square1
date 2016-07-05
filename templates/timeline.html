@@ -25,7 +25,7 @@
                                 <div class="timeline-panel">
                                     <h4 class="timeline-title"><%= checkin.name %></h4>
                                     <% if ( !_.isNull(checkin.photoUUID) ){ %>
-                                        <img src="https://ucarecdn.com/<%= checkin.photoUUID %>/" class="img-thumbnail">
+                                        <img src="https://ucarecdn.com/<%= checkin.photoUUID %>/-/resize/400x/" class="img-thumbnail">
                                     <% } %>
                                     <% if ( !_.isEmpty(checkin.review) ){ %>
                                         <blockquote><p><%= checkin.review %></p></blockquote>

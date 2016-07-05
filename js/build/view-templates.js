@@ -64,7 +64,7 @@ __p += '">\n                                <div class="timeline-badge"><i class
  if ( !_.isNull(checkin.photoUUID) ){ ;
 __p += '\n                                        <img src="https://ucarecdn.com/' +
 ((__t = ( checkin.photoUUID )) == null ? '' : __t) +
-'/" class="img-thumbnail">\n                                    ';
+'/-/resize/400x/" class="img-thumbnail">\n                                    ';
  } ;
 __p += '\n                                    ';
  if ( !_.isEmpty(checkin.review) ){ ;
