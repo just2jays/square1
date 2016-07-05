@@ -240,6 +240,12 @@ class Rest {
             $place_id = $this->addPlace($data);
         }
 
+        // Check if user submitted photo with checkin
+        if( $data->inlcudedphoto ) {
+            $checkinPhoto = $this->uploadPhoto();
+            error_log(print_r($checkinPhoto,true));
+        }
+
         $query = $this->db->prepare("INSERT INTO checkin (checkin_user_id, checkin_place_id, checkin_latitude, checkin_longitude, checkin_review) VALUES (:user, :place, :latitude, :longitude, :review)");
         $query->bindParam(':user', $data->user_id);
         $query->bindParam(':place', $place_id);
@@ -412,6 +418,32 @@ class Rest {
 
         $this->response = json_encode($response);
         $this->send();
+    }
+
+    public function uploadPhoto() {
+        $target_dir = "uploads/";
+        $target_file = $target_dir . basename($_FILES["checkinPhoto"]["name"]);
+        $uploadOk = true;
+        $photoResponse = array();
+
+        // CHECK FILE SIZE?
+        // if ($_FILES["fileToUpload"]["size"] > 500000) {
+        //     echo "Sorry, your file is too large.";
+        //     $uploadOk = false;
+        // }
+
+        if ( !$uploadOk ) {
+            $photoResponse['message'] = "Sorry, your file was not uploaded.";
+            // if everything is ok, try to upload file
+        } else {
+            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                $photoResponse['message'] = "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+            } else {
+                $photoResponse['message'] = "Sorry, there was an error uploading your file.";
+            }
+        }
+
+        return $photoResponse;
     }
 }
 ?>
