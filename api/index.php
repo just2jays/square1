@@ -241,8 +241,7 @@ class Rest {
         }
 
         error_log("=====");
-        $parray =  (array) $data->includedPhoto;
-        error_log( print_r($parray, true) );
+        error_log($data->includedPhoto);
         error_log("=====");
         // Check if user submitted photo with checkin
         // if( $data->includedPhoto ) {
