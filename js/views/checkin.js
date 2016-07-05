@@ -180,12 +180,11 @@ var CheckinView = Backbone.View.extend({
                 $('.include-checkin-photo-btn').removeClass('btn-primary').addClass('btn-success');
                 $('.include-checkin-photo-btn').html('').html('<i class="fa fa-camera-retro" aria-hidden="true"></i> Picture Added!');
             }
+            // Re-enable button to allow final checkin submission
+            $('.existing_save').removeClass('disabled');
         }, this)).fail(function(error, fileInfo) {
             checkinImage.cancel();
             alert('Photo Error: Please try again...');
         });
-
-        // Re-enable button to allow final checkin submission
-        $('.existing_save').removeClass('disabled');
     }
 });
