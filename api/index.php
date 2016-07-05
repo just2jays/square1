@@ -253,7 +253,7 @@ class Rest {
             $photo_uuid = $data->includedPhotoUUID;
             $query->bindParam(':uuid', $photo_uuid);
         }
-        
+
         $query->execute();
 
         $response = $this->checkPrize($data->user_id);
@@ -270,7 +270,8 @@ class Rest {
                 'latitude' => $row['checkin_latitude'],
                 'longitude' => $row['checkin_longitude'],
                 'review' => $row['checkin_review'],
-                'timestamp' => date('D, M j, \'y @ g:i a', strtotime($row['checkin_timestamp']))
+                'timestamp' => date('D, M j, \'y @ g:i a', strtotime($row['checkin_timestamp'])),
+                'photoUUID' => $row['checkin_photo_uuid']
             );
         }
 

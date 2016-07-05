@@ -61,6 +61,12 @@ __p += 'timeline-inverted';
 __p += '">\n                                <div class="timeline-badge"><i class="fa fa-check"></i></div>\n                                <div class="timeline-panel">\n                                    <h4 class="timeline-title">' +
 ((__t = ( checkin.name )) == null ? '' : __t) +
 '</h4>\n                                    ';
+ if ( !_.isNull(checkin.photoUUID) ){ ;
+__p += '\n                                        <img src="https://ucarecdn.com/' +
+((__t = ( checkin.photoUUID )) == null ? '' : __t) +
+'/" class="img-thumbnail">\n                                    ';
+ } ;
+__p += '\n                                    ';
  if ( !_.isEmpty(checkin.review) ){ ;
 __p += '\n                                        <blockquote><p>' +
 ((__t = ( checkin.review )) == null ? '' : __t) +
