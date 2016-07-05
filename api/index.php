@@ -240,12 +240,15 @@ class Rest {
             $place_id = $this->addPlace($data);
         }
 
+        error_log("=====");
+        error_log($data->includedPhoto);
+        error_log("=====");
         // Check if user submitted photo with checkin
-        if( $data->includedPhoto ) {
-            error_log(print_r($data->includedPhoto,true));
-            $checkinPhoto = $this->uploadPhoto();
-            error_log(print_r($checkinPhoto,true));
-        }
+        // if( $data->includedPhoto ) {
+        //
+        //     $checkinPhoto = $this->uploadPhoto();
+        //     error_log(print_r($checkinPhoto,true));
+        // }
 
         $query = $this->db->prepare("INSERT INTO checkin (checkin_user_id, checkin_place_id, checkin_latitude, checkin_longitude, checkin_review) VALUES (:user, :place, :latitude, :longitude, :review)");
         $query->bindParam(':user', $data->user_id);
@@ -423,7 +426,6 @@ class Rest {
 
     public function uploadPhoto() {
         $target_dir = "uploads/";
-        error_log(print_r($_FILES,true));
         $target_file = $target_dir . basename($_FILES["checkinPhoto"]["name"]);
         $uploadOk = true;
         $photoResponse = array();
