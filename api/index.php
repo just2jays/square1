@@ -251,9 +251,8 @@ class Rest {
         $photo_uuid = NULL;
         if( $data->includedPhoto ) {
             $photo_uuid = $data->includedPhotoUUID;
-            $query->bindParam(':uuid', $photo_uuid);
         }
-
+        $query->bindParam(':uuid', $photo_uuid);
         $query->execute();
 
         $response = $this->checkPrize($data->user_id);
