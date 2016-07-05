@@ -240,22 +240,20 @@ class Rest {
             $place_id = $this->addPlace($data);
         }
 
-        error_log("=====");
-        error_log($data->includedPhoto);
-        error_log("=====");
-        // Check if user submitted photo with checkin
-        // if( $data->includedPhoto ) {
-        //
-        //     $checkinPhoto = $this->uploadPhoto();
-        //     error_log(print_r($checkinPhoto,true));
-        // }
-
-        $query = $this->db->prepare("INSERT INTO checkin (checkin_user_id, checkin_place_id, checkin_latitude, checkin_longitude, checkin_review) VALUES (:user, :place, :latitude, :longitude, :review)");
+        $query = $this->db->prepare("INSERT INTO checkin (checkin_user_id, checkin_place_id, checkin_latitude, checkin_longitude, checkin_review, checkin_photo_uuid) VALUES (:user, :place, :latitude, :longitude, :review, :uuid)");
         $query->bindParam(':user', $data->user_id);
         $query->bindParam(':place', $place_id);
         $query->bindParam(':latitude', $data->latitude);
         $query->bindParam(':longitude', $data->longitude);
         $query->bindParam(':review', $data->review);
+
+        // Check if user submitted photo with checkin
+        $photo_uuid = NULL;
+        if( $data->includedPhoto ) {
+            $photo_uuid = $data->includedPhotoUUID;
+            $query->bindParam(':uuid', $photo_uuid);
+        }
+        
         $query->execute();
 
         $response = $this->checkPrize($data->user_id);

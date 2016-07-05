@@ -4,7 +4,8 @@ var CheckinView = Backbone.View.extend({
     initialize: function(){
         this.venues = [];
         this.selectedVenue = {};
-        this.includedPhoto = new FileReader();
+        this.includedPhoto = false;
+        this.photoUUID = '';
         this.render();
     },
 
@@ -133,7 +134,8 @@ var CheckinView = Backbone.View.extend({
             latitude: this.selectedVenue.location.lat,
             longitude: this.selectedVenue.location.lng,
             review: !_.isEmpty($(e.currentTarget).find('.checkinMessageInput').val()) ? $(e.currentTarget).find('.checkinMessageInput').val() : null,
-            includedPhoto: this.includedPhoto
+            includedPhoto: this.includedPhoto,
+            includedPhotoUUID: this.photoUUID
         });
 
         checkin.save({}, {
@@ -171,12 +173,14 @@ var CheckinView = Backbone.View.extend({
         var checkinImage = uploadcare.fileFrom('object', e.currentTarget.files[0]);
 
         // Upload to Uploadcare service
-        checkinImage.done(function(fileInfo) {
+        checkinImage.done(_bind(function(fileInfo) {
             if(fileInfo.isStored) {
+                this.includedPhoto = true;
+                this.photoUUID = fileInfo.uuid;
                 $('.include-checkin-photo-btn').removeClass('btn-primary').addClass('btn-success');
                 $('.include-checkin-photo-btn').html('').html('<i class="fa fa-camera-retro" aria-hidden="true"></i> Picture Added!');
             }
-        }).fail(function(error, fileInfo) {
+        }, this)).fail(function(error, fileInfo) {
             checkinImage.cancel();
             alert('Photo Error: Please try again...');
         });
