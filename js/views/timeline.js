@@ -6,6 +6,7 @@ var MapView = Backbone.View.extend({
     },
 
     events: {
+        "click .timeline-image": "showFullTimelineImage"
     },
 
     render: function(){
@@ -53,5 +54,12 @@ var MapView = Backbone.View.extend({
             latlngbounds.extend( new google.maps.LatLng(parseFloat(checkin.latitude), parseFloat(checkin.longitude)) );
         });
         map.setCenter( latlngbounds.getCenter() );
+    },
+
+    showFullTimelineImage: function(el) {
+        console.log(el);
+        //$('#the-modal-image').attr('src', $('#imageresource').attr('src')); // here asign the image to the modal when the user click the enlarge link
+        //$('#imagemodal').modal('show');
+        return false;
     }
 });

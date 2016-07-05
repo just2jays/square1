@@ -62,9 +62,9 @@ __p += '">\n                                <div class="timeline-badge"><i class
 ((__t = ( checkin.name )) == null ? '' : __t) +
 '</h4>\n                                    ';
  if ( !_.isNull(checkin.photoUUID) ){ ;
-__p += '\n                                        <img src="https://ucarecdn.com/' +
+__p += '\n                                        <a class="timeline-image" href="#"><img src="https://ucarecdn.com/' +
 ((__t = ( checkin.photoUUID )) == null ? '' : __t) +
-'/-/resize/400x/" class="img-thumbnail">\n                                    ';
+'/-/resize/400x/" class="img-thumbnail"></a>\n                                    ';
  } ;
 __p += '\n                                    ';
  if ( !_.isEmpty(checkin.review) ){ ;
@@ -76,6 +76,6 @@ __p += '\n                                    <p><small><i class="fa fa-clock-o"
 ((__t = ( checkin.timestamp )) == null ? '' : __t) +
 '</small></p>\n                                </div>\n                            </li>\n                        ';
  }); ;
-__p += '\n                    </ul>\n                </div>\n            </div>\n\t\t</div><!-- col-md-8 -->\n\t</div><!-- row -->\n</div><!-- container -->\n';
+__p += '\n                    </ul>\n                </div>\n            </div>\n\t\t</div><!-- col-md-8 -->\n\t</div><!-- row -->\n</div><!-- container -->\n\n<div id="timelineImageModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">\n    <div class="modal-dialog">\n        <div class="modal-content">\n            <div class="modal-body">\n                <img id="the-modal-image" class="full-timeline-image" src="">\n            </div>\n            <div class="modal-footer">\n                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\n            </div>\n        </div>\n    </div>\n</div>\n';
 return __p
 };
