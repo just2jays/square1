@@ -170,16 +170,23 @@ var CheckinView = Backbone.View.extend({
     handleIncludedPhoto: function(e){
         // DO NOT allow checkin submission without Photo response
         $('.existing_save').addClass('disabled');
+        $('.photo-upload-progress').show();
 
         // Upload to Uploadcare service
         var checkinImage = uploadcare.fileFrom('object', e.currentTarget.files[0]);
+
+        // Progress of upload via Uploadcare service
         checkinImage.progress(function(uploadInfo) {
-            console.log(uploadInfo.progress);
+            var width = uploadInfo.progress * 100;
+            $(".photo-upload-progress").css("width", width+"%");
         });
+
+        // Successful response from Uploadcare service
         checkinImage.done(_.bind(function(fileInfo) {
             if(fileInfo.isStored) {
                 this.includedPhoto = true;
                 this.photoUUID = fileInfo.uuid;
+                $('.photo-upload-progress').hide();
                 $('.include-checkin-photo-btn').removeClass('btn-primary').addClass('btn-success');
                 $('.include-checkin-photo-btn').html('').html('<i class="fa fa-camera-retro" aria-hidden="true"></i> Picture Added!');
             }
