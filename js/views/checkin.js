@@ -173,7 +173,7 @@ var CheckinView = Backbone.View.extend({
 
         // Upload to Uploadcare service
         var checkinImage = uploadcare.fileFrom('object', e.currentTarget.files[0]);
-        file.progress(function(uploadInfo) {
+        checkinImage.progress(function(uploadInfo) {
             console.log(uploadInfo.progress);
         });
         checkinImage.done(_.bind(function(fileInfo) {
