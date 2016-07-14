@@ -171,6 +171,7 @@ var CheckinView = Backbone.View.extend({
         // DO NOT allow checkin submission without Photo response
         $('.existing_save').addClass('disabled');
         $('.photo-upload-progress').show();
+        $('.include-checkin-photo-btn').removeClass('btn-primary').addClass('btn-info').html('').html('<i class="fa fa-clock-o" aria-hidden="true"></i> Uploading...');;
 
         // Upload to Uploadcare service
         var checkinImage = uploadcare.fileFrom('object', e.currentTarget.files[0]);
@@ -187,7 +188,7 @@ var CheckinView = Backbone.View.extend({
                 this.includedPhoto = true;
                 this.photoUUID = fileInfo.uuid;
                 $('.photo-upload-progress').hide();
-                $('.include-checkin-photo-btn').removeClass('btn-primary').addClass('btn-success');
+                $('.include-checkin-photo-btn').removeClass('btn-info').addClass('btn-success');
                 $('.include-checkin-photo-btn').html('').html('<i class="fa fa-camera-retro" aria-hidden="true"></i> Picture Added!');
             }
             // Re-enable button to allow final checkin submission
