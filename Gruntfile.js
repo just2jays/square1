@@ -1,6 +1,5 @@
 module.exports = function(grunt) {
 
-    // 1. All configuration goes here
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
@@ -53,15 +52,14 @@ module.exports = function(grunt) {
         },
 
         concat: {
-            // 2. Configuration for concatinating files goes here.
             dist: {
                 src: [
                     'js/build/view-templates.js',
-                    'js/models/*.js', // All JS in the models folder
-                    'js/views/*.js', // All JS in the views folder
-                    'js/collections/*.js', // All JS in the views folder
-                    'js/routes.js',  // This specific file
-                    'js/global.js'  // This specific file
+                    'js/models/*.js',
+                    'js/views/*.js',
+                    'js/collections/*.js',
+                    'js/routes.js',
+                    'js/global.js'
                 ],
                 dest: 'js/build/production.js',
             }
@@ -86,33 +84,34 @@ module.exports = function(grunt) {
         },
 
         watch: {
-            scripts: {
-                files: ['js/*.js'],
-                tasks: ['concat', 'uglify'],
-                options: {
-                    spawn: false,
-                },
+            sass: {
+                files: [
+                    'css/*.scss'
+                ],
+                tasks: ['sass']
             },
-            css: {
-                files: ['css/*.scss'],
-                tasks: ['sass'],
-                options: {
-                    spawn: false,
-                }
+
+            scripts: {
+                files: [
+                    'js/collections/*.js',
+                    'js/models/*.js',
+                    'js/views/*.js',
+                    'js/routes.js',
+                    'js/global.js'
+                ],
+                tasks: ['jst', 'concat', 'uglify']
             }
         }
 
     });
 
-    // 3. Where we tell Grunt we plan to use this plug-in.
     grunt.loadNpmTasks('grunt-bowercopy');
     grunt.loadNpmTasks('grunt-contrib-jst');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-sass');
-    //grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
-    // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
-    grunt.registerTask('default', ['bowercopy', 'jst', 'concat', 'uglify', 'sass']);
+    grunt.registerTask('default', ['bowercopy', 'jst', 'concat', 'uglify', 'sass', 'watch']);
 
 };
