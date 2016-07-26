@@ -179,7 +179,7 @@ var CheckinView = Backbone.View.extend({
         // Progress of upload via Uploadcare service
         checkinImage.progress(function(uploadInfo) {
             var width = uploadInfo.progress * 100;
-            $(".photo-upload-progress").css("width", width+"%");
+            $(".photo-upload-progress .progress-bar").css("width", width+"%");
         });
 
         // Successful response from Uploadcare service
