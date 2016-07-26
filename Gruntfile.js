@@ -91,15 +91,23 @@ module.exports = function(grunt) {
                 tasks: ['sass']
             },
 
+            templates: {
+                files: [
+                    'templates/*.html'
+                ],
+                tasks: ['jst']
+            },
+
             scripts: {
                 files: [
+                    'js/build/view-templates.js',
                     'js/collections/*.js',
                     'js/models/*.js',
                     'js/views/*.js',
                     'js/routes.js',
                     'js/global.js'
                 ],
-                tasks: ['jst', 'concat', 'uglify']
+                tasks: ['concat', 'uglify']
             }
         }
 
